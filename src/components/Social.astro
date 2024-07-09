@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon/components";
+import { socialLinks } from "config";
+import Link from "./Link.astro";
+---
+
+<div class="flex items-center gap-4">
+  {
+    socialLinks &&
+      socialLinks.map((link) => (
+        <Link
+          aria-label={link.name}
+          class="text-2xl font-medium transition-colors hover:text-primary"
+          href={link.href}>
+          <Icon name={link.icon} class="w-6 h-6" />
+        </Link>
+      ))
+  }
+</div>

@@ -1,0 +1,15 @@
+---
+import { siteMeta } from "@/config";
+import { Image } from "astro:assets";
+import logo from "@/assets/logo.svg";
+
+const { title, href = siteMeta.baseUrl, width = 32, height = 32 } = Astro.props;
+---
+
+<a
+  aria-label={title}
+  href={siteMeta.baseUrl}
+  class="flex gap-2 items-center font-semibold text-2xl">
+  <Image src={logo} alt={title ?? ""} width={32} height={32} />
+  {title}
+</a>

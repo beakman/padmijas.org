@@ -1,5 +1,8 @@
 ---
-import { siteMeta } from "../config";
+import "@/assets/styles/globals.css";
+import { footerLinks, mainMenu, siteMeta } from "@/config";
+import Footer from "@/components/Footer.astro";
+import Navbar from "@/components/Navbar.astro";
 import { SEO } from "astro-seo";
 
 interface Props {
@@ -30,7 +33,7 @@ const { title, description, ogImage, ogType } = Astro.props;
       }}
       extend={{
         // extending the default link tags
-        link: [{ rel: "icon", href: "/assets/favicon.ico" }],
+        link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
         // extending the default meta tags
         meta: [
           {
@@ -42,46 +45,20 @@ const { title, description, ogImage, ogType } = Astro.props;
             name: "twitter:description",
             content: description ?? siteMeta.description,
           },
+          {
+            name: "viewport",
+            content: "width=device-width, initial-scale=1.0",
+          },
         ],
       }}
     />
     <meta charset="UTF-8" />
-    <meta name="description" content={description ?? siteMeta.description} />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title ?? siteMeta.title}</title>
   </head>
   <body>
+    <Navbar mainMenuItems={mainMenu} />
     <slot />
-    <style is:global>
-      :root {
-        --accent: 136, 58, 234;
-        --accent-light: 224, 204, 250;
-        --accent-dark: 49, 10, 101;
-        --accent-gradient: linear-gradient(
-          45deg,
-          rgb(var(--accent)),
-          rgb(var(--accent-light)) 30%,
-          white 60%
-        );
-      }
-      html {
-        font-family: system-ui, sans-serif;
-        background: #13151a;
-        background-size: 224px;
-      }
-      code {
-        font-family:
-          Menlo,
-          Monaco,
-          Lucida Console,
-          Liberation Mono,
-          DejaVu Sans Mono,
-          Bitstream Vera Sans Mono,
-          Courier New,
-          monospace;
-      }
-    </style>
+    <Footer footerLinks={footerLinks} />
   </body>
 </html>

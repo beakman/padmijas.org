@@ -1,0 +1,64 @@
+---
+import Logo from "./Logo.astro";
+import type { MenuItemProps } from "@/types";
+import Social from "./Social.astro";
+import { siteMeta } from "@/config";
+
+const { footerLinks } = Astro.props;
+---
+
+<footer class="border-t-2 px-0 py-10">
+  <div
+    class="mx-auto flex flex-wrap items-center justify-between space-x-4 p-4 max-w-3xl px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+    <div class="w-full">
+      <div class="mb-6">
+        <a
+          aria-label="Template logo"
+          href="https://themes.noice.store"
+          class="flex items-center">
+          <Logo href="/" />
+        </a>
+      </div>
+      <div
+        class="grid grid-cols-2 lg:grid-flow-col auto-cols-fr gap-y-8 sm:gap-6">
+        {
+          footerLinks.map((link) => (
+            <div>
+              <h2 class="mb-6 text-sm font-semibold uppercase">
+                {link.section}
+              </h2>
+              <ul class="">
+                {link.links.map((link: MenuItemProps) => (
+                  <li class="mb-4">
+                    <a
+                      href={link.href}
+                      class="hover:underline"
+                      target={link.target}>
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  <hr class="my-6 sm:mx-auto lg:my-8" />
+  <div
+    class="mx-auto flex flex-wrap items-center justify-between space-x-4 p-4 max-w-3xl px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+    <div
+      class="w-full flex gap-4 flex-col sm:flex-row sm:items-center sm:justify-between">
+      <span class="order-2 sm:order-1 text-sm text-center sm:text-left"
+        >© 2024 <a href={siteMeta.baseUrl} class="hover:underline"
+          >{siteMeta.title}</a
+        >. All Rights Reserved.
+      </span>
+      <div
+        class="mx-auto sm:mx-0 order-1 sm:order-2 mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+        <Social />
+      </div>
+    </div>
+  </div>
+</footer>

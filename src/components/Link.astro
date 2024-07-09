@@ -1,0 +1,11 @@
+---
+const url = new URL(Astro.props.href, Astro.url);
+const isExternal = url.host !== Astro.url.host;
+const isCurrent = url.href === Astro.url.href;
+---
+
+<a
+  aria-current={isCurrent ? "page" : null}
+  rel={isExternal ? "noopener" : null}
+  {...Astro.props}><slot /></a
+>

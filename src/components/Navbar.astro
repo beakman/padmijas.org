@@ -1,0 +1,276 @@
+---
+import type { MenuItemProps } from "types";
+import Hamburger from "./Hamburger.astro";
+import Link from "./Link.astro";
+import Logo from "./Logo.astro";
+import Social from "./Social.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+
+interface Props {
+  mainMenuItems: MenuItemProps[];
+}
+
+const { mainMenuItems } = Astro.props;
+---
+
+<header>
+  <nav class="bg-background z-20 w-full border-b-2">
+    <div
+      class="mx-auto flex flex-wrap items-center justify-between space-x-4 p-4 max-w-3xl px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+      <Logo title="noicethemes" href="/" />
+      <!-- Expand mobile menu -->
+      <div class="flex items-center md:hidden lg:order-2">
+        <span class="sr-only">Open main menu</span>
+        <Hamburger
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          aria-label="Open Menu"
+          class="mobile-menu"
+        />
+      </div>
+      <!-- Main menu (desktop) -->
+      <div class="hidden items-center justify-between md:flex md:gap-6">
+        <ul class="mt-0 flex h-14 items-center space-x-8 font-medium">
+          {
+            mainMenuItems &&
+              mainMenuItems.map((item: MenuItemProps) => (
+                <li class="flex h-full items-center">
+                  {item.children ? (
+                    <div class="group flex h-full items-center">
+                      <span class="flex cursor-pointer items-end gap-1">
+                        {item.name}
+                        <svg
+                          class="pt-1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24">
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m6 9l6 6l6-6"
+                          />
+                        </svg>
+                      </span>
+                      <ul class="dropdown-menu animate-fade-up animate-duration-200 bg-background invisible absolute top-[65px] z-50 translate-y-2 flex-col space-y-4 rounded-lg border-2 py-4 font-medium opacity-0 shadow-flat transition group-hover:visible group-hover:flex group-hover:translate-y-0 group-hover:opacity-100">
+                        {item.children.map((child) => (
+                          <li class="flex">
+                            <Link
+                              aria-label={child.name}
+                              class="block px-8 py-0.5"
+                              href={child.href}>
+                              {child.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <Link
+                      aria-label={item.name}
+                      class="block w-full p-0"
+                      href={item.href}>
+                      {item.name}
+                    </Link>
+                  )}
+                </li>
+              ))
+          }
+        </ul>
+        <ThemeSwitcher />
+      </div>
+    </div>
+  </nav>
+  <!-- Main menu (mobile) -->
+  <div
+    class="hidden w-full h-full flex-col -translate-y-4 border-b-2 opacity-0 transition"
+    id="mobile-menu">
+    <ul class="flex flex-col divide-y text-2xl h-auto font-medium">
+      {
+        mainMenuItems &&
+          mainMenuItems.map((item: MenuItemProps) => (
+            <>
+              {item.children ? (
+                <>
+                  <li class="dropdown-item group peer p-0">
+                    <span class="flex w-full items-center justify-between p-6">
+                      {item.name}
+                      <svg
+                        class="rotate-0 pt-1 transition-transform group-[.is-open]:rotate-180"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24">
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="m6 9l6 6l6-6"
+                        />
+                      </svg>
+                    </span>
+                  </li>
+                  {item.children.map((child: MenuItemProps) => (
+                    <li class="hidden -translate-y-4 p-6 pl-14 opacity-0 transition-all peer-[.is-open]:block peer-[.is-open]:translate-y-0 peer-[.is-open]:opacity-100">
+                      <Link
+                        aria-label={child.name}
+                        class="block w-full p-0 text-base font-normal transition-all"
+                        href={child.href}>
+                        {child.name}
+                      </Link>
+                    </li>
+                  ))}
+                </>
+              ) : (
+                <li class="p-6">
+                  <Link
+                    aria-label={item.name}
+                    class="block w-full p-0"
+                    href={item.href}>
+                    {item.name}
+                  </Link>
+                </li>
+              )}
+            </>
+          ))
+      }
+    </ul>
+    <div class="flex-auto">
+      <div
+        class="navbar-footer w-full flex items-center justify-between gap-4 p-6">
+        <ThemeSwitcher />
+        <Social />
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const isExpanded = function () {
+    const menuBtn: HTMLButtonElement = document.querySelector(
+      ".mobile-menu"
+    ) as HTMLButtonElement;
+    return menuBtn?.getAttribute("aria-expanded") === "true";
+  };
+
+  const _handleOpenAnimation = function () {
+    const mobileMenu = document.querySelector("#mobile-menu") as HTMLElement;
+    const header = document.querySelector("header") as HTMLElement;
+    header.classList.add("h-screen");
+    animate(
+      mobileMenu,
+      ["opacity-0", "-translate-y-4", "blur-sm"],
+      ["opacity-100", "translate-y-0", "blur-none"]
+    );
+  };
+
+  const _handleCloseAnimation = function () {
+    const mobileMenu = document.querySelector("#mobile-menu") as HTMLElement;
+    const header = document.querySelector("header") as HTMLElement;
+    header.classList.remove("h-screen");
+    animate(
+      mobileMenu,
+      ["opacity-100", "translate-y-0", "blur-none"],
+      ["opacity-0", "-translate-y-4", "blur-sm"]
+    );
+  };
+
+  const animate = function (
+    element: Element,
+    origClasses: string[],
+    finalClasses: string[]
+  ) {
+    element?.classList.remove(...origClasses);
+    element?.classList.add(...finalClasses);
+  };
+
+  const toggleNav = function () {
+    const menuBtn: HTMLButtonElement = document.querySelector(
+      ".mobile-menu"
+    ) as HTMLButtonElement;
+    const mobileMenu: HTMLElement = document.querySelector(
+      "#mobile-menu"
+    ) as HTMLElement;
+    menuBtn.setAttribute("aria-expanded", isExpanded() ? "false" : "true");
+    menuBtn.setAttribute(
+      "aria-label",
+      isExpanded() ? "Open Menu" : "Close Menu"
+    );
+
+    if (isExpanded()) {
+      // Display container
+      mobileMenu.classList.remove("hidden");
+      // Start showing animation
+      requestAnimationFrame(_handleOpenAnimation);
+    } else {
+      // Start hidding animation
+      _handleCloseAnimation();
+    }
+  };
+
+  const closeMenu = function () {
+    const menuBtn: HTMLButtonElement = document.querySelector(
+      ".mobile-menu"
+    ) as HTMLButtonElement;
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.setAttribute("aria-label", "Open Menu");
+    _handleCloseAnimation();
+  };
+
+  const onLoad = function () {
+    const menuBtn: HTMLButtonElement = document.querySelector(
+      ".mobile-menu"
+    ) as HTMLButtonElement;
+    const mobileMenu = document.querySelector("#mobile-menu");
+    const dropdownItems = document.querySelectorAll(".dropdown-item");
+    menuBtn?.addEventListener("click", () => toggleNav());
+
+    // Collapse when select an option
+    // mobileMenu?.addEventListener("click", () => closeMenu())
+
+    // Hide container when animation ends
+    mobileMenu?.addEventListener("transitionend", () => {
+      if (!isExpanded()) {
+        mobileMenu.classList.add("hidden");
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && isExpanded()) {
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Close Menu");
+        _handleCloseAnimation();
+        menuBtn.focus();
+      }
+    });
+
+    // Attach click events to dropdown menu
+    dropdownItems.forEach(function (item: Element) {
+      item.addEventListener("click", function () {
+        item.classList.toggle("is-open");
+        animate(
+          item,
+          ["opacity-0", "-translate-y-4", "blur-sm"],
+          ["opacity-100", "translate-y-0", "blur-none"]
+        );
+      });
+    });
+  };
+
+  const onPageShow = function () {
+    closeMenu();
+  };
+
+  window.onload = onLoad;
+  window.onpageshow = onPageShow;
+  // Runs on view transitions navigation
+  document.addEventListener("astro:after-swap", () => {
+    onLoad();
+    onPageShow();
+  });
+</script>

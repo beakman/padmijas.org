@@ -1,0 +1,132 @@
+---
+import "assets/styles/hamburgers.css";
+
+interface Props {
+  class: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<astro-hamburger>
+  <button
+    id="hamburger"
+    class:list={["hamburger hamburger--spin", className]}
+    type="button"
+    aria-label="Menu"
+    aria-controls="navigation">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+</astro-hamburger>
+
+<style lang="scss">
+  .hamburger {
+    padding: 15px 15px;
+    display: inline-block;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    overflow: visible;
+  }
+  .hamburger:hover {
+    opacity: 0.7;
+  }
+  .hamburger.is-active:hover {
+    opacity: 0.7;
+  }
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after {
+    background-color: #000;
+  }
+
+  .hamburger-box {
+    width: 40px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .hamburger-inner {
+    display: block;
+    top: 50%;
+    margin-top: -2px;
+  }
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    width: 40px;
+    height: 4px;
+    background-color: #000;
+    border-radius: 4px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+  }
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    content: "";
+    display: block;
+  }
+  .hamburger-inner::before {
+    top: -10px;
+  }
+  .hamburger-inner::after {
+    bottom: -10px;
+  }
+
+  .hamburger {
+    scale: 0.85;
+  }
+
+  .hamburger--spin .hamburger-inner::before  {
+    top: 11px;
+  }
+  .hamburger--spin .hamburger-inner::after  {
+    top: 22px;
+  }
+
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    height: 3px;
+    width: 38px;
+  }
+
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after {
+    background-color: hsl(var(--foreground));
+  }
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    background-color: hsl(var(--foreground));
+  }
+</style>
+
+<script>
+  class Hamburger extends HTMLElement {
+    constructor() {
+      super();
+
+      const button = this.querySelector(".hamburger") as HTMLElement;
+
+      button.addEventListener("click", () => {
+        button.classList.toggle("is-active");
+      });
+    }
+  }
+
+  // Tell the browser to use our Hamburger class for <astro-hamburger> elements.
+  customElements.define("astro-hamburger", Hamburger);
+</script>
