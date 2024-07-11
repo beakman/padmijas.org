@@ -19,7 +19,6 @@ import Button from "./Button.astro";
 </Button>
 
 <script>
-  console.log("script");
   const setTheme = (theme: string) => {
     console.log(theme);
     if (theme === "light") {
@@ -54,6 +53,13 @@ import Button from "./Button.astro";
       icon.classList.toggle("opacity-0");
     });
   };
+
+  console.log("script");
+  const themeToggler = document.querySelectorAll("[data-theme-toggle]");
+  themeToggler.forEach((toggler) => {
+    toggler.addEventListener("click", handleToggleTheme);
+  });
+  console.log(themeToggler);
 
   document.addEventListener("astro:page-load", () => {
     console.log("astro:page-load");
