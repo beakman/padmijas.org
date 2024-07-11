@@ -9,21 +9,21 @@ const { title, href = siteMeta.baseUrl, width = 32, height = 32 } = Astro.props;
 
 <a
   aria-label={title}
-  href={siteMeta.baseUrl}
+  href={href}
   class="flex gap-2 items-center font-semibold text-2xl">
   <Image
     class="dark:hidden"
     src={logo}
     alt={title ?? ""}
-    width={32}
-    height={32}
+    width={width}
+    height={height}
   />
   <Image
     class="hidden dark:block"
     src={logoDark}
     alt={title ?? ""}
-    width={32}
-    height={32}
+    width={width}
+    height={height}
   />
   {title}
 </a>
