@@ -86,61 +86,63 @@ const { mainMenuItems } = Astro.props;
   </nav>
   <!-- Main menu (mobile) -->
   <div
-    class="hidden w-full h-full flex-col -translate-y-4 border-b-2 opacity-0 overflow-y-auto transition"
+    class="hidden w-full flex-col -translate-y-4 border-b-2 opacity-0 overflow-y-auto transition inset-0"
     id="mobile-menu">
-    <ul class="flex flex-col h-full pb-14 divide-y text-2xl font-medium">
-      {
-        mainMenuItems &&
-          mainMenuItems.map((item: MenuItemProps) => (
-            <>
-              {item.children ? (
-                <>
-                  <li class="dropdown-item group peer p-0">
-                    <span class="flex w-full items-center justify-between p-6">
-                      {item.name}
-                      <svg
-                        class="rotate-0 pt-1 transition-transform group-[.is-open]:rotate-180"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24">
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="m6 9l6 6l6-6"
-                        />
-                      </svg>
-                    </span>
-                  </li>
-                  {item.children.map((child: MenuItemProps) => (
-                    <li class="hidden -translate-y-4 p-6 pl-14 opacity-0 transition-all peer-[.is-open]:block peer-[.is-open]:translate-y-0 peer-[.is-open]:opacity-100">
-                      <Link
-                        aria-label={child.name}
-                        class="block w-full p-0 text-base font-normal transition-all"
-                        href={child.href}>
-                        {child.name}
-                      </Link>
+    <div class="flex-1 overflow-y-auto">
+      <ul class="flex flex-col divide-y text-2xl font-medium relative">
+        {
+          mainMenuItems &&
+            mainMenuItems.map((item: MenuItemProps) => (
+              <>
+                {item.children ? (
+                  <>
+                    <li class="dropdown-item group peer p-0">
+                      <span class="flex w-full items-center justify-between p-6">
+                        {item.name}
+                        <svg
+                          class="rotate-0 pt-1 transition-transform group-[.is-open]:rotate-180"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24">
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m6 9l6 6l6-6"
+                          />
+                        </svg>
+                      </span>
                     </li>
-                  ))}
-                </>
-              ) : (
-                <li class="p-6">
-                  <Link
-                    aria-label={item.name}
-                    class="block w-full p-0"
-                    href={item.href}>
-                    {item.name}
-                  </Link>
-                </li>
-              )}
-            </>
-          ))
-      }
-    </ul>
-    <div class="fixed bottom-0 left-0 h-14 z-50 bg-background">
+                    {item.children.map((child: MenuItemProps) => (
+                      <li class="hidden -translate-y-4 p-6 pl-14 opacity-0 transition-all peer-[.is-open]:block peer-[.is-open]:translate-y-0 peer-[.is-open]:opacity-100">
+                        <Link
+                          aria-label={child.name}
+                          class="block w-full p-0 text-base font-normal transition-all"
+                          href={child.href}>
+                          {child.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </>
+                ) : (
+                  <li class="p-6">
+                    <Link
+                      aria-label={item.name}
+                      class="block w-full p-0"
+                      href={item.href}>
+                      {item.name}
+                    </Link>
+                  </li>
+                )}
+              </>
+            ))
+        }
+      </ul>
+    </div>
+    <div class="flex bg-background">
       <div
         class="navbar-footer w-full flex items-center justify-between gap-4 p-6">
         <ThemeSwitcher />
