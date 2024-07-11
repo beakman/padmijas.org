@@ -6,20 +6,22 @@ const { theme } = Astro.props;
 ---
 
 <div class="flex flex-col gap-4 w-full p-4">
-  <Image
-    src={theme.data.image}
-    alt={theme.data.title}
-    width={1670}
-    height={1018}
-    class="rounded-md"
-  />
-  <div class="flex justify-between items-center">
+  <a href={`/themes/${theme.slug}`}>
+    <Image
+      src={theme.data.image}
+      alt={theme.data.title}
+      width={656}
+      height={400}
+      class="rounded-md"
+    />
+  </a>
+  <div class="flex gap-4 justify-between items-center">
     <div>
       <h2 class="text-2xl font-semibold">{theme.data.title}</h2>
       <p class="text-base text-muted-foreground">{theme.data.description}</p>
     </div>
     <Button variant="default">
-      <a href={`/themes/${theme.slug}`}>Buy Now</a>
+      <a href={`/themes/${theme.slug}`}>Buy</a>
     </Button>
   </div>
 </div>
