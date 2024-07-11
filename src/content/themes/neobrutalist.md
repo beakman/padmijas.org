@@ -4,9 +4,9 @@ title: "Neobrutalist"
 description: "Neobrutalist is a Astro template for a modern, clean, and minimalist website."
 image: "/src/content/themes/_images/neobrutalist-thumbnail.webp"
 images:
-  - "/src/content/themes/_images/neobrutalist-2.webp"
-  - "/src/content/themes/_images/neobrutalist-3.webp"
-  - "/src/content/themes/_images/neobrutalist-4.webp"
+  - "./_images/neobrutalist-2.webp"
+  - "./_images/neobrutalist-3.webp"
+  - "./_images/neobrutalist-4.webp"
 author:
   url: "https://noicethemes.com"
   name: "NoiceThemes"

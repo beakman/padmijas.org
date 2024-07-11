@@ -5,6 +5,8 @@ const allImages = import.meta.glob<{ default: ImageMetadata }>(
   "/src/content/themes/_images/*.{png,jpg,jpeg,webp}"
 );
 
+console.log(allImages);
+
 export async function resolveImage(entry: CollectionEntry<"themes">) {
   if (!(entry.data.image in allImages)) {
     throw new Error(

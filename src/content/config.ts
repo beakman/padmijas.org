@@ -29,30 +29,31 @@ export const ThemeTools = new Map([
 // 2. Define a `type` and `schema` for each collection
 const themeCollection = defineCollection({
   type: "content", // v2.5.0 and later
-  schema: z.object({
-    title: z.string().min(3),
-    description: z.string().min(5),
-    fullDescription: z.string().optional(),
-    image: z.string(),
-    images: z.array(z.string()).default([]),
-    author: z.object({
-      url: z.string(),
-      name: z.string(),
-      avatar: z.string(),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string().min(3),
+      description: z.string().min(5),
+      fullDescription: z.string().optional(),
+      image: image(),
+      images: z.array(image()).default([]),
+      author: z.object({
+        url: z.string(),
+        name: z.string(),
+        avatar: z.string(),
+      }),
+      categories: z.array(
+        z.enum(Array.from(ThemeCategories.keys()) as [string, ...string[]])
+      ),
+      repoUrl: z.string().url().optional(),
+      demoUrl: z.string().url().optional(),
+      buyUrl: z.string().url().optional(),
+      tools: z
+        .array(z.enum(Array.from(ThemeTools.keys()) as [string, ...string[]]))
+        .default([]),
+      related: z.array(z.string()).max(3).default([]),
+      publishDate: z.date({ coerce: true }).optional(),
+      badge: z.string().optional(),
     }),
-    categories: z.array(
-      z.enum(Array.from(ThemeCategories.keys()) as [string, ...string[]])
-    ),
-    repoUrl: z.string().url().optional(),
-    demoUrl: z.string().url().optional(),
-    buyUrl: z.string().url().optional(),
-    tools: z
-      .array(z.enum(Array.from(ThemeTools.keys()) as [string, ...string[]]))
-      .default([]),
-    related: z.array(z.string()).max(3).default([]),
-    publishDate: z.date({ coerce: true }).optional(),
-    badge: z.string().optional(),
-  }),
 });
 
 // 3. Export a single `collections` object to register your collection(s)
