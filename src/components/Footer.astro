@@ -1,6 +1,6 @@
 ---
 import Logo from "./Logo.astro";
-import type { MenuItemProps } from "@/types";
+import type { MenuItemProps, FooterItemsProps } from "@/types";
 import Social from "./Social.astro";
 import { siteMeta } from "@/config";
 
@@ -22,7 +22,7 @@ const { footerLinks } = Astro.props;
       <div
         class="grid grid-cols-2 lg:grid-flow-col auto-cols-fr gap-y-8 sm:gap-6">
         {
-          footerLinks.map((link) => (
+          footerLinks.map((link: FooterItemsProps) => (
             <div>
               <h2 class="mb-6 text-sm font-semibold uppercase">
                 {link.section}

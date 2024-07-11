@@ -6,3 +6,8 @@ export interface MenuItemProps {
   target?: string;
   rel?: string;
 }
+
+export interface FooterItemsProps {
+  section: string;
+  links: MenuItemProps[];
+}

@@ -23,6 +23,8 @@ export const mainMenu: MenuItemProps[] = [
     name: "Documentation",
     href: "https://docs.noicethemes.com",
   },
+  { name: "Support", href: "/support" },
+  { name: "Plugins", href: "/plugins" },
   {
     name: "About",
     href: "/about",

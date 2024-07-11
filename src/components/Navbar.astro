@@ -86,9 +86,9 @@ const { mainMenuItems } = Astro.props;
   </nav>
   <!-- Main menu (mobile) -->
   <div
-    class="hidden w-full h-full flex-col -translate-y-4 border-b-2 opacity-0 transition"
+    class="hidden w-full h-full flex-col -translate-y-4 border-b-2 opacity-0 overflow-y-auto transition"
     id="mobile-menu">
-    <ul class="flex flex-col divide-y text-2xl h-auto font-medium">
+    <ul class="flex flex-col h-full pb-14 divide-y text-2xl font-medium">
       {
         mainMenuItems &&
           mainMenuItems.map((item: MenuItemProps) => (
@@ -140,7 +140,7 @@ const { mainMenuItems } = Astro.props;
           ))
       }
     </ul>
-    <div class="flex-auto">
+    <div class="fixed bottom-0 left-0 h-14 z-50 bg-background">
       <div
         class="navbar-footer w-full flex items-center justify-between gap-4 p-6">
         <ThemeSwitcher />
@@ -161,7 +161,9 @@ const { mainMenuItems } = Astro.props;
   const _handleOpenAnimation = function () {
     const mobileMenu = document.querySelector("#mobile-menu") as HTMLElement;
     const header = document.querySelector("header") as HTMLElement;
-    header.classList.add("h-screen");
+    const body = document.body;
+    header.classList.add("h-dvh");
+    body.classList.add("overflow-hidden");
     animate(
       mobileMenu,
       ["opacity-0", "-translate-y-4", "blur-sm"],
@@ -172,7 +174,9 @@ const { mainMenuItems } = Astro.props;
   const _handleCloseAnimation = function () {
     const mobileMenu = document.querySelector("#mobile-menu") as HTMLElement;
     const header = document.querySelector("header") as HTMLElement;
-    header.classList.remove("h-screen");
+    const body = document.body;
+    header.classList.remove("h-dvh");
+    body.classList.remove("overflow-hidden");
     animate(
       mobileMenu,
       ["opacity-100", "translate-y-0", "blur-none"],
@@ -205,6 +209,7 @@ const { mainMenuItems } = Astro.props;
     if (isExpanded()) {
       // Display container
       mobileMenu.classList.remove("hidden");
+      mobileMenu.classList.add("flex");
       // Start showing animation
       requestAnimationFrame(_handleOpenAnimation);
     } else {
@@ -237,6 +242,7 @@ const { mainMenuItems } = Astro.props;
     mobileMenu?.addEventListener("transitionend", () => {
       if (!isExpanded()) {
         mobileMenu.classList.add("hidden");
+        mobileMenu.classList.remove("flex");
       }
     });
 
