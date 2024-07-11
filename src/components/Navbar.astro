@@ -86,7 +86,7 @@ const { mainMenuItems } = Astro.props;
   </nav>
   <!-- Main menu (mobile) -->
   <div
-    class="hidden w-full flex-col -translate-y-4 border-b-2 opacity-0 overflow-y-auto transition inset-0"
+    class="hidden w-full h-[calc(100vh-110px)] flex-col -translate-y-4 border-b-2 opacity-0 overflow-y-auto transition inset-0"
     id="mobile-menu">
     <div class="flex-1 overflow-y-auto">
       <ul class="flex flex-col divide-y text-2xl font-medium relative">
@@ -142,6 +142,7 @@ const { mainMenuItems } = Astro.props;
         }
       </ul>
     </div>
+    <div class="h-[16px] flex bg-gradient-to-t from-background z-50"></div>
     <div class="flex bg-background">
       <div
         class="navbar-footer w-full flex items-center justify-between gap-4 p-6">
@@ -164,7 +165,7 @@ const { mainMenuItems } = Astro.props;
     const mobileMenu = document.querySelector("#mobile-menu") as HTMLElement;
     const header = document.querySelector("header") as HTMLElement;
     const body = document.body;
-    header.classList.add("h-dvh");
+    header.classList.add("h-screen");
     body.classList.add("overflow-hidden");
     animate(
       mobileMenu,
@@ -177,7 +178,7 @@ const { mainMenuItems } = Astro.props;
     const mobileMenu = document.querySelector("#mobile-menu") as HTMLElement;
     const header = document.querySelector("header") as HTMLElement;
     const body = document.body;
-    header.classList.remove("h-dvh");
+    header.classList.remove("h-screen");
     body.classList.remove("overflow-hidden");
     animate(
       mobileMenu,
