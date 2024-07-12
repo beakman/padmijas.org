@@ -40,7 +40,6 @@ import Button from "@/components/Button.astro";
   }
 
   const handleToggleTheme = () => {
-    console.log("handleToggleTheme");
     const icon = document.querySelectorAll(".theme-toggle-icon");
     const element = document.documentElement;
     element.classList.toggle("dark");
@@ -54,12 +53,12 @@ import Button from "@/components/Button.astro";
     });
   };
 
-  console.log("script");
+  const theme = getTheme();
+  setTheme(theme);
   const themeToggler = document.querySelectorAll("[data-theme-toggle]");
   themeToggler.forEach((toggler) => {
     toggler.addEventListener("click", handleToggleTheme);
   });
-  console.log(themeToggler);
 
   document.addEventListener("astro:page-load", () => {
     console.log("astro:page-load");
