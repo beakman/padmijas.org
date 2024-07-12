@@ -10,6 +10,8 @@ export const siteMeta = {
   twitterCreator: "@noicethemes",
 };
 
+export const pageSize = 9;
+
 export const mainMenu: MenuItemProps[] = [
   {
     name: "Home",

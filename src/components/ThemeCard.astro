@@ -1,16 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import Button from "./Button.astro";
+import Button from "@/components/Button.astro";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
   theme: CollectionEntry<"themes">;
 }
 const { theme } = Astro.props;
-
-console.log("theme");
-console.log(theme.data.cover);
-console.log(theme.data.cover.src);
 ---
 
 <div class="flex flex-col gap-4 w-full p-4">
@@ -20,7 +16,7 @@ console.log(theme.data.cover.src);
       alt={theme.data.title}
       width={656}
       height={400}
-      class="rounded-md"
+      class="rounded-md hover:opacity-75"
       format="avif"
     />
   </a>

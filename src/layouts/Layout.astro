@@ -1,8 +1,8 @@
 ---
-import "../assets/styles/globals.css";
-import { footerLinks, mainMenu, siteMeta } from "../config";
-import Footer from "../components/Footer.astro";
-import Navbar from "../components/Navbar.astro";
+import "@/assets/styles/globals.css";
+import { footerLinks, mainMenu, siteMeta } from "@/config";
+import Footer from "@/components/Footer.astro";
+import Navbar from "@/components/Navbar.astro";
 import { SEO } from "astro-seo";
 
 interface Props {
@@ -58,7 +58,8 @@ const { title, description, ogImage, ogType } = Astro.props;
     <title>{title ?? siteMeta.title}</title>
   </head>
   <body
-    class="text-foreground bg-background transition-colors duration-200 ease-in-out">
+    class="text-foreground bg-background transition-colors duration-200 ease-in-out"
+  >
     <Navbar mainMenuItems={mainMenu} />
     <slot />
     <Footer footerLinks={footerLinks} />

@@ -1,20 +1,19 @@
 ---
-layout: "@/layouts/ThemeLayout.astro"
+# layout: "@/layouts/ThemeLayout.astro"  not compatible with image optimization
 title: "Neobrutalist"
 description: "Neobrutalist is a Astro template for a modern, clean, and minimalist website."
-image: /src/content/themes/_images/neobrutalist-thumbnail.webp
+cover: ./images/neobrutalist.jpg
 images:
-  - /src/content/themes/_images/neobrutalist-2.webp
-  - /src/content/themes/_images/neobrutalist-3.webp
-  - /src/content/themes/_images/neobrutalist-4.webp
+  - ./images/neobrutalist-2.webp
+  - ./images/neobrutalist-3.webp
+  - ./images/neobrutalist-4.webp
 author:
   url: "https://noicethemes.com"
   name: "NoiceThemes"
   avatar: "https://noicethemes.com/assets/favicon.png"
 categories:
-  - "neobrutalist"
-  - "learning"
-  - "colorful"
+  - "blog"
+  - "education"
 buyUrl: "https://noicethemes.lemonsqueezy.com/"
 demoUrl: "https://neobrutalist.noicethemes.com/"
 tools:

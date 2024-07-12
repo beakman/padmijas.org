@@ -45,7 +45,7 @@ const themeCollection = defineCollection({
         avatar: z.string(),
       }),
       categories: z.array(
-        z.enum(Array.from(ThemeCategories.keys()) as [string, ...string[]])
+        z.enum(Array.from(ThemeCategories.keys()) as [string, ...string[]]),
       ),
       repoUrl: z.string().url().optional(),
       demoUrl: z.string().url().optional(),
@@ -61,5 +61,5 @@ const themeCollection = defineCollection({
 
 // 3. Export a single `collections` object to register your collection(s)
 export const collections = {
-  theme: themeCollection,
+  themes: themeCollection,
 };

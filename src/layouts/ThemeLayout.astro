@@ -1,12 +1,15 @@
 ---
-import Layout from "./Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 
-const { frontmatter } = Astro.props;
+const { title, description, ogImage } = Astro.props;
 ---
 
-<Layout title={frontmatter.title} description={frontmatter.description}>
-  <main
-    class="mx-auto flex flex-wrap items-center justify-between space-x-4 p-4 max-w-3xl px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+<Layout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogType="website">
+  <main class="p-4 max-w-3xl px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
     <slot />
   </main>
 </Layout>
