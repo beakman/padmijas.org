@@ -11,3 +11,9 @@ export interface FooterItemsProps {
   section: string;
   links: MenuItemProps[];
 }
+
+export interface SocialItemProps {
+  name: string;
+  href: string;
+  icon: string;
+}

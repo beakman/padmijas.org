@@ -1,8 +1,8 @@
 ---
-import "@/assets/styles/globals.css";
-import { footerLinks, mainMenu, siteMeta } from "@/config";
-import Footer from "@/components/Footer.astro";
-import Navbar from "@/components/Navbar.astro";
+import "../assets/styles/globals.css";
+import { footerLinks, mainMenu, siteMeta } from "../config";
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
 import { SEO } from "astro-seo";
 
 interface Props {
@@ -47,7 +47,8 @@ const { title, description, ogImage, ogType } = Astro.props;
           },
           {
             name: "viewport",
-            content: "width=device-width, initial-scale=1.0",
+            content:
+              "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
           },
         ],
       }}

@@ -27,14 +27,17 @@ export const ThemeTools = new Map([
 ] as const);
 
 // 2. Define a `type` and `schema` for each collection
+
 const themeCollection = defineCollection({
-  type: "content", // v2.5.0 and later
+  type: "content",
   schema: ({ image }) =>
     z.object({
       title: z.string().min(3),
       description: z.string().min(5),
       fullDescription: z.string().optional(),
-      image: image(),
+      cover: image().refine((img) => img.width >= 1080, {
+        message: "Cover image must be at least 1080 pixels wide!",
+      }),
       images: z.array(image()).default([]),
       author: z.object({
         url: z.string(),
