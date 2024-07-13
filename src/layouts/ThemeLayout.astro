@@ -2,6 +2,7 @@
 import Button from "@/components/Button.astro";
 import Slider from "@/components/Slider.astro";
 import Layout from "@/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 
 const { title, description, images, ogImage } = Astro.props;
 ---
@@ -12,16 +13,63 @@ const { title, description, images, ogImage } = Astro.props;
   ogImage={ogImage}
   ogType="website">
   <main class="p-4 max-w-3xl sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
-    <Slider images={images} title={title} />
-    <article class="prose dark:prose-invert w-full py-14">
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-start">
-        <div class="col-span-3 md:col-span-2">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 max-w-6xl mx-auto py-12 px-4 md:px-6">
+      <div>
+        <Slider images={images} title={title} />
+        <div class="prose dark:prose-invert mt-8 space-y-6">
           <slot />
         </div>
-        <div class="col-span-3 md:col-span-1">
-          <Button>Buy this theme</Button>
+      </div>
+      <div class="bg-muted rounded-lg p-6 space-y-6">
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold">$49</h2>
+            <Button size="lg">Buy Theme</Button>
+          </div>
+          <p class="text-muted-foreground text-sm mt-2">
+            Includes 6 months of free updates and support.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">Template Info</h3>
+          <div class="grid gap-2 mt-2">
+            <div class="flex items-center gap-2">
+              <Icon
+                name="tabler:folder"
+                class="w-5 h-5 text-muted-foreground"
+              />
+              <span class="text-muted-foreground">Web Design</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon name="tabler:tag" class="w-5 h-5 text-muted-foreground" />
+              <span class="text-muted-foreground">HTML, CSS, JavaScript</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon
+                name="tabler:calendar"
+                class="w-5 h-5 text-muted-foreground"
+              />
+              <span class="text-muted-foreground">Updated 2 weeks ago</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon
+                name="tabler:download"
+                class="w-5 h-5 text-muted-foreground"
+              />
+              <span class="text-muted-foreground">1,234 downloads</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold">License</h3>
+          <p class="text-muted-foreground text-sm mt-2">
+            This template is licensed under the MIT license, which means you can
+            use it for personal and commercial projects without any
+            restrictions.
+          </p>
         </div>
       </div>
-    </article>
+    </div>
   </main>
 </Layout>

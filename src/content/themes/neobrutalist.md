@@ -2,11 +2,12 @@
 # layout: "@/layouts/ThemeLayout.astro"  not compatible with image optimization
 title: "Neobrutalist"
 description: "Neobrutalist is a Astro template for a modern, clean, and minimalist website."
-cover: ./images/neobrutalist.jpg
+cover: ./_images/neobrutalist-1.png
 images:
-  - ./images/neobrutalist-2.webp
-  - ./images/neobrutalist-3.webp
-  - ./images/neobrutalist-4.webp
+  - ./_images/neobrutalist-1.png
+  - ./_images/neobrutalist-2.png
+  - ./_images/neobrutalist-3.png
+  - ./_images/neobrutalist-4.png
 author:
   url: "https://noicethemes.com"
   name: "NoiceThemes"
