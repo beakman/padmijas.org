@@ -1,7 +1,9 @@
 ---
+import Button from "@/components/Button.astro";
+import Slider from "@/components/Slider.astro";
 import Layout from "@/layouts/Layout.astro";
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, images, ogImage } = Astro.props;
 ---
 
 <Layout
@@ -9,9 +11,17 @@ const { title, description, ogImage } = Astro.props;
   description={description}
   ogImage={ogImage}
   ogType="website">
-  <main class="p-4 max-w-3xl px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
-    <article class="prose dark:prose-invert">
-      <slot />
+  <main class="p-4 max-w-3xl sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+    <Slider images={images} title={title} />
+    <article class="prose dark:prose-invert w-full py-14">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-start">
+        <div class="col-span-3 md:col-span-2">
+          <slot />
+        </div>
+        <div class="col-span-3 md:col-span-1">
+          <Button>Buy this theme</Button>
+        </div>
+      </div>
     </article>
   </main>
 </Layout>

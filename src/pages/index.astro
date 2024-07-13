@@ -1,6 +1,10 @@
 ---
 import Button from "@/components/Button.astro";
 import Layout from "@/layouts/Layout.astro";
+
+const gotoThemes = () => {
+  window.location.href = "/themes";
+};
 ---
 
 <Layout title="Welcome to NoiceThemes.">
@@ -10,8 +14,8 @@ import Layout from "@/layouts/Layout.astro";
       class="mx-auto prose-headings:mb-1 flex flex-col items-center justify-center gap-4 w-full px-4 py-16 prose dark:prose-invert">
       <h1 class="text-center">Welcome to NoiceThemes.</h1>
       <p class="mt-0 text-center">
-        NoiceThemes: where Astro and Medusa templates get a makeover! Free and
-        premium options for developers who want it easy, fast, and customizable.
+        Where Astro and Medusa templates get a makeover! 💅 Free and premium
+        options for developers who want it easy, fast, and customizable.
       </p>
       <div class="flex flex-col md:flex-row mx-auto items-center gap-4">
         <Button size="lg">View Themes</Button>
