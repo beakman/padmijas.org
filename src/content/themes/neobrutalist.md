@@ -15,6 +15,7 @@ author:
 categories:
   - "blog"
   - "education"
+price: 49
 buyUrl: "https://noicethemes.lemonsqueezy.com/"
 demoUrl: "https://neobrutalist.noicethemes.com/"
 tools:

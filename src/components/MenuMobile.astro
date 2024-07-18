@@ -1,0 +1,83 @@
+---
+import type { MenuItemProps } from "@/types";
+import Link from "./Link.astro";
+import Social from "./Social.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+
+interface Props {
+  mainMenuItems: MenuItemProps[];
+  class?: string;
+}
+
+const { mainMenuItems, class: className = "" } = Astro.props;
+---
+
+<div
+  role="menu"
+  aria-label="Main Menu"
+  class:list={[
+    "inset-0 w-full h-screen absolute top-20 col-span-2 transition duration-100 ease-out -translate-y-4 opacity-0 bg-background",
+    className,
+  ]}
+  id="mobile-menu">
+  <ul
+    class="relative flex flex-col w-full h-full mb-20 overflow-y-auto text-2xl font-medium divide-y">
+    {
+      mainMenuItems &&
+        mainMenuItems.map((item: MenuItemProps) => (
+          <>
+            {item.children ? (
+              <>
+                <li class="p-0 dropdown-item group peer">
+                  <span class="flex items-center justify-between w-full p-6">
+                    {item.name}
+                    <svg
+                      class="rotate-0 pt-1 transition-transform group-[.is-open]:rotate-180"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24">
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m6 9l6 6l6-6"
+                      />
+                    </svg>
+                  </span>
+                </li>
+                {item.children.map((child: MenuItemProps) => (
+                  <li class="hidden -translate-y-4 p-6 pl-14 opacity-0 transition-all peer-[.is-open]:block peer-[.is-open]:translate-y-0 peer-[.is-open]:opacity-100">
+                    <Link
+                      aria-label={child.name}
+                      class="block w-full p-0 text-base font-normal transition-all"
+                      href={child.href}>
+                      {child.name}
+                    </Link>
+                  </li>
+                ))}
+              </>
+            ) : (
+              <li class="p-6">
+                <Link
+                  aria-label={item.name}
+                  class="block w-full p-0"
+                  href={item.href}>
+                  {item.name}
+                </Link>
+              </li>
+            )}
+          </>
+        ))
+    }
+  </ul>
+  <div class="fixed bottom-0 left-0 w-full h-20 bg-background">
+    <div
+      class="flex items-center justify-between w-full gap-4 p-6 navbar-footer">
+      <ThemeSwitcher />
+      <Social />
+    </div>
+  </div>
+</div>

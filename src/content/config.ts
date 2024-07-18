@@ -50,6 +50,7 @@ const themeCollection = defineCollection({
       repoUrl: z.string().url().optional(),
       demoUrl: z.string().url().optional(),
       buyUrl: z.string().url().optional(),
+      price: z.number().min(0).default(0),
       tools: z
         .array(z.enum(Array.from(ThemeTools.keys()) as [string, ...string[]]))
         .default([]),

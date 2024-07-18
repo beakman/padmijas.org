@@ -4,14 +4,19 @@ import { Image } from "astro:assets";
 import logo from "@/assets/logo.svg";
 import logoDark from "@/assets/logo-dark.svg";
 
-const { title, href = siteMeta.baseUrl, width = 32, height = 32 } = Astro.props;
+const {
+  title,
+  href = siteMeta.baseUrl,
+  width = 32,
+  height = 32,
+  class: className = "",
+} = Astro.props;
 ---
 
 <a
   aria-label={title}
   href={href}
-  class="flex gap-2 items-center font-semibold text-2xl"
->
+  class:list={["flex gap-2 font-semibold text-2xl", className]}>
   <Image
     class="dark:hidden"
     src={logo}

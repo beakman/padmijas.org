@@ -1,0 +1,117 @@
+---
+import type { MenuItemProps } from "types";
+import Hamburger from "@/components/Hamburger.astro";
+import Link from "@/components/Link.astro";
+import Logo from "@/components/Logo.astro";
+import Social from "@/components/Social.astro";
+import ThemeSwitcher from "@/components/ThemeSwitcher.astro";
+import { Icon } from "astro-icon/components";
+import MenuDesktop from "./MenuDesktop.astro";
+import MenuMobile from "./MenuMobile.astro";
+
+interface Props {
+  mainMenuItems: MenuItemProps[];
+}
+
+const { mainMenuItems } = Astro.props;
+---
+
+<style>
+  #hamburger-checkbox:checked ~ #mobile-menu {
+    @apply translate-y-0 opacity-100;
+  }
+</style>
+
+<header>
+  <nav
+    class="flex items-center justify-between h-16 max-w-3xl mx-auto sm:flex lg:max-w-6xl xl:max-w-7xl">
+    <Logo class="items-start col-span-1 p-4" title="noicethemes" href="/" />
+
+    <!-- Main menu (desktop) -->
+    <MenuDesktop mainMenuItems={mainMenuItems} />
+
+    <!-- Hamburger button -->
+    <div
+      class="items-center self-center justify-center col-span-1 ml-auto sm:hidden">
+      <input type="checkbox" class="sr-only peer" id="hamburger-checkbox" />
+      <label
+        for="hamburger-checkbox"
+        class="relative w-8 h-8 cursor-pointer inset-0 flex flex-col items-center justify-center space-y-1.5 transition-all duration-300 peer-checked:space-y-0">
+        <span
+          class="block w-5 h-0.5 bg-muted-foreground transition-all duration-300 peer-checked:rotate-45 peer-checked:translate-y-1.5 peer-checked:bg-foreground"
+        ></span>
+        <span
+          class="block w-5 h-0.5 bg-muted-foreground transition-all duration-300 peer-checked:-rotate-45 peer-checked:-translate-y-1.5 peer-checked:bg-foreground"
+        ></span>
+      </label>
+
+      <!-- Mobile menu -->
+      <div
+        role="menu"
+        aria-label="Main Menu"
+        class="absolute inset-0 w-full h-screen col-span-2 transition duration-100 ease-out -translate-y-4 opacity-0 top-20 bg-background"
+        id="mobile-menu">
+        <ul
+          class="relative flex flex-col w-full h-full mb-20 overflow-y-auto text-2xl font-medium divide-y">
+          {
+            mainMenuItems &&
+              mainMenuItems.map((item: MenuItemProps) => (
+                <>
+                  {item.children ? (
+                    <>
+                      <li class="p-0 dropdown-item group peer">
+                        <span class="flex items-center justify-between w-full p-6">
+                          {item.name}
+                          <svg
+                            class="rotate-0 pt-1 transition-transform group-[.is-open]:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24">
+                            <path
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="m6 9l6 6l6-6"
+                            />
+                          </svg>
+                        </span>
+                      </li>
+                      {item.children.map((child: MenuItemProps) => (
+                        <li class="hidden -translate-y-4 p-6 pl-14 opacity-0 transition-all peer-[.is-open]:block peer-[.is-open]:translate-y-0 peer-[.is-open]:opacity-100">
+                          <Link
+                            aria-label={child.name}
+                            class="block w-full p-0 text-base font-normal transition-all"
+                            href={child.href}>
+                            {child.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </>
+                  ) : (
+                    <li class="p-6">
+                      <Link
+                        aria-label={item.name}
+                        class="block w-full p-0"
+                        href={item.href}>
+                        {item.name}
+                      </Link>
+                    </li>
+                  )}
+                </>
+              ))
+          }
+        </ul>
+        <div class="fixed bottom-0 left-0 w-full h-20 bg-background">
+          <div
+            class="flex items-center justify-between w-full gap-4 p-6 navbar-footer">
+            <ThemeSwitcher />
+            <Social />
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
