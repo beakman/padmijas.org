@@ -24,7 +24,7 @@ const { mainMenuItems } = Astro.props;
     @apply translate-y-0 opacity-100;
   }
   .mobile-menu-content {
-    height: 100%;
+    height: calc(100vh - 10rem); /* Subtract the height of the footer */
     overflow-y: auto;
   }
 </style>
