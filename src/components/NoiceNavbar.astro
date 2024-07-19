@@ -17,11 +17,14 @@ const { mainMenuItems } = Astro.props;
 ---
 
 <style>
+  #mobile-menu {
+    height: calc(100vh - 10rem); /* Subtract the height of the footer */
+  }
   #hamburger-checkbox:checked ~ #mobile-menu {
     @apply translate-y-0 opacity-100;
   }
   .mobile-menu-content {
-    height: calc(100vh - 10rem); /* Subtract the height of the footer */
+    height: 100%;
     overflow-y: auto;
   }
 </style>
@@ -53,7 +56,7 @@ const { mainMenuItems } = Astro.props;
       <div
         role="menu"
         aria-label="Main Menu"
-        class="absolute inset-0 w-full h-screen col-span-2 transition duration-200 ease-in-out -translate-y-4 opacity-0 top-20 bg-background"
+        class="absolute inset-0 w-full col-span-2 transition duration-200 ease-in-out -translate-y-4 opacity-0 top-20 bg-background"
         id="mobile-menu">
         <div class="overflow-y-auto mobile-menu-content">
           <ul
@@ -112,11 +115,11 @@ const { mainMenuItems } = Astro.props;
         </div>
         <div
           id="mobile-menu-gradient"
-          class="absolute w-full h-20 bottom-32 bg-gradient-to-t from-background from-60% to-transparent z-10 mobile-menu-gradient">
+          class="absolute w-full h-10 -bottom-4 bg-gradient-to-t from-background from-60% to-transparent z-10 mobile-menu-gradient">
         </div>
         <div
           id="mobile-menu-footer"
-          class="left-0 flex items-center h-20 p-4 m-auto mobile-menu-footer bottom-20 bg-background">
+          class="bottom-0 left-0 flex items-center h-20 p-4 m-auto mobile-menu-footer bg-background">
           <div
             class="flex items-center justify-between w-full gap-4 navbar-footer">
             <ThemeSwitcher />
