@@ -18,13 +18,13 @@ const { mainMenuItems } = Astro.props;
 
 <style>
   #mobile-menu {
-    height: calc(100vh - 10rem); /* Subtract the height of the footer */
+    height: calc(100dvh - 10rem); /* Subtract the height of the footer */
   }
   #hamburger-checkbox:checked ~ #mobile-menu {
     @apply translate-y-0 opacity-100;
   }
   .mobile-menu-content {
-    height: calc(100vh - 10rem); /* Subtract the height of the footer */
+    height: calc(100dvh - 10rem); /* Subtract the height of the footer */
     overflow-y: auto;
   }
 </style>
