@@ -2,9 +2,9 @@
 import "@/assets/styles/globals.css";
 import { ViewTransitions } from "astro:transitions";
 import { footerLinks, mainMenu, siteMeta } from "@/config";
-import Footer from "@/components/Footer.astro";
-import NoiceNavbar from "@/components/NoiceNavbar.astro";
+import Footer from "@/components/layout/Footer.astro";
 import { SEO } from "astro-seo";
+import Header from "@/components/layout/Header.astro";
 
 interface Props {
   title?: string;
@@ -62,8 +62,8 @@ const { title, description, ogImage, ogType } = Astro.props;
   <body
     id="body"
     class="transition-colors duration-200 ease-in-out has-[.navbar-expanded]:overflow-y-hidden text-foreground bg-background">
-    <NoiceNavbar mainMenuItems={mainMenu} />
+    <Header />
     <slot />
-    <Footer footerLinks={footerLinks} />
+    <Footer />
   </body>
 </html>

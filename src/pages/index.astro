@@ -1,24 +1,25 @@
 ---
-import Button from "@/components/Button.astro";
+import Button from "@/components/forms/Button.astro";
+import Link from "@/components/ui/Link.astro";
 import Layout from "@/layouts/Layout.astro";
-
-const gotoThemes = () => {
-  window.location.href = "/themes";
-};
 ---
 
 <Layout title="Welcome to NoiceThemes.">
   <main
-    class="mx-auto flex flex-wrap items-center justify-between space-x-4 p-4 max-w-3xl px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+    class="flex flex-wrap items-center justify-between max-w-3xl p-4 px-4 mx-auto space-x-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
     <section
-      class="mx-auto prose-headings:mb-1 flex flex-col items-center justify-center gap-4 w-full px-4 py-16 prose dark:prose-invert">
+      class="flex flex-col items-center justify-center w-full gap-4 px-4 py-16 mx-auto prose prose-headings:mb-1 dark:prose-invert">
       <h1 class="text-center">Welcome to NoiceThemes.</h1>
       <p class="mt-0 text-center">
         Where Astro and Medusa templates get a makeover! 💅 Free and premium
         options for developers who want it easy, fast, and customizable.
       </p>
-      <div class="flex flex-col md:flex-row mx-auto items-center gap-4">
-        <Button size="lg">View Themes</Button>
+      <div class="flex flex-col items-center gap-4 mx-auto md:flex-row">
+        <Link
+          href="/themes"
+          class="flex items-center justify-center px-8 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-11 not-prose"
+          >View Themes</Link
+        >
         <Button size="lg" variant="outline">Buy Themes</Button>
       </div>
     </section>

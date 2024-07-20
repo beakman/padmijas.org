@@ -1,0 +1,12 @@
+---
+import { mainMenu, socialLinks } from "@/config";
+import Navbar from "@/components/navigation/Navbar.astro";
+---
+
+<header>
+  <Navbar
+    mainMenuItems={mainMenu}
+    socialLinks={socialLinks}
+    showThemeSwitcher={true}
+  />
+</header>

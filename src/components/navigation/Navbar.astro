@@ -1,0 +1,204 @@
+---
+import type { MenuItemProps, SocialItemProps } from "types";
+import Logo from "@/components/ui/Logo.astro";
+import ThemeSwitcher from "@/components/ui/ThemeSwitcher.astro";
+import Social from "@/components/ui/Social.astro";
+import Link from "@/components/ui/Link.astro";
+
+interface Props {
+  mainMenuItems: MenuItemProps[];
+  socialLinks: SocialItemProps[];
+  showThemeSwitcher?: boolean;
+}
+
+const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
+---
+
+<style>
+  #mobile-menu {
+    height: calc(100dvh - 10rem); /* Subtract the height of the footer */
+  }
+  #hamburger-checkbox:checked ~ #mobile-menu {
+    @apply translate-y-0 opacity-100;
+  }
+  .mobile-menu-content {
+    height: calc(100dvh - 10rem); /* Subtract the height of the footer */
+    overflow-y: auto;
+  }
+</style>
+
+<nav
+  class="flex items-center justify-between h-16 max-w-3xl mx-auto sm:flex lg:max-w-6xl xl:max-w-7xl">
+  <Logo class="items-start p-4" title="noicethemes" href="/" />
+
+  <!-- Main menu (desktop) -->
+  <div class="items-center justify-between hidden p-4 sm:flex sm:gap-6">
+    <ul class="flex items-center mt-0 space-x-8 font-medium h-14">
+      {
+        mainMenuItems &&
+          mainMenuItems.map((item: MenuItemProps) => (
+            <li class="flex items-center h-full">
+              {item.children ? (
+                <div class="flex items-center h-full group">
+                  <span class="flex items-end gap-1 cursor-pointer">
+                    {item.name}
+                    <svg
+                      class="pt-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24">
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m6 9l6 6l6-6"
+                      />
+                    </svg>
+                  </span>
+                  <ul class="dropdown-menu animate-fade-up animate-duration-200 bg-background invisible absolute top-[65px] z-50 translate-y-2 flex-col space-y-4 rounded-lg border-2 py-4 font-medium opacity-0 shadow-flat transition group-hover:visible group-hover:flex group-hover:translate-y-0 group-hover:opacity-100">
+                    {item.children.map((child) => (
+                      <li class="flex">
+                        <Link
+                          aria-label={child.name}
+                          class="block px-8 py-0.5"
+                          href={child.href}>
+                          {child.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <Link
+                  aria-label={item.name}
+                  class="block w-full p-0"
+                  href={item.href}>
+                  {item.name}
+                </Link>
+              )}
+            </li>
+          ))
+      }
+    </ul>
+
+    {
+      (showThemeSwitcher || socialLinks) && (
+        <div class="flex items-center justify-between w-full gap-4">
+          {/* {socialLinks && <Social socialLinks={socialLinks} />} */}
+          {showThemeSwitcher && <ThemeSwitcher />}
+        </div>
+      )
+    }
+  </div>
+  <!-- / Main menu (desktop) -->
+
+  <!-- Hamburger button -->
+  <div class="items-center self-center justify-center sm:hidden">
+    <input type="checkbox" class="sr-only peer" id="hamburger-checkbox" />
+    <label
+      for="hamburger-checkbox"
+      class="relative px-4 w-10 h-10 cursor-pointer inset-0 flex flex-col items-center justify-center space-y-1.5 transition-all duration-200 peer-checked:space-y-0">
+      <span
+        class="block w-5 h-0.5 bg-muted-foreground transition-all duration-200 peer-checked:rotate-45 peer-checked:translate-y-1.5 peer-checked:bg-foreground"
+      ></span>
+      <span
+        class="block w-5 h-0.5 bg-muted-foreground transition-all duration-200 peer-checked:-rotate-45 peer-checked:-translate-y-1.5 peer-checked:bg-foreground"
+      ></span>
+    </label>
+
+    <!-- Mobile menu -->
+    <div
+      role="menu"
+      aria-label="Main Menu"
+      class="absolute inset-0 w-full col-span-2 transition duration-200 ease-in-out -translate-y-4 opacity-0 -z-20 peer-checked:z-50 top-20 bg-background"
+      id="mobile-menu">
+      <div class="overflow-y-auto mobile-menu-content">
+        <ul class="relative flex flex-col w-full text-2xl font-medium divide-y">
+          {
+            mainMenuItems &&
+              mainMenuItems.map((item: MenuItemProps) => (
+                <>
+                  {item.children ? (
+                    <>
+                      <li class="p-0 dropdown-item group peer">
+                        <span class="flex items-center justify-between w-full p-6">
+                          {item.name}
+                          <svg
+                            class="rotate-0 pt-1 transition-transform group-[.is-open]:rotate-180"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24">
+                            <path
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="m6 9l6 6l6-6"
+                            />
+                          </svg>
+                        </span>
+                      </li>
+                      {item.children.map((child: MenuItemProps) => (
+                        <li class="hidden -translate-y-4 p-6 pl-14 opacity-0 transition-all peer-[.is-open]:block peer-[.is-open]:translate-y-0 peer-[.is-open]:opacity-100">
+                          <Link
+                            aria-label={child.name}
+                            class="block w-full p-0 text-base font-normal transition-all"
+                            href={child.href}>
+                            {child.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </>
+                  ) : (
+                    <li class="p-6">
+                      <Link
+                        aria-label={item.name}
+                        class="block w-full p-0"
+                        href={item.href}>
+                        {item.name}
+                      </Link>
+                    </li>
+                  )}
+                </>
+              ))
+          }
+        </ul>
+      </div>
+      <div
+        id="mobile-menu-gradient"
+        class="absolute w-full h-10 -bottom-4 bg-gradient-to-t from-background from-60% to-transparent z-10 mobile-menu-gradient">
+      </div>
+      <div
+        id="mobile-menu-footer"
+        class="bottom-0 left-0 flex items-center h-20 p-4 m-auto mobile-menu-footer bg-background">
+        <div
+          class="flex items-center justify-between w-full gap-4 navbar-footer">
+          {showThemeSwitcher && <ThemeSwitcher />}
+          <Social socialLinks={socialLinks} />
+        </div>
+      </div>
+    </div>
+    <!-- / Mobile menu -->
+  </div>
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkbox = document.getElementById(
+      "hamburger-checkbox"
+    ) as HTMLInputElement;
+
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        document.body.classList.add("overflow-hidden");
+      } else {
+        document.body.classList.remove("overflow-hidden");
+      }
+    });
+  });
+</script>

@@ -1,0 +1,24 @@
+---
+import { Icon } from "astro-icon/components";
+import type { SocialItemProps } from "@/types";
+import Link from "@/components/ui/Link.astro";
+
+interface Props {
+  socialLinks: SocialItemProps[];
+}
+
+const { socialLinks } = Astro.props;
+---
+
+<div class="flex items-center gap-4">
+  {
+    socialLinks.map((link: SocialItemProps) => (
+      <Link
+        aria-label={link.name}
+        class="text-2xl font-medium transition-colors hover:text-primary"
+        href={link.href}>
+        <Icon name={link.icon} class="w-6 h-6" />
+      </Link>
+    ))
+  }
+</div>

@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  href?: string;
+  cover: ImageMetadata;
+  title: string;
+}
+
+const { cover, title, href } = Astro.props;
+---
+
+<div
+  class="relative inline-block p-0 text-center border-2 border-gray-300 rounded dark:border-gray-600">
+  <div
+    class="w-full border-b-2 border-gray-300 rounded-t dark:border-gray-600 h-7">
+  </div>
+  <div class="absolute top-2.5 left-3 flex space-x-2">
+    <div class="w-2 h-2 bg-gray-300 rounded-full dark:bg-gray-600"></div>
+    <div class="w-2 h-2 bg-gray-300 rounded-full dark:bg-gray-600"></div>
+    <div class="w-2 h-2 bg-gray-300 rounded-full dark:bg-gray-600"></div>
+  </div>
+
+  {
+    href ? (
+      <a href={href}>
+        <Image
+          src={cover}
+          alt={title}
+          width={600}
+          height={450}
+          class="rounded-b-sm p-0 inset-0 hover:opacity-75 aspect-[4/3]"
+          format="avif"
+        />
+      </a>
+    ) : (
+      <Image
+        src={cover}
+        alt={title}
+        width={600}
+        height={450}
+        class="rounded-b-sm p-0 inset-0 hover:opacity-75 aspect-[4/3]"
+        format="avif"
+      />
+    )
+  }
+</div>
