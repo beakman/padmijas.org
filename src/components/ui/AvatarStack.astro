@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import Avatar from "./Avatar.astro";
+
+interface Avatar {
+  name: string;
+  img: ImageMetadata;
+}
+
+interface Props {
+  avatars: Avatar[];
+  class?: string;
+}
+
+const { avatars, class: className = "w-8 h-8" } = Astro.props;
+---
+
+<div class="flex -space-x-1 overflow-hidden">
+  {
+    avatars.map((avatar) => (
+      <Avatar
+        class:list={["inline-block", className]}
+        src={avatar.img}
+        alt={avatar.name}
+      />
+    ))
+  }
+</div>

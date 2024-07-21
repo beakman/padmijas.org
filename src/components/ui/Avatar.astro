@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  class?: string;
+}
+
+const { src, alt, class: className = "" } = Astro.props;
+---
+
+<div class:list={["relative", className]}>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div
+      class="w-full h-full overflow-hidden rounded-full ring-2 ring-gray-200 dark:ring-gray-700">
+      <Image
+        src={src}
+        alt={alt ?? ""}
+        width={128}
+        height={128}
+        class="object-cover w-full h-full"
+      />
+    </div>
+  </div>
+  <slot />
+</div>
