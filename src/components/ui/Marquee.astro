@@ -1,0 +1,67 @@
+---
+import Testimonial from "./Testimonial.astro";
+
+const testimonials = [
+  {
+    name: "Tommie Ewart",
+    message: "Lorem ipsum dolor sit amet.",
+  },
+  {
+    name: "John Doe",
+    message: "Lorem ipsum dolor sit amet.",
+  },
+  {
+    name: "Jane Doe",
+    message: "Lorem ipsum dolor sit amet.",
+  },
+  {
+    href: "https://twitter.com/username",
+    name: "@username",
+    message: "Lorem ipsum dolor sit amet.",
+    handler: "Twitter",
+  },
+  {
+    href: "https://github.com/username",
+    name: "@username",
+    message: "Lorem ipsum dolor sit amet.",
+    handler: "GitHub",
+  },
+  {
+    href: "https://www.linkedin.com/in/username",
+    name: "@username",
+    message: "Lorem ipsum dolor sit amet.",
+    handler: "LinkedIn",
+  },
+];
+---
+
+<div class="relative flex items-center w-full h-full py-6">
+  <div class="relative flex flex-col max-w-[100vw] overflow-hidden py-5">
+    <div
+      class="flex w-max animate-marquee [--duration:30s] hover:[animation-play-state:paused]">
+      {
+        testimonials.map((item) => (
+          <div class="h-full px-2">
+            <Testimonial
+              class="mx-2 w-[20rem] animate-fade-in delay-200 transition opacity-0"
+              {...item}
+            />
+          </div>
+        ))
+      }
+    </div>
+    <div
+      class="mt-2 flex w-max animate-marquee [animation-direction:reverse] hover:[animation-play-state:paused]">
+      {
+        testimonials.map((item) => (
+          <div class="h-full px-2">
+            <Testimonial
+              class="mx-2 w-[20rem] animate-fade-in transition delay-200 opacity-0"
+              {...item}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

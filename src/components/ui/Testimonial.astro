@@ -1,0 +1,42 @@
+---
+import Avatar from "./Avatar.astro";
+
+import avatarImg from "assets/images/avatar.png";
+
+interface Props {
+  href?: string;
+  name: string;
+  handler?: string;
+  message: string;
+  class?: string;
+}
+
+const { href, name, handler, message, class: className = "" } = Astro.props;
+---
+
+<div
+  class:list={[
+    "p-5 mb-5 font-light border rounded-lg border-foreground/20 dark:border-foreground/10 dark:bg-foreground/5 text-wrap whitespace-normal",
+    className,
+  ]}>
+  <div class="flex items-center w-full mb-4">
+    <Avatar class="w-10 h-10" src={avatarImg} alt={name} />
+    <div class="flex-grow pl-3">
+      <h6 class="text-sm font-bold">{name}</h6>
+      <span class="text-sm text-muted-foreground">
+        {handler && <span class="text-muted-foreground">@{handler}</span>}
+      </span>
+    </div>
+  </div>
+
+  <div class="w-full">
+    <p class="text-sm leading-tight">
+      <span class="mr-1 text-lg italic font-bold leading-none text-gray-400"
+        >"</span
+      >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae,
+      obcaecati ullam excepturi dicta error deleniti sequi.<span
+        class="ml-1 text-lg italic font-bold leading-none text-gray-400">"</span
+      >
+    </p>
+  </div>
+</div>
