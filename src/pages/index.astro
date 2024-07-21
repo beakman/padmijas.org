@@ -1,15 +1,25 @@
 ---
 import Button from "@/components/forms/Button.astro";
+import Accordion from "@/components/ui/Accordion.astro";
+import AccordionSection from "@/components/ui/AccordionSection.astro";
+import AvatarStack from "@/components/ui/AvatarStack.astro";
 import Link from "@/components/ui/Link.astro";
+import Marquee from "@/components/ui/Marquee.astro";
 import Layout from "@/layouts/Layout.astro";
+
+import avatarImg from "assets/images/avatar.png";
+import { Icon } from "astro-icon/components";
 ---
 
 <Layout title="Welcome to NoiceThemes.">
   <main
     class="flex flex-wrap items-center justify-between max-w-3xl p-4 px-4 mx-auto space-x-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+    <!-- Main Hero Section -->
     <section
-      class="flex flex-col items-center justify-center w-full gap-4 px-4 py-16 mx-auto prose prose-headings:mb-1 dark:prose-invert">
-      <h1 class="text-center">Welcome to NoiceThemes.</h1>
+      class="flex flex-col items-center justify-center w-full gap-4 px-4 py-20 mx-auto prose prose-headings:mb-1 dark:prose-invert">
+      <h1 class="text-4xl text-center md:text-6xl">
+        Noooice themes, serious code.
+      </h1>
       <p class="mt-0 text-center">
         Where Astro and Medusa templates get a makeover! 💅 Free and premium
         options for developers who want it easy, fast, and customizable.
@@ -17,11 +27,109 @@ import Layout from "@/layouts/Layout.astro";
       <div class="flex flex-col items-center gap-4 mx-auto md:flex-row">
         <Link
           href="/themes"
-          class="flex items-center justify-center px-8 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-11 not-prose"
-          >View Themes</Link
+          class="flex items-center justify-center px-8 tracking-wide rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-11 not-prose"
+          >Get all for $199</Link
         >
-        <Button size="lg" variant="outline">Buy Themes</Button>
+        <Link class="tracking-wide" href="/themes">Explore Themes</Link>
+      </div>
+      <div class="flex items-center justify-center">
+        <div class="flex items-start gap-4 py-6">
+          <AvatarStack
+            avatars={[
+              { name: "Dries Vincent", img: avatarImg },
+              { name: "Lindsay Walton", img: avatarImg },
+              { name: "Courtney Henry", img: avatarImg },
+              { name: "Tom Cook", img: avatarImg },
+            ]}
+          />
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2">
+              <Icon
+                name="tabler:star-filled"
+                class="w-4 h-4 text-foreground dark:text-gray-500"
+              />
+              <Icon
+                name="tabler:star-filled"
+                class="w-4 h-4 text-foreground dark:text-gray-500"
+              />
+              <Icon
+                name="tabler:star-filled"
+                class="w-4 h-4 text-foreground dark:text-gray-500"
+              />
+              <Icon
+                name="tabler:star-filled"
+                class="w-4 h-4 text-foreground dark:text-gray-500"
+              />
+              <Icon
+                name="tabler:star-filled"
+                class="w-4 h-4 text-foreground dark:text-gray-500"
+              />
+            </div>
+            <span class="text-xs font-light"> Trusted by some people </span>
+          </div>
+        </div>
       </div>
     </section>
   </main>
+
+  <!-- Testimonials Section -->
+  <section class="w-full">
+    <div class="mx-auto prose prose-headings:mb-1 dark:prose-invert">
+      <h1
+        class="text-2xl font-bold text-center delay-100 md:text-3xl animated-fade-in">
+        Testimonials
+      </h1>
+      <p class="text-center text-md">
+        Hear from our customers about their experiences with NoiceThemes.
+      </p>
+    </div>
+    <Marquee />
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section
+    class="flex flex-wrap items-center justify-between max-w-3xl p-4 px-4 mx-auto space-x-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+    <div
+      class="flex flex-col items-center justify-center w-full gap-4 px-4 py-16 mx-auto prose prose-xl prose-headings:mb-1 prose-headings:m-0 dark:prose-invert">
+      <div class="mx-auto prose prose-headings:mb-1 dark:prose-invert">
+        <h1
+          class="text-2xl font-bold text-center delay-100 md:text-3xl animated-fade-in">
+          Frequently Asked Questions
+        </h1>
+        <p class="text-center text-md">
+          Some of the most frequently asked questions about NoiceThemes.
+        </p>
+      </div>
+      <Accordion>
+        <AccordionSection>
+          <h4 slot="question">What lifetime license means?</h4>
+          <p slot="answer">
+            Our courses cover a wide range of topics, including but not limited
+            to programming, design, business, personal development, language
+            learning, and more. We continuously update our course offerings to
+            meet the evolving needs and interests of our learners.
+          </p>
+        </AccordionSection>
+        <AccordionSection>
+          <h4 slot="question">What lifetime license means?</h4>
+          <p slot="answer">
+            Our courses cover a wide range of topics, including but not limited
+            to programming, design, business, personal development, language
+            learning, and more. We continuously update our course offerings to
+            meet the evolving needs and interests of our learners.
+          </p>
+        </AccordionSection>
+        <AccordionSection>
+          <h4 slot="question">What lifetime license means?</h4>
+          <p slot="answer">
+            Our courses cover a wide range of topics, including but not limited
+            to programming, design, business, personal development, language
+            learning, and more. We continuously update our course offerings to
+            meet the evolving needs and interests of our learners.
+          </p>
+        </AccordionSection>
+      </Accordion>
+    </div>
+  </section>
 </Layout>
