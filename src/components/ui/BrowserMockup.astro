@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  url: string;
+}
+
+const { title, url } = Astro.props;
+---
+
+<div
+  class="relative inline-block w-full p-0 text-center border-2 rounded h-[1200px] border-foreground">
+  <div class="w-full border-b-2 rounded-t border-foreground h-7"></div>
+  <div class="absolute top-2.5 left-3 flex space-x-2">
+    <div class="w-2 h-2 rounded-full bg-foreground"></div>
+    <div class="w-2 h-2 rounded-full bg-foreground"></div>
+    <div class="w-2 h-2 rounded-full bg-foreground"></div>
+  </div>
+
+  <div class="w-full overflow-hidden h-[1168px]">
+    <iframe
+      src={url}
+      title={title}
+      frameborder="0"
+      scrolling="yes"
+      width="100%"
+      height="100%"></iframe>
+  </div>
+</div>

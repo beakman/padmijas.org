@@ -1,6 +1,6 @@
 ---
 import Slider from "@/components/media/Slider.astro";
-import ThemeLayout from "@/layouts/ThemeLayout.astro";
+import ThemeBrowserLayout from "@/layouts/ThemeBrowserLayout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -19,10 +19,12 @@ const { theme } = Astro.props as { theme: CollectionEntry<"themes"> };
 const { Content } = await theme.render();
 ---
 
-<ThemeLayout
+<ThemeBrowserLayout
   title={theme.data.title}
   description={theme.data.description}
   ogImage={theme.data.cover}
+  demoUrl={theme.data.demoUrl}
+  price={theme.data.price}
   images={theme.data.images}>
   <Content />
-</ThemeLayout>
+</ThemeBrowserLayout>
