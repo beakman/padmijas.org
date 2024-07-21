@@ -1,0 +1,22 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { icon = "tabler:chevron-left" } = Astro.props;
+---
+
+<label
+  class="grid items-center grid-cols-12 px-4 py-8 overflow-hidden cursor-pointer">
+  <input type="checkbox" value="" class="col-span-12 sr-only peer" />
+  <div
+    class="col-span-11 text-lg font-medium md:text-xl peer-checked:font-bold">
+    <slot name="question" />
+  </div>
+  <Icon
+    class="col-span-1 ml-auto text-2xl transition peer-checked:-rotate-90"
+    name={icon}
+  />
+  <span
+    class="h-0 col-span-12 pt-0 transition duration-300 -translate-y-2 opacity-0 peer-checked:h-auto peer-checked:translate-y-0 peer-checked:pt-3 peer-checked:opacity-100">
+    <slot name="answer" />
+  </span>
+</label>

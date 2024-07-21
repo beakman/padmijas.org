@@ -1,0 +1,8 @@
+---
+const { class: className = "" } = Astro.props;
+---
+
+<div
+  class:list={["divide-stroke flex flex-col divide-y rounded-lg", className]}>
+  <slot />
+</div>
