@@ -20,7 +20,7 @@ const { images, title } = Astro.props;
             <Image
               class="w-full snap-always snap-start peer"
               src={image}
-              alt={title}
+              alt={title ?? ""}
               id={`slide${index + 1}`}
               width={1600}
               height={900}

@@ -14,7 +14,7 @@ const { theme } = Astro.props;
   <a href={`/themes/${theme.slug}`}>
     <Image
       src={theme.data.cover}
-      alt={theme.data.title}
+      alt={theme.data.title ?? ""}
       width={656}
       height={400}
       class="rounded-md hover:opacity-75"
