@@ -4,6 +4,19 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      animation: {
+        marquee: "marquee 25s linear infinite",
+        "fade-in": "fade-in .5s linear forwards",
+      },
+      keyframes: {
+        marquee: {
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "fade-in": {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
