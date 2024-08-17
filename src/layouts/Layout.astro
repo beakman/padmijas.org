@@ -1,5 +1,7 @@
 ---
 import "@/assets/styles/globals.css";
+import "@fontsource/poppins";
+import "@fontsource-variable/caveat";
 import { ViewTransitions } from "astro:transitions";
 import { footerLinks, mainMenu, siteMeta } from "@/config";
 import Footer from "@/components/layout/Footer.astro";
@@ -12,6 +14,9 @@ interface Props {
   ogImage?: string;
   ogType?: string;
 }
+
+import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
+const t = useTranslations(Astro.currentLocale as Lang);
 
 const { title, description, ogImage, ogType } = Astro.props;
 ---
@@ -61,7 +66,8 @@ const { title, description, ogImage, ogType } = Astro.props;
   </head>
   <body
     id="body"
-    class="transition-colors duration-200 ease-in-out has-[.navbar-expanded]:overflow-y-hidden text-foreground bg-background">
+    class="bg-background text-foreground transition-colors duration-200 ease-in-out has-[.navbar-expanded]:overflow-y-hidden"
+  >
     <Header />
     <slot />
     <Footer />

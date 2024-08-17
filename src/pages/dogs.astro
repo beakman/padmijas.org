@@ -1,0 +1,26 @@
+---
+import { getDogs } from "../api/dogs";
+import Layout from "../layouts/Layout.astro";
+import { Dogs } from "../api/types/dog";
+
+const { dogs } = (await getDogs()) as Dogs;
+
+console.log("perritoooo", dogs);
+---
+
+<Layout title="Dogs">
+  <main
+    class="mx-auto flex max-w-3xl flex-wrap items-center justify-between space-x-4 p-4 px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl"
+  >
+    <section class="prose py-16 dark:prose-invert prose-headings:mb-1">
+      <h1
+        class="animated-fade-in max-w-lg text-4xl font-bold delay-100 md:text-5xl"
+      >
+        Dogs
+      </h1>
+      <p class="text-xl">
+        We are here to help you with any questions or issues you may have.
+      </p>
+    </section>
+  </main>
+</Layout>

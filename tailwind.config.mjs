@@ -3,9 +3,18 @@ export default {
   darkMode: ["class"],
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
+    fontFamily: {
+      'sans': ['Poppins', 'sans-serif'],
+      'serif': ['serif'],
+      'mono': ['ui-monospace'],
+      'display': ['Caveat', 'sans-serif'],
+      'handwrite': ['Caveat Variable', 'sans-serif'],
+      'heading': ['Caveat', 'sans-serif'],
+      'body': ['Poppins', 'sans-serif'],
+    },
     extend: {
       animation: {
-        marquee: "marquee 25s linear infinite",
+        marquee: "marquee 80s linear infinite",
         "fade-in": "fade-in .5s linear forwards",
       },
       keyframes: {

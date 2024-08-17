@@ -1,14 +1,14 @@
 ---
 import { siteMeta } from "@/config";
 import { Image } from "astro:assets";
-import logo from "@/assets/logo.svg";
-import logoDark from "@/assets/logo-dark.svg";
+import logo from "@/assets/images/logo.svg";
+import logoDark from "@/assets/images/logo-dark.svg";
 
 const {
   title,
   href = siteMeta.baseUrl,
-  width = 32,
-  height = 32,
+  width = 60,
+  height = 60,
   class: className = "",
 } = Astro.props;
 ---
@@ -16,7 +16,8 @@ const {
 <a
   aria-label={title}
   href={href}
-  class:list={["flex gap-2 font-semibold text-2xl", className]}>
+  class:list={["flex gap-2 text-2xl font-semibold", className]}
+>
   <Image
     class="dark:hidden"
     src={logo}

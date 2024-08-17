@@ -7,13 +7,14 @@ import Button from "@/components/forms/Button.astro";
   data-theme-toggle
   type="button"
   variant="ghost"
-  class="w-full md:w-auto">
+  class="flex w-auto justify-start"
+>
   <Icon
-    class="w-6 h-6 transition opacity-100 theme-toggle-icon"
+    class="theme-toggle-icon h-6 w-6 opacity-100 transition"
     name="tabler:moon"
   />
   <Icon
-    class="hidden w-6 h-6 transition opacity-0 theme-toggle-icon"
+    class="theme-toggle-icon hidden h-6 w-6 opacity-0 transition"
     name="tabler:sun"
   />
 </Button>

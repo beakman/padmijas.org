@@ -1,0 +1,94 @@
+---
+import BentoLayout from "@/layouts/BentoLayout.astro";
+import Tab from "./Tab.astro";
+import { Image } from "astro:assets";
+
+import imageBento2 from "assets/images/image-bento-2.webp";
+import { Icon } from "astro-icon/components";
+---
+
+<section class="flex flex-row flex-wrap space-x-4">
+  <!-- Tab 1 -->
+  <Tab id="tab1" icon="tabler:bug" title="Issues" name="tabs" checked />
+
+  <!-- Tab 2 -->
+  <Tab id="tab2" icon="tabler:layout" title="Cycles" name="tabs" />
+
+  <!-- Tab 3 -->
+  <Tab id="tab3" icon="tabler:apps" title="Modules" name="tabs" />
+
+  <!-- Tab 4 -->
+  <Tab id="tab4" icon="tabler:layout" title="Layouts + Views" name="tabs" />
+
+  <div class="h-0 basis-full"></div>
+
+  <div
+    class="h-0 w-full -translate-x-4 py-8 opacity-0 transition peer-checked/tab1:h-auto peer-checked/tab1:translate-x-0 peer-checked/tab1:opacity-100">
+    <BentoLayout>
+      <div slot="first">
+        <p class="text-2xl leading-tight tracking-tight">
+          Add work from any screen, nest sub-issues to as many levels as you
+          want, and track your work in custom states and stategroups.
+        </p>
+      </div>
+      <div class="" slot="second">
+        <Image
+          class="rounded-lg"
+          src={imageBento2}
+          alt="App Screenshots"
+          width={1065}
+          height={235}
+        />
+        <h3 class="my-4 text-lg font-bold">Transfer issues in two clicks.</h3>
+        <p class="text-base leading-tight tracking-tight">
+          Move issues from a project, a cycle, or a module to another in two
+          clicks. All issue properties get mapped to your destination
+          seamlessly.
+        </p>
+      </div>
+      <div slot="third">
+        <div
+          class="relative mx-auto flex aspect-square size-16 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
+          <Icon name="tabler:brand-twitter" class="m-auto h-fit w-10" />
+        </div>
+        <div class="relative z-10 mt-6 space-y-2 text-center">
+          <h2 class="text-lg font-medium">Hello #2</h2>
+          <p class="">
+            Provident fugit and vero voluptate. magnam magni doloribus dolores
+            voluptates a sapiente nisi.
+          </p>
+        </div>
+      </div>
+      <div slot="fourth">
+        <div
+          class="relative mb-8 flex aspect-square size-12 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:bg-white/5 dark:before:border-white/5 dark:before:bg-white/5">
+          <Icon name="tabler:brand-twitter" class="m-auto h-fit w-8" />
+        </div>
+        <div class="space-y-2">
+          <h2 class="text-xl font-medium">Hello #4</h2>
+          <p>
+            Provident fugit vero voluptate. Voluptates a sapiente inventore
+            nisi.
+          </p>
+        </div>
+      </div>
+      <div slot="fifth">
+        <div class="pt-6 lg:px-6">
+          <Icon name="tabler:bug" class="m-auto h-fit w-16" />
+        </div>
+        <div class="relative z-10 mt-14 space-y-2 text-center">
+          <h2
+            class="text-lg font-medium text-gray-800 transition group-hover:text-purple-950 dark:text-white">
+            Hello #5
+          </h2>
+          <p class="">
+            Provident fugit vero voluptate. Voluptates a sapiente inventore
+            nisi.
+          </p>
+        </div>
+      </div>
+    </BentoLayout>
+    <div class="hidden w-full py-8 peer-checked/tab2:block">Tab 2 Content</div>
+    <div class="hidden w-full py-8 peer-checked/tab3:block">Tab 3 Content</div>
+  </div>
+</section>

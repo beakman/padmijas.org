@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+import Tab from "./Tab.astro";
+import BentoLayout from "@/layouts/BentoLayout.astro";
+---
+
+<div class="relative h-auto">
+  <legend class="sr-only"> Tabs </legend>
+  <div class="relative flex space-x-4">
+    <!-- Tab 1 -->
+    <Tab id="tab1" icon="tabler:bug" title="Issues" name="tabs">
+      <BentoLayout />
+    </Tab>
+
+    <!-- Tab 2 -->
+    <Tab id="tab2" icon="tabler:layout" title="Cycles" name="tabs">
+      <h2 class="mb-4 text-xl font-semibold">Tab 2 Content</h2>
+      <p>This is the content of Tab 2.</p>
+    </Tab>
+
+    <!-- Tab 3 -->
+    <Tab id="tab3" icon="tabler:apps" title="Modules" name="tabs">
+      <h2 class="mb-4 text-xl font-semibold">Tab 3 Content</h2>
+      <p>This is the content of Tab 3.</p>
+    </Tab>
+
+    <!-- Tab 4 -->
+    <Tab id="tab4" icon="tabler:layout" title="Layouts + Views" name="tabs">
+      <h2 class="mb-4 text-xl font-semibold">Tab 4 Content</h2>
+      <p>This is the content of Tab 4.</p>
+    </Tab>
+  </div>
+</div>

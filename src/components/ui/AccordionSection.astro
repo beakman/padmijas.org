@@ -5,10 +5,10 @@ const { icon = "tabler:chevron-left" } = Astro.props;
 ---
 
 <label
-  class="grid items-center grid-cols-12 px-4 py-8 overflow-hidden cursor-pointer">
-  <input type="checkbox" value="" class="col-span-12 sr-only peer" />
+  class="grid cursor-pointer grid-cols-12 items-center overflow-hidden px-4 py-8">
+  <input type="checkbox" value="" class="peer sr-only col-span-12" />
   <div
-    class="col-span-11 text-lg font-medium md:text-xl peer-checked:font-bold">
+    class="col-span-11 text-lg font-medium peer-checked:font-bold md:text-xl">
     <slot name="question" />
   </div>
   <Icon
@@ -16,7 +16,7 @@ const { icon = "tabler:chevron-left" } = Astro.props;
     name={icon}
   />
   <span
-    class="h-0 col-span-12 pt-0 transition duration-300 -translate-y-2 opacity-0 peer-checked:h-auto peer-checked:translate-y-0 peer-checked:pt-3 peer-checked:opacity-100">
+    class="col-span-12 h-0 -translate-y-2 pt-0 text-base opacity-0 transition delay-0 duration-300 peer-checked:h-auto peer-checked:translate-y-0 peer-checked:pt-3 peer-checked:opacity-100">
     <slot name="answer" />
   </span>
 </label>

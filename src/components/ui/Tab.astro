@@ -1,0 +1,38 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  id: string;
+  name: string;
+  icon: string;
+  title: string;
+  checked?: boolean;
+}
+
+const {
+  id,
+  name = "tabs",
+  icon = "tabler:bug",
+  title = "Tab 1",
+  checked = false,
+} = Astro.props;
+---
+
+<input
+  id={id}
+  type="radio"
+  name={name}
+  class=`peer/${id} hidden`
+  aria-labelledby={id}
+  aria-describedby={id}
+  checked={checked}
+/>
+<label
+  for={id}
+  class:list={[
+    "flex h-10 cursor-pointer items-center rounded-full bg-primary px-4 py-1 text-primary-foreground transition-colors hover:bg-primary/90",
+    `peer-checked/${id}:text-accent-foreground" peer-checked/${id}:bg-accent`,
+  ]}>
+  <Icon name={icon} class="h-5 w-5" />
+  <span class="text-md">{title}</span>
+</label>

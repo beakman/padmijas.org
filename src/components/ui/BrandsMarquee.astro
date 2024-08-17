@@ -1,0 +1,75 @@
+---
+import logo1 from "assets/images/astro.svg";
+import logo2 from "assets/images/django.svg";
+import logo3 from "assets/images/nextjs.svg";
+import logo4 from "assets/images/github.svg";
+import logo5 from "assets/images/stripe.svg";
+import logo6 from "assets/images/vercel.svg";
+import { Image } from "astro:assets";
+
+const logos = [
+  {
+    name: "Astro",
+    url: "https://astro.build",
+    logo: logo1,
+    width: 512,
+    height: 169,
+  },
+  {
+    name: "Django",
+    url: "https://www.djangoproject.com",
+    logo: logo2,
+    width: 512,
+    height: 179,
+  },
+  {
+    name: "Next.js",
+    url: "https://nextjs.org",
+    logo: logo3,
+    width: 512,
+    height: 104,
+  },
+  {
+    name: "GitHub",
+    url: "https://github.com",
+    logo: logo4,
+    width: 512,
+    height: 139,
+  },
+  {
+    name: "Stripe",
+    url: "https://stripe.com",
+    logo: logo5,
+    width: 512,
+    height: 214,
+  },
+  {
+    name: "Vercel",
+    url: "https://vercel.com",
+    logo: logo6,
+    width: 512,
+    height: 116,
+  },
+];
+---
+
+<div class="relative flex h-full w-full items-center py-6">
+  <div class="relative flex max-w-[100vw] flex-col overflow-hidden py-5">
+    <div
+      class="flex w-max animate-marquee items-center [--duration:30s] hover:[animation-play-state:paused]">
+      {
+        [...logos, ...logos].map((item) => (
+          <div class="h-full px-2">
+            <Image
+              class="mx-8 w-[10rem] animate-fade-in fill-red-400 opacity-0 transition delay-200"
+              src={item.logo}
+              alt={item.name}
+              width={item.width}
+              height={item.height}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

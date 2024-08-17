@@ -1,0 +1,13 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { icon = "tabler:rocket" } = Astro.props;
+---
+
+<div
+  class="bg-muted-background flex flex-col items-start gap-4 rounded-xl border border-gray-200 p-4 dark:border-gray-700">
+  <Icon name={icon} class="h-8 w-8 text-accent dark:text-accent" />
+  <div class="prose">
+    <slot />
+  </div>
+</div>

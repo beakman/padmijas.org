@@ -1,10 +1,10 @@
 import type { MenuItemProps } from "./types";
 
 export const siteMeta = {
-  title: "NoiceThemes - Premium Astro and Medusa Templates",
+  title: "NoiceShelter - Premium Astro template for animal shelters",
   description:
-    "Discover stunning and fully customizable Astro and Medusa templates at NoiceThemes. Perfect for creating beautiful and responsive websites effortlessly. Elevate your web design with our premium themes.",
-  baseUrl: "https://noicethemes.com",
+    "Give your animal shelter a professional and modern website with NoiceShelter. Elevate your web design with our premium templates.",
+  baseUrl: "https://shelter.noicethemes.com",
   ogImage: "./assets/og-image.png",
   ogType: "website",
   twitterCreator: "@noicethemes",
@@ -18,9 +18,10 @@ export const mainMenu: MenuItemProps[] = [
     href: "/",
   },
   {
-    name: "Themes",
-    href: "/themes",
+    name: "Dogs",
+    href: "/dogs",
   },
+
   {
     name: "Documentation",
     href: "https://docs.noicethemes.com",
@@ -33,67 +34,54 @@ export const mainMenu: MenuItemProps[] = [
 
 export const socialLinks = [
   {
-    name: "Twitter",
-    href: "https://twitter.com/noicethemes",
-    icon: "tabler:brand-twitter",
+    name: "X",
+    href: "https://x.com/protectora_pad",
+    icon: "tabler:brand-x",
   },
   {
-    name: "GitHub",
-    href: "https://github.com/noicethemes",
-    icon: "tabler:brand-github",
+    name: "Facebook",
+    href: "https://www.facebook.com/PADmijas",
+    icon: "tabler:brand-facebook",
   },
   {
     name: "Instagram",
-    href: "https://discord.gg/noicethemes",
+    href: "https://www.instagram.com/protectora_pad_mijascosta/",
     icon: "tabler:brand-instagram",
   },
 ];
 
 export const footerLinks = [
   {
-    section: "Navigation",
+    section: "Enlaces de interés",
     links: [
       {
-        name: "Home",
-        href: "/",
+        name: "Mapa del sitio",
+        href: "/sitemap",
         target: "_self",
       },
       {
-        name: "Themes",
-        href: "/themes",
+        name: "Preguntas frecuentes",
+        href: "/preguntas-frecuentes",
         target: "_self",
       },
       {
-        name: "Documentation",
-        href: "https://docs.noicethemes.com",
-        target: "_blank",
-      },
-      {
-        name: "About",
-        href: "/about",
-        target: "_self",
-      },
-      {
-        name: "Contact",
-        href: "/contact",
+        name: "Donaciones",
+        href: "/donaciones",
         target: "_self",
       },
     ],
   },
   {
-    section: "Themes",
+    section: "Legal",
     links: [
-      { name: "Neobrutralist", href: "/themes/neobrutalist", target: "_self" },
       {
-        name: "Noicefolio",
-        href: "/themes/noicefolio",
-        disabled: true,
+        name: "Política de privacidad",
+        href: "/politica-de-privacidad",
         target: "_self",
       },
       {
-        name: "StayHaven",
-        href: "/themes/stayhaven",
-        disabled: true,
+        name: "Política de cookies",
+        href: "/politica-de-cookies",
         target: "_self",
       },
     ],
@@ -102,27 +90,17 @@ export const footerLinks = [
     section: "Social",
     links: [
       {
-        name: "Twitter",
-        href: "https://twitter.com/noicethemes",
-        icon: "twitter",
+        name: "Instagram",
+        href: "https://www.instagram.com/protectora_pad_mijascosta/",
+        icon: "tabler:brand-instagram",
         target: "_blank",
       },
       {
-        name: "GitHub",
-        href: "https://github.com/noicethemes",
-        icon: "github",
+        name: "Facebook",
+        href: "https://www.facebook.com/PADmijas",
+        icon: "tabler:brand-facebook",
         target: "_blank",
       },
-    ],
-  },
-  {
-    section: "Legal",
-    links: [
-      { name: "License", href: "/license", target: "_self" },
-      { name: "Refund Policy", href: "/refund-policy", target: "_self" },
-      { name: "Privacy Policy", href: "/privacy-policy", target: "_self" },
-      { name: "Terms of Service", href: "/terms-of-service", target: "_self" },
-      { name: "Support", href: "/support", target: "_self" },
     ],
   },
 ];
