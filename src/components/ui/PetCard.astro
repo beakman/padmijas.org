@@ -1,0 +1,140 @@
+---
+import { cva } from "class-variance-authority";
+import { formatDistanceToNowStrict } from "date-fns";
+import { es } from "date-fns/locale";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import { Dog } from "../../api/types/dog";
+import { getAssetURL } from "../../api/client";
+import { useTranslations } from "../../i18n";
+import type { Lang } from "../../i18n";
+import { petCard } from "../../consts";
+export interface Props {
+  dog: Dog;
+}
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(Astro.currentLocale as Lang);
+
+console.log("locale", locale);
+console.log(t(petCard.isAdopted));
+
+const petStatus = cva(
+  [
+    "aspect-square",
+    "group-hover:-translate-y-2",
+    "group-hover:ring-8",
+    "group-hover:shadow-lg",
+    "mb-2",
+    "object-cover",
+    "rounded-full",
+    "transition-all",
+  ],
+  {
+    variants: {
+      status: {
+        adopted: ["ring-8", "ring-primary", "group-hover:ring-primary"],
+        reserved: ["ring-8", "ring-purple-700", "group-hover:ring-purple-500"],
+        default: ["group-hover:ring-primary"],
+      },
+      size: {
+        default: ["w-full"],
+        sm: ["w-32 h-32"],
+        md: ["w-48 h-48"],
+        lg: ["h-52 h-52"],
+        xl: ["h-64 h-64"],
+      },
+    },
+    compoundVariants: [
+      {
+        status: "adopted",
+        class: "ring-8",
+      },
+      {
+        status: "reserved",
+        class: "ring-8",
+      },
+    ],
+  },
+);
+
+const {
+  slug,
+  name,
+  gender,
+  birthday,
+  image,
+  status = "default",
+  size = "default",
+} = Astro.props;
+
+const ageTimeAgo = formatDistanceToNowStrict(new Date(birthday), {
+  locale: locale == "es" ? es : undefined,
+});
+const thumbnail = getAssetURL(image.id);
+const imageThumbnail = {
+  src: thumbnail ? thumbnail : "/dog-placeholder.png",
+  alt: "Dog picture",
+};
+---
+
+<div class="not-prose">
+  <a href={`/dogs/${slug}`} class="group flex flex-col items-center px-2 py-5">
+    <Image
+      class={petStatus({ status, size })}
+      src={imageThumbnail.src}
+      alt={imageThumbnail.alt || "Dog picture"}
+      loading="lazy"
+      decoding="async"
+      quality="mid"
+      width="500"
+      height="500"
+    />
+    {
+      status == "adopted" ? (
+        <span class="md:text-md z-10 -mt-6 flex items-center rounded-full bg-primary p-2 text-xs font-medium uppercase text-black transition-all group-hover:-translate-y-2 group-hover:bg-primary">
+          <Icon
+            name="tabler:check"
+            classes={{
+              icon: "w-5 h-5 fill-white",
+            }}
+          />
+          <strong>{t(petCard.isAdopted)}</strong>
+        </span>
+      ) : (
+        status == "reserved" && (
+          <span class="md:text-md z-10 -mt-6 flex items-center rounded-full bg-purple-700 p-2 text-xs font-medium uppercase text-white transition-all group-hover:-translate-y-2 group-hover:bg-purple-500">
+            <Icon
+              name="tabler:bookmark"
+              classes={{
+                icon: "w-5 h-5 fill-white",
+              }}
+            />
+            <strong>{t(petCard.isReserved)}</strong>
+          </span>
+        )
+      )
+    }
+    <h5 class="my-2 text-4xl font-medium text-gray-900 dark:text-white">
+      {name}
+    </h5>
+    <div class="mx-auto flex items-center justify-center gap-1 text-muted">
+      {
+        birthday && (
+          <>
+            {ageTimeAgo}{" "}
+            <>
+              <div>•</div>
+              <Icon
+                name={
+                  gender === "male"
+                    ? "tabler:gender-male"
+                    : "tabler:gender-female"
+                }
+              />
+            </>
+          </>
+        )
+      }
+    </div>
+  </a>
+</div>

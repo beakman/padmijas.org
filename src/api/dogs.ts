@@ -6,17 +6,22 @@ import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
 
 const dogFields: Array<string> = ["*", "profile_picture.*", "translations.*"];
+const dogFieldsDetail: Array<string> = [
+  "*",
+  "profile_picture.*",
+  "gallery.*",
+  "translations.*",
+];
 const client = getDirectusClient();
 
 export async function getDogs(): Promise<Dogs> {
-  console.log("getting dogs");
   try {
     return (await client.request<Dogs>(
       readItems("dogs", {
         fields: dogFields,
         filter: {
           status: {
-            _eq: "published",
+            _neq: "draft",
           },
         },
       }),
@@ -43,7 +48,7 @@ export async function getDog(id: string): Promise<Dog> {
 export async function getDogBySlug(slug: string): Promise<Dog> {
   return (await client.request(
     readItem("dogs", slug, {
-      fields: dogFields,
+      fields: dogFieldsDetail,
       filter: {
         status: {
           _eq: "published",

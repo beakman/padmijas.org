@@ -22,3 +22,8 @@ export function getDirectusClient() {
   }
   return createDirectus<Schema>(URL).with(rest()).with(staticToken(TOKEN));
 }
+
+export function getAssetURL(assetId: string) {
+  const URL = import.meta.env.DIRECTUS_URL || process.env.DIRECTUS_URL;
+  return `${URL}/assets/${assetId}?key=profile`;
+}

@@ -32,8 +32,9 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        pad: "hsl(var(--pad))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "hsl(var(--pad))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {

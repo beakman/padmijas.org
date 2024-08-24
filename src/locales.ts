@@ -1,7 +1,7 @@
 // locale settings for this theme
 // https://astro-i18n-starter.pages.dev/setup/
 
-export const DEFAULT_LOCALE_SETTING: string = "en";
+export const DEFAULT_LOCALE_SETTING: string = "es";
 
 export const LOCALES_SETTING: LocaleSetting = {
   es: {

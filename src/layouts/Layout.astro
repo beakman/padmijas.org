@@ -7,13 +7,15 @@ import { footerLinks, mainMenu, siteMeta } from "@/config";
 import Footer from "@/components/layout/Footer.astro";
 import { SEO } from "astro-seo";
 import Header from "@/components/layout/Header.astro";
-
+import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   ogType?: string;
 }
+
+const locale = Astro.currentLocale as Lang;
 
 import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
 const t = useTranslations(Astro.currentLocale as Lang);
@@ -22,7 +24,7 @@ const { title, description, ogImage, ogType } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head>
     <SEO
       title={title ?? siteMeta.title}
@@ -61,6 +63,15 @@ const { title, description, ogImage, ogType } = Astro.props;
     />
     <meta charset="UTF-8" />
     <meta name="generator" content={Astro.generator} />
+    {
+      getLocalePaths(Astro.url).map((props) => (
+        <link
+          rel="alternate"
+          hreflang={LOCALES[props.lang].lang || props.lang}
+          href={Astro.site?.origin + props.path}
+        />
+      ))
+    }
     <title>{title ?? siteMeta.title}</title>
     <ViewTransitions />
   </head>
