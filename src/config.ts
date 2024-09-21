@@ -14,21 +14,84 @@ export const pageSize = 9;
 
 export const mainMenu: MenuItemProps[] = [
   {
-    name: "Home",
-    href: "/",
+    name: {
+      en: "Home",
+      es: "Inicio",
+      ja: "ホーム",
+      "zh-cn": "主页",
+      ar: "الصفحة الرئيسية",
+    },
+    href: {
+      es: "/",
+      en: "/",
+      ja: "/",
+      "zh-cn": "/",
+      ar: "/",
+    },
   },
   {
-    name: "Dogs",
-    href: "/dogs",
+    name: {
+      en: "Our dogs",
+      es: "Nuestros perros",
+      ja: "犬たち",
+      "zh-cn": "我们的狗",
+      ar: "أنا الكلب",
+    },
+    href: {
+      en: "/our-dogs",
+      es: "/nuestros-perros",
+      ja: "/犬たち",
+      "zh-cn": "/我们的狗",
+      ar: "/أنا-الكلب",
+    },
   },
-
   {
-    name: "Documentation",
-    href: "https://docs.noicethemes.com",
+    name: {
+      es: "Voluntariado",
+      en: "Volunteer",
+      ja: "ボランティア",
+      "zh-cn": "志愿者",
+      ar: "متطوع",
+    },
+    href: {
+      es: "/voluntariado",
+      en: "/voluntary",
+      ja: "/ボランティア",
+      "zh-cn": "/志愿者",
+      ar: "/متطوع",
+    },
   },
   {
-    name: "Support",
-    href: "/support",
+    name: {
+      es: "Donaciones",
+      en: "Donations",
+      ja: "寄付",
+      "zh-cn": "捐赠",
+      ar: "تبرع",
+    },
+    href: {
+      es: "/donaciones",
+      en: "/donations",
+      ja: "/寄付",
+      "zh-cn": "/捐赠",
+      ar: "/تبرع",
+    },
+  },
+  {
+    name: {
+      es: "Contacto",
+      en: "Contact",
+      ja: "お問い合わせ",
+      "zh-cn": "联系我们",
+      ar: "اتصل بنا",
+    },
+    href: {
+      es: "/contacto",
+      en: "/contact",
+      ja: "/お問い合わせ",
+      "zh-cn": "/联系我们",
+      ar: "/اتصل بنا",
+    },
   },
 ];
 

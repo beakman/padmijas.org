@@ -8,6 +8,7 @@ import Footer from "@/components/layout/Footer.astro";
 import { SEO } from "astro-seo";
 import Header from "@/components/layout/Header.astro";
 import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
+
 interface Props {
   title?: string;
   description?: string;
@@ -16,10 +17,7 @@ interface Props {
 }
 
 const locale = Astro.currentLocale as Lang;
-
-import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
 const t = useTranslations(Astro.currentLocale as Lang);
-
 const { title, description, ogImage, ogType } = Astro.props;
 ---
 
@@ -77,8 +75,7 @@ const { title, description, ogImage, ogType } = Astro.props;
   </head>
   <body
     id="body"
-    class="bg-background text-foreground transition-colors duration-200 ease-in-out has-[.navbar-expanded]:overflow-y-hidden"
-  >
+    class="bg-background text-foreground transition-colors duration-200 ease-in-out has-[.navbar-expanded]:overflow-y-hidden">
     <Header />
     <slot />
     <Footer />

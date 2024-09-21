@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.2",
+    "@astrojs/mdx": "^3.1.5",
+    "@astrojs/node": "^8.3.3",
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/tailwind": "^5.1.0",
     "@directus/sdk": "^17.0.0",
@@ -23,6 +25,7 @@
     "astro-seo": "^0.8.4",
     "class-variance-authority": "^0.7.0",
     "date-fns": "^3.6.0",
+    "marked": "^14.1.1",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "serve": "^14.2.3",
     "sharp": "^0.33.4",

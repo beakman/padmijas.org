@@ -1,0 +1,157 @@
+---
+export const prerender = false;
+import Layout from "@/layouts/Layout.astro";
+import { getDogBySlug } from "@/api/dogs";
+import type { Dog } from "@/api/types/dog";
+import { Image } from "astro:assets";
+import { getAssetURL } from "@/api/client";
+import { getLocalePaths, LOCALES, useTranslations } from "@/i18n";
+import type { Lang } from "@/i18n";
+import { Icon } from "astro-icon/components";
+import { marked } from "marked";
+
+import PetMeta from "@/components/ui/PetMeta.astro";
+import Button from "@/components/forms/Button.astro";
+import SocialShare from "@/components/ui/SocialShare.astro";
+import { petStatus, singleDog } from "@/consts";
+
+const locale = Astro.currentLocale as Lang;
+
+const t = useTranslations(locale);
+
+const { slug } = Astro.params;
+if (!slug) return;
+
+let dog: Dog | null = null;
+
+try {
+  dog = (await getDogBySlug(slug, locale)) as Dog;
+  if (!dog) {
+    return Astro.redirect("/404");
+  }
+} catch (error) {
+  console.error(`Error fetching dog with slug ${slug}:`, error);
+  return Astro.redirect("/404");
+}
+
+const profilePicture = getAssetURL(dog.profile_picture.id);
+const coverPicture = getAssetURL(dog.cover.id);
+const Content = dog.translations[0].description;
+const content = marked.parse(dog.translations[0].description);
+
+console.log("dog.profile_picture");
+console.log(dog.profile_picture);
+---
+
+<Layout title="Dog detail">
+  <main
+    class="justify-beeen mx-auto flex max-w-7xl flex-wrap items-center space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl md:py-8 lg:px-8 lg:py-16">
+    <section class="w-full">
+      <div
+        class="mx-auto flex h-max w-full flex-col gap-6 md:max-w-5xl md:flex-row">
+        <div class="order-2 w-full md:order-1 md:w-5/6">
+          <div class="flex flex-col gap-4">
+            <!-- dogs pictures -->
+            {
+              dog.gallery &&
+                dog.gallery.map((image) => (
+                  <Image
+                    class="aspect-square w-full rounded-lg"
+                    src={getAssetURL(image.directus_files_id)}
+                    alt={dog.name}
+                    width={100}
+                    height={100}
+                  />
+                ))
+            }
+          </div>
+        </div>
+        <aside
+          class="order-1 mb-5 h-max w-full md:sticky md:top-28 md:order-2 md:mb-0">
+          <div class="flex flex-col gap-4">
+            <header class="flex flex-col gap-4">
+              <div class="relative">
+                <div
+                  class="visible relative flex h-48 w-full justify-end rounded-xl bg-cover md:hidden">
+                  <Image
+                    class="absolute flex h-48 w-full justify-center rounded-lg bg-gray-600 bg-cover object-cover dark:bg-slate-800"
+                    src={coverPicture}
+                    alt={dog.name}
+                    loading="lazy"
+                    decoding="async"
+                    quality="mid"
+                    width="764"
+                    height="100"
+                  />
+                  <div
+                    class="dark:!border-navy-700 absolute -bottom-12 right-2 flex h-[120px] w-[120px] items-center justify-start rounded-full border-[4px] border-white bg-pink-400">
+                    {
+                      dog && (
+                        <Image
+                          class:list="[aspect-square h-full w-full rounded-full bg-gray-600 object-cover dark:bg-slate-800]"
+                          src={profilePicture}
+                          alt={dog.name}
+                          loading="lazy"
+                          decoding="async"
+                          quality="mid"
+                          width="132"
+                          height="132"
+                        />
+                      )
+                    }
+                  </div>
+                </div>
+                <!-- Title and reserved/adopted badge -->
+                <div
+                  class="flex flex-col items-start justify-start gap-4 md:flex-row md:items-center">
+                  <h1
+                    class="leading-tighter mx-w-auto mt-8 w-full font-heading text-4xl font-bold tracking-tighter md:mt-0 md:max-w-fit md:text-5xl">
+                    {dog.name}
+                  </h1>
+                  <span class="flex items-center gap-2 text-sm">
+                    {
+                      dog.status == "reserved" && (
+                        <div class="flex w-fit items-center gap-1 rounded-lg bg-purple-700 px-2 py-1 uppercase text-white transition-all dark:bg-purple-300 dark:text-black">
+                          <Icon
+                            name="tabler:bookmark"
+                            class="h-4 w-4 fill-white md:h-5 md:w-5"
+                          />
+                          <strong>{t(petStatus.reserved)}</strong>
+                        </div>
+                      )
+                    }
+                    {
+                      dog.status == "adopted" && (
+                        <div class="flex w-fit items-center gap-1 rounded-lg bg-green-500 px-2 py-1 uppercase text-white transition-all dark:bg-green-300 dark:text-black">
+                          <Icon
+                            name="tabler:heart"
+                            class="h-4 w-4 fill-white md:h-5 md:w-5"
+                          />
+                          <strong>{t(petStatus.adopted)}</strong>
+                        </div>
+                      )
+                    }
+                  </span>
+                </div>
+              </div>
+              <article class="prose" set:html={content} />
+              <PetMeta dog={dog} />
+              {
+                dog.status !== "adopted" && (
+                  <Button variant="default" size="lg" class="w-auto">
+                    {t(singleDog.adoptmeButton)}
+                  </Button>
+                )
+              }
+              <SocialShare
+                url={`${LOCALES[locale].lang}/${dog.slug}`}
+                text={dog.name}
+                class="mt-5 align-middle text-gray-500 dark:text-slate-600 sm:mt-1"
+              />
+            </header>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+</Layout>

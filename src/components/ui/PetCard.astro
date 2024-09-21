@@ -6,7 +6,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import { Dog } from "../../api/types/dog";
 import { getAssetURL } from "../../api/client";
-import { useTranslations } from "../../i18n";
+import { Multilingual, useTranslations } from "../../i18n";
 import type { Lang } from "../../i18n";
 import { petCard } from "../../consts";
 export interface Props {
@@ -14,9 +14,6 @@ export interface Props {
 }
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(Astro.currentLocale as Lang);
-
-console.log("locale", locale);
-console.log(t(petCard.isAdopted));
 
 const petStatus = cva(
   [
@@ -67,6 +64,14 @@ const {
   size = "default",
 } = Astro.props;
 
+const baseUrl: Multilingual = {
+  es: "nuestros-perros",
+  en: "our-dogs",
+  ja: "犬たち",
+  "zh-cn": "我们的狗",
+  ar: "أنا الكلب",
+};
+
 const ageTimeAgo = formatDistanceToNowStrict(new Date(birthday), {
   locale: locale == "es" ? es : undefined,
 });
@@ -78,7 +83,10 @@ const imageThumbnail = {
 ---
 
 <div class="not-prose">
-  <a href={`/dogs/${slug}`} class="group flex flex-col items-center px-2 py-5">
+  <a
+    href={`/${t(baseUrl)}/${slug}`}
+    class="group flex flex-col items-center px-2 py-5"
+  >
     <Image
       class={petStatus({ status, size })}
       src={imageThumbnail.src}

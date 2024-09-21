@@ -7,6 +7,18 @@ import Link from "@/components/ui/Link.astro";
 import Button from "../forms/Button.astro";
 import { Icon } from "astro-icon/components";
 import LanguageSelector from "@/components/i18n/LanguageSelector.astro";
+import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getPages } from "@/api/pages";
+import type { Page } from "@/api/types/pages";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(Astro.currentLocale as Lang);
+
+const lang = LOCALES[locale].lang || locale;
+
+const pages = await getPages(["main-menu"]);
+
 interface Props {
   mainMenuItems: MenuItemProps[];
   socialLinks: SocialItemProps[];
@@ -30,8 +42,7 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
 </style>
 
 <nav
-  class="mx-auto flex h-16 max-w-3xl items-center justify-between sm:flex lg:max-w-6xl xl:max-w-7xl"
->
+  class="mx-auto flex h-16 max-w-3xl items-center justify-between sm:flex lg:max-w-6xl xl:max-w-7xl">
   <Logo class="items-start py-4" href="/" />
 
   <!-- Main menu (desktop) -->
@@ -50,8 +61,7 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
-                      viewBox="0 0 24 24"
-                    >
+                      viewBox="0 0 24 24">
                       <path
                         fill="none"
                         stroke="currentColor"
@@ -66,11 +76,10 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
                     {item.children.map((child) => (
                       <li class="flex">
                         <Link
-                          aria-label={child.name}
+                          aria-label={t(child.name)}
                           class="block px-8 py-0.5"
-                          href={child.href}
-                        >
-                          {child.name}
+                          href={getRelativeLocaleUrl(lang, t(child.href))}>
+                          {t(child.name)}
                         </Link>
                       </li>
                     ))}
@@ -78,13 +87,25 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
                 </div>
               ) : (
                 <Link
-                  aria-label={item.name}
+                  aria-label={t(item.name)}
                   class="block w-full p-0 hover:underline hover:underline-offset-2"
-                  href={item.href}
-                >
-                  {item.name}
+                  href={getRelativeLocaleUrl(lang, t(item.href))}>
+                  {t(item.name)}
                 </Link>
               )}
+            </li>
+          ))
+      }
+      {
+        pages &&
+          pages.map((item: Page) => (
+            <li class="flex h-full items-center">
+              <Link
+                aria-label={t(item.translations[0].slug)}
+                href={`/${t(item.translations[0].slug)}`}
+                class="block w-full p-0 hover:underline hover:underline-offset-2">
+                {item.translations[0].title}
+              </Link>
             </li>
           ))
       }
@@ -97,8 +118,7 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
     <Button
       variant="outline"
       size="lg"
-      class="flex items-center justify-center gap-2"
-    >
+      class="flex items-center justify-center gap-2">
       <Icon
         name="tabler:heart-filled"
         class="h-5 w-5 text-foreground group-hover:text-red-500"
@@ -114,8 +134,7 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
     <input type="checkbox" class="peer sr-only" id="hamburger-checkbox" />
     <label
       for="hamburger-checkbox"
-      class="relative inset-0 flex h-10 w-10 cursor-pointer flex-col items-center justify-center space-y-1.5 px-4 transition-all duration-200 peer-checked:space-y-0"
-    >
+      class="relative inset-0 flex h-10 w-10 cursor-pointer flex-col items-center justify-center space-y-1.5 px-4 transition-all duration-200 peer-checked:space-y-0">
       <span
         class="block h-0.5 w-5 bg-muted-foreground transition-all duration-200 peer-checked:translate-y-1.5 peer-checked:rotate-45 peer-checked:bg-foreground"
       ></span>
@@ -129,12 +148,10 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
       role="menu"
       aria-label="Main Menu"
       class="absolute inset-0 top-20 -z-20 col-span-2 w-full -translate-y-4 bg-primary opacity-0 transition duration-200 ease-in-out peer-checked:z-50"
-      id="mobile-menu"
-    >
+      id="mobile-menu">
       <div class="mobile-menu-content overflow-y-auto">
         <ul
-          class="relative flex w-full flex-col divide-y divide-black/10 text-2xl font-medium"
-        >
+          class="relative flex w-full flex-col divide-y divide-black/10 text-2xl font-medium">
           {
             mainMenuItems &&
               mainMenuItems.map((item: MenuItemProps) => (
@@ -149,8 +166,7 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
                             height="24"
-                            viewBox="0 0 24 24"
-                          >
+                            viewBox="0 0 24 24">
                             <path
                               fill="none"
                               stroke="currentColor"
@@ -165,10 +181,9 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
                       {item.children.map((child: MenuItemProps) => (
                         <li class="hidden -translate-y-4 p-6 pl-14 opacity-0 transition-all peer-[.is-open]:block peer-[.is-open]:translate-y-0 peer-[.is-open]:opacity-100">
                           <Link
-                            aria-label={child.name}
+                            aria-label={t(child.name)}
                             class="block w-full p-0 text-base font-normal transition-all"
-                            href={child.href}
-                          >
+                            href={getRelativeLocaleUrl(lang, t(child.href))}>
                             {child.name}
                           </Link>
                         </li>
@@ -177,11 +192,10 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
                   ) : (
                     <li class="p-6">
                       <Link
-                        aria-label={item.name}
+                        aria-label={t(item.name)}
                         class="block w-full p-0"
-                        href={item.href}
-                      >
-                        {item.name}
+                        href={getRelativeLocaleUrl(lang, t(item.href))}>
+                        {t(item.name)}
                       </Link>
                     </li>
                   )}
@@ -192,16 +206,13 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
       </div>
       <div
         id="mobile-menu-gradient"
-        class="mobile-menu-gradient absolute -bottom-4 z-10 h-10 w-full bg-gradient-to-t from-primary from-60% to-transparent"
-      >
+        class="mobile-menu-gradient absolute -bottom-4 z-10 h-10 w-full bg-gradient-to-t from-primary from-60% to-transparent">
       </div>
       <div
         id="mobile-menu-footer"
-        class="mobile-menu-footer bottom-0 left-0 m-auto flex h-20 items-center bg-primary p-4"
-      >
+        class="mobile-menu-footer bottom-0 left-0 m-auto flex h-20 items-center bg-primary p-4">
         <div
-          class="navbar-footer flex w-full items-center justify-between gap-4"
-        >
+          class="navbar-footer flex w-full items-center justify-between gap-4">
           {showThemeSwitcher && <ThemeSwitcher />}
           <Social socialLinks={socialLinks} />
         </div>
@@ -214,7 +225,7 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const checkbox = document.getElementById(
-      "hamburger-checkbox",
+      "hamburger-checkbox"
     ) as HTMLInputElement;
 
     checkbox.addEventListener("change", () => {

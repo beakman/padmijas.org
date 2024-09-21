@@ -1,0 +1,72 @@
+---
+import type { Dog } from "@/api/types/dog";
+import { Icon } from "astro-icon/components";
+import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
+import { singleDog } from "@/consts";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(Astro.currentLocale as Lang);
+
+const { dog } = Astro.props;
+
+console.log(dog);
+---
+
+<div
+  class="flex flex-col justify-center divide-y divide-gray-200 dark:divide-gray-800">
+  <span class="flex w-full items-center gap-4 py-4">
+    <Icon class="h-5 w-5 text-muted" name="tabler:ruler-measure">
+      <strong>{t(singleDog.sizeLabel)}</strong>
+    </Icon>
+    <span class="capitalize">{dog.size}</span>
+  </span>
+  <span class="flex w-full items-center gap-4 py-4">
+    <Icon class="h-5 w-5 text-muted" name="tabler:dog">
+      <strong>{t(singleDog.breedLabel)}</strong>
+    </Icon>
+    <span class="flex flex-wrap gap-2">
+      {
+        dog.breeds &&
+          dog.breeds.map((breed) => (
+            <span class="rounded bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+              {breed}
+            </span>
+          ))
+      }</span
+    >
+  </span>
+  <span class="flex w-full items-center gap-4 py-4">
+    <Icon
+      class="h-5 w-5 text-muted"
+      name={dog.gender === "male"
+        ? "tabler:gender-male"
+        : "tabler:gender-female"}>
+      <strong>{t(singleDog.genderLabel)}</strong>
+    </Icon>
+    <span class="capitalize">{dog.gender}</span>
+  </span>
+  <span class="flex w-full items-center gap-4 py-4">
+    <Icon class="h-5 w-5 text-muted" name="tabler:cake">
+      <strong>{t(singleDog.birthDateLabel)}</strong>
+    </Icon>
+    <span class="capitalize">{dog.birth_date}</span>
+  </span>
+  <!-- <span class="flex items-center justify-between w-full py-4">
+    <Icon class="w-5 h-5 text-muted" name="tabler:clipboard-heart">
+      <strong>{t('singleDog.vaccinatedLabel')}</strong>
+    </Icon>
+    <span>{dog.attributes.isVaccinated ? t('No') : t('Yes')}</span>
+  </span> -->
+  <!-- <span class="flex items-center justify-between w-full py-4">
+    <Icon class="w-5 h-5 text-muted" name="tabler:cpu">
+      <strong>{t('singleDog.microchippedLabel')}</strong>
+    </Icon>
+    <span>{dog.attributes.isMicrochipped ? t('No') : t('Yes')}</span>
+  </span> -->
+  <!-- <span class="flex items-center justify-between w-full py-4">
+    <Icon class="w-5 h-5 text-muted" name="tabler:baby-carriage">
+      <strong>{t('singleDog.sterilizedLabel')}</strong>
+    </Icon>
+    <span>{dog.attributes.isSterilized ? t('No') : t('Yes')}</span>
+  </span> -->
+</div>

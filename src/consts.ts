@@ -31,6 +31,82 @@ export const petCard = {
   },
 };
 
+export const petStatus = {
+  adopted: {
+    en: "Adopted",
+    es: "Adoptado",
+    ja: "好きな",
+    "zh-cn": "喜欢的",
+    ar: "مستحب",
+  },
+  reserved: {
+    en: "Reserved",
+    es: "Reservado",
+    ja: "予約済み",
+    "zh-cn": "预约",
+    ar: "محجوز",
+  },
+};
+
+export const singleDog = {
+  adoptmeButton: {
+    en: "Adopt me",
+    es: "Adoptame",
+    ja: "あなたの家に来てください",
+    "zh-cn": "领养我",
+    ar: "اختارني",
+  },
+  sizeLabel: {
+    en: "Size",
+    es: "Tamaño",
+    ja: "サイズ",
+    "zh-cn": "大小",
+    ar: "الحجم",
+  },
+  breedLabel: {
+    en: "Breed",
+    es: "Raza",
+    ja: "品種",
+    "zh-cn": "品种",
+    ar: "نوع",
+  },
+  genderLabel: {
+    en: "Gender",
+    es: "Género",
+    ja: "性別",
+    "zh-cn": "性别",
+    ar: "جنس",
+  },
+  birthDateLabel: {
+    en: "Birth Date",
+    es: "Fecha de nacimiento",
+    ja: "生年月日",
+    "zh-cn": "出生日期",
+    ar: "تاريخ الميلاد",
+  },
+  vaccinatedLabel: {
+    en: "Vaccinated",
+    es: "Vacunado",
+    ja: "接種済み",
+    "zh-cn": "接种",
+    ar: "مصاب",
+  },
+  microchippedLabel: {
+    en: "Microchipped",
+    es: "Microchip",
+    ja: "マイクロチップ",
+    "zh-cn": "微芯片",
+    ar: "ميكروتشيب",
+  },
+  sterilizedLabel: {
+    en: "Sterilized",
+    es: "Esterilizado",
+    ja: "絶育済み",
+    "zh-cn": "绝育",
+    ar: "مصاب",
+  },
+};
+
 export const NOT_TRANSLATED_CAUTION: string | Multilingual = {
   en: "This page is not available in your language.",
   ja: "このページはご利用の言語でご覧いただけません。",

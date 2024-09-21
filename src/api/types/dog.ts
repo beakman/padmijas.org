@@ -17,19 +17,27 @@ import type { Image } from "@/api/types/image.ts";
 
 export interface Dog {
   id: string;
+  cover: Image;
   birth_date: Date;
   breeds: Array<string>;
-  date_created: string;
-  date_updated: string | null;
+  date_created: Date;
+  date_updated: Date | null;
   gallery: Array<number>;
   gender: string;
   name: string;
   profile_picture: Image;
   slug: string;
   sort: number;
+  size: string;
   status: "draft" | "published" | "adopted" | "reserved";
-  translations: Array<number>;
+  translations: Array<DogTranslation>;
   user_created: string;
 }
+
+export type DogTranslation = {
+  id: number;
+  description: string;
+  locale: string;
+};
 
 export type Dogs = Array<Dog>;

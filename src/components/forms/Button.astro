@@ -36,6 +36,7 @@ const button = cva("button", {
 export interface Props
   extends HTMLAttributes<"button">,
     VariantProps<typeof button> {
+  variant?: string;
   class?: string;
   size?: number;
 }

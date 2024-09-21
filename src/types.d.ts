@@ -1,6 +1,8 @@
+import type { Multilingual } from "@/i18n.ts";
+
 export interface MenuItemProps {
-  name: string;
-  href?: string;
+  name: Multilingual;
+  href: Multilingual;
   classes?: string;
   children?: MenuItemProps[];
   target?: string;

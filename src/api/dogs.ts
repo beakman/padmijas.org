@@ -4,11 +4,13 @@
 import type { Dog, Dogs } from "@/api/types/dog.ts";
 import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
+import type { Lang } from "@/i18n";
 
 const dogFields: Array<string> = ["*", "profile_picture.*", "translations.*"];
 const dogFieldsDetail: Array<string> = [
   "*",
   "profile_picture.*",
+  "cover.*",
   "gallery.*",
   "translations.*",
 ];
@@ -17,7 +19,7 @@ const client = getDirectusClient();
 export async function getDogs(): Promise<Dogs> {
   try {
     return (await client.request<Dogs>(
-      readItems("dogs", {
+      readItems("animals", {
         fields: dogFields,
         filter: {
           status: {
@@ -34,24 +36,36 @@ export async function getDogs(): Promise<Dogs> {
 
 export async function getDog(id: string): Promise<Dog> {
   return (await client.request(
-    readItem("dogs", id, {
+    readItem("animals", id, {
       fields: dogFields,
       filter: {
         status: {
-          _eq: "published",
+          _neq: "draft",
         },
       },
     }),
   )) as Dog;
 }
 
-export async function getDogBySlug(slug: string): Promise<Dog> {
+export async function getDogBySlug(slug: string, lang: string): Promise<Dog> {
+  console.log("lang", lang);
   return (await client.request(
-    readItem("dogs", slug, {
+    readItem("animals", slug, {
       fields: dogFieldsDetail,
+      deep: {
+        translations: {
+          _filter: {
+            _and: [
+              {
+                languages_code: { _eq: lang },
+              },
+            ],
+          },
+        },
+      },
       filter: {
         status: {
-          _eq: "published",
+          _neq: "draft",
         },
       },
     }),
@@ -60,7 +74,7 @@ export async function getDogBySlug(slug: string): Promise<Dog> {
 
 export async function fetchDogsByBreed(category: string): Promise<Dogs> {
   return (await client.request(
-    readItems("dogs", {
+    readItems("animals", {
       fields: dogFields,
       filter: {
         status: {
