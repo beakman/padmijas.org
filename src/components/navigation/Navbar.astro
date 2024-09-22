@@ -29,7 +29,7 @@ interface Props {
   showThemeSwitcher?: boolean;
 }
 
-const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props;
+const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props as Props;
 ---
 
 <style>

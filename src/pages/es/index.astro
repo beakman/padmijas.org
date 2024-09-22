@@ -9,8 +9,8 @@ import Testimonial from "@/components/ui/Testimonial.astro";
 import heroImage from "assets/images/hero-bg.jpg";
 import heroImage2 from "assets/images/hero-bg-2.jpg";
 
-import { SITE_TITLE, SITE_DESCRIPTION, X_ACCOUNT } from "@/consts";
-import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import { useTranslations, type Lang } from "@/i18n";
 const t = useTranslations(Astro.currentLocale as Lang);
 
 interface Props {
@@ -20,7 +20,6 @@ interface Props {
 }
 
 const { title, description } = Astro.props.frontmatter || Astro.props;
-const locale = Astro.currentLocale as Lang;
 const localeTitle = title ? `${title} - ${t(SITE_TITLE)}` : t(SITE_TITLE);
 const localeDescription = description || t(SITE_DESCRIPTION);
 

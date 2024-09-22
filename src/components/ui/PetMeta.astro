@@ -1,10 +1,8 @@
 ---
-import type { Dog } from "@/api/types/dog";
 import { Icon } from "astro-icon/components";
-import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
+import { useTranslations, type Lang } from "@/i18n";
 import { singleDog } from "@/consts";
 
-const locale = Astro.currentLocale as Lang;
 const t = useTranslations(Astro.currentLocale as Lang);
 
 const { dog } = Astro.props;
