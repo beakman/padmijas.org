@@ -1,5 +1,5 @@
 ---
-import { Dogs } from "@/api/types/dog";
+import { type Dogs } from "@/api/types/dog";
 import { getDogs } from "@/api/dogs";
 import Layout from "@/layouts/Layout.astro";
 import PetCard from "@/components/ui/PetCard.astro";
@@ -31,14 +31,7 @@ const dogs = (await getDogs()) as Dogs;
           dogs &&
             dogs.map((dog) => (
               <div>
-                <PetCard
-                  status={dog.status}
-                  slug={dog.slug}
-                  name={dog.name}
-                  gender={dog.gender}
-                  birthday={dog.birth_date}
-                  image={dog.profile_picture}
-                />
+                <PetCard dog={dog} />
               </div>
             ))
         }

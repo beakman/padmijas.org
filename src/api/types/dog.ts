@@ -22,7 +22,7 @@ export interface Dog {
   breeds: Array<string>;
   date_created: Date;
   date_updated: Date | null;
-  gallery: Array<number>;
+  gallery: Array<Image>;
   gender: string;
   name: string;
   profile_picture: Image;

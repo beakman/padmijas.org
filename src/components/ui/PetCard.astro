@@ -4,11 +4,11 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { es } from "date-fns/locale";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import { Dog } from "../../api/types/dog";
+import type { Dog } from "@/api/types/dog";
 import { getAssetURL } from "../../api/client";
-import { Multilingual, useTranslations } from "../../i18n";
-import type { Lang } from "../../i18n";
-import { petCard } from "../../consts";
+import { type Multilingual, useTranslations } from "@/i18n";
+import type { Lang } from "@/i18n";
+import { petCard } from "@/consts";
 export interface Props {
   dog: Dog;
 }
@@ -54,15 +54,7 @@ const petStatus = cva(
   }
 );
 
-const {
-  slug,
-  name,
-  gender,
-  birthday,
-  image,
-  status = "default",
-  size = "default",
-} = Astro.props;
+const { dog } = Astro.props;
 
 const baseUrl: Multilingual = {
   es: "nuestros-perros",
@@ -72,20 +64,31 @@ const baseUrl: Multilingual = {
   ar: "أنا الكلب",
 };
 
-const ageTimeAgo = formatDistanceToNowStrict(new Date(birthday), {
+const ageTimeAgo = formatDistanceToNowStrict(new Date(dog.birth_date), {
   locale: locale == "es" ? es : undefined,
 });
-const thumbnail = getAssetURL(image.id);
+const thumbnail = getAssetURL(dog.profile_picture.id);
 const imageThumbnail = {
   src: thumbnail ? thumbnail : "/dog-placeholder.png",
   alt: "Dog picture",
 };
+
+const statusCard =
+  (dog.status === "adopted" && "adopted") ||
+  (dog.status === "reserved" && "reserved") ||
+  "default";
+const sizeCard =
+  (dog.size === "sm" && "sm") ||
+  (dog.size === "md" && "md") ||
+  (dog.size === "lg" && "lg") ||
+  (dog.size === "xl" && "xl") ||
+  "default";
 ---
 
 <div class="not-prose">
-  <a href={`${slug}`} class="group flex flex-col items-center px-2 py-5">
+  <a href={`${dog.slug}`} class="group flex flex-col items-center px-2 py-5">
     <Image
-      class={petStatus({ status, size })}
+      class={petStatus({ status: statusCard, size: sizeCard })}
       src={imageThumbnail.src}
       alt={imageThumbnail.alt || "Dog picture"}
       loading="lazy"
@@ -97,23 +100,13 @@ const imageThumbnail = {
     {
       status == "adopted" ? (
         <span class="md:text-md z-10 -mt-6 flex items-center rounded-full bg-primary p-2 text-xs font-medium uppercase text-black transition-all group-hover:-translate-y-2 group-hover:bg-primary">
-          <Icon
-            name="tabler:check"
-            classes={{
-              icon: "w-5 h-5 fill-white",
-            }}
-          />
+          <Icon name="tabler:check" class="h-5 w-5 fill-white" />
           <strong>{t(petCard.isAdopted)}</strong>
         </span>
       ) : (
         status == "reserved" && (
           <span class="md:text-md z-10 -mt-6 flex items-center rounded-full bg-purple-700 p-2 text-xs font-medium uppercase text-white transition-all group-hover:-translate-y-2 group-hover:bg-purple-500">
-            <Icon
-              name="tabler:bookmark"
-              classes={{
-                icon: "w-5 h-5 fill-white",
-              }}
-            />
+            <Icon name="tabler:bookmark" class="h-5 w-5 fill-white" />
             <strong>{t(petCard.isReserved)}</strong>
           </span>
         )
@@ -124,14 +117,14 @@ const imageThumbnail = {
     </h5>
     <div class="mx-auto flex items-center justify-center gap-1 text-muted">
       {
-        birthday && (
+        dog.birth_date && (
           <>
             {ageTimeAgo}{" "}
             <>
               <div>•</div>
               <Icon
                 name={
-                  gender === "male"
+                  dog.gender === "male"
                     ? "tabler:gender-male"
                     : "tabler:gender-female"
                 }
