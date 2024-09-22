@@ -11,9 +11,13 @@ export default defineConfig({
   output: "hybrid",
   i18n: {
     defaultLocale: "es",
-    locales: ["es", "en"]
+    locales: ["es", "en"],
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: false,
+    },
   },
   adapter: node({
-    mode: "standalone"
-  })
+    mode: "standalone",
+  }),
 });

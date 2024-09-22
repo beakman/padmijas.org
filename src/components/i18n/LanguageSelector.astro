@@ -23,18 +23,11 @@ import { getLocalePaths, LOCALES } from "@/i18n";
 <script is:inline>
   const selects = document.querySelectorAll("[data-languageSelect]");
 
-  document.addEventListener("astro:before-swap", (event) => {
-    console.log("before swap");
-    // Pass the incoming document to set the theme on it
-    selects.forEach((select) => {
-      select.addEventListener("change", (event) => {
-        console.log("event", event);
-        console.log(event.target?.selectedOptions[0].dataset.lang);
-        // used for 404 page
-        localStorage.selectedLang =
-          event.target?.selectedOptions[0].dataset.lang;
-        location.href = event.target?.value;
-      });
+  selects.forEach((select) => {
+    select.addEventListener("change", (event) => {
+      // used for 404 page
+      localStorage.selectedLang = event.target?.selectedOptions[0].dataset.lang;
+      location.href = event.target?.value;
     });
   });
 </script>

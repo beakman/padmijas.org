@@ -57,7 +57,6 @@ export async function getPageBySlug(
   slug: string,
   lang: string,
 ): Promise<Page | null> {
-  console.log("lang", lang);
   const pages = await client.request<Pages>(
     readItems("pages", {
       fields: pageFieldsDetail,

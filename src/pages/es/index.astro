@@ -1,0 +1,289 @@
+---
+import Button from "@/components/forms/Button.astro";
+import Layout from "@/layouts/Layout.astro";
+
+import { Image, getImage } from "astro:assets";
+import Marquee from "@/components/ui/Marquee.astro";
+import Testimonial from "@/components/ui/Testimonial.astro";
+
+import heroImage from "assets/images/hero-bg.jpg";
+import heroImage2 from "assets/images/hero-bg-2.jpg";
+
+import { SITE_TITLE, SITE_DESCRIPTION, X_ACCOUNT } from "@/consts";
+import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
+const t = useTranslations(Astro.currentLocale as Lang);
+
+interface Props {
+  title?: string;
+  description?: string;
+  frontmatter?: undefined;
+}
+
+const { title, description } = Astro.props.frontmatter || Astro.props;
+const locale = Astro.currentLocale as Lang;
+const localeTitle = title ? `${title} - ${t(SITE_TITLE)}` : t(SITE_TITLE);
+const localeDescription = description || t(SITE_DESCRIPTION);
+
+const bgHero2 = await getImage({
+  src: heroImage2,
+  format: "webp",
+});
+---
+
+<Layout title={localeTitle} description={localeDescription}>
+  <main class="">
+    <!-- Main Hero Section -->
+    <div>
+      <!-- Hero card -->
+      <div class="relative">
+        <div class="w-full">
+          <div class="relative shadow-xl sm:overflow-hidden">
+            <div class="absolute inset-0">
+              <Image
+                src={heroImage}
+                alt="Dog looking at you"
+                width={1065}
+                height={235}
+                class="h-full w-full object-cover"
+              />
+              <div class="absolute inset-0 bg-yellow-700 mix-blend-multiply">
+              </div>
+            </div>
+            <div
+              class="relative max-w-screen-sm px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+              <h1
+                class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                <span
+                  class="mb-2 block font-handwrite text-4xl font-light tracking-wide text-white md:mb-4 md:text-5xl"
+                  >Bienvenid@ a la</span
+                >
+                <span
+                  class="block font-heading text-4xl font-bold uppercase leading-tight tracking-wide text-white md:text-6xl"
+                  >Protectora de animales domésticos</span
+                >
+              </h1>
+              <div class="justify-startr mt-10 flex w-full sm:max-w-sm">
+                <div
+                  class="flex w-full flex-col items-center justify-start gap-4 md:flex-row">
+                  <Button class="w-full md:w-auto" variant="default"
+                    >Adopta</Button
+                  >
+                  <Button
+                    class="w-full border-white text-white md:w-auto"
+                    variant="outline">Galería</Button
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hours section -->
+    <section class="not-prose bg-blue-50 dark:bg-slate-800">
+      <div
+        class="text-md mx-auto max-w-6xl px-4 py-4 text-center font-medium sm:px-6">
+        <span class="font-bold"
+          ><svg
+            height="1em"
+            viewBox="0 0 24 24"
+            width="1em"
+            class="inline-block h-5 w-5 align-text-bottom"
+            data-icon="tabler:info-square"
+            ><symbol id="ai:tabler:info-square"
+              ><g
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                ><path
+                  d="M12 9h.01M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                ></path><path d="M11 12h1v4h1"></path></g
+              ></symbol
+            ><use xlink:href="#ai:tabler:info-square"></use></svg
+          > Horarios:</span
+        > L-V 9:00 a 14:00 y 15:00 a 18:00
+      </div>
+    </section>
+
+    <section class="relative scroll-mt-[72px]" id="features">
+      <div
+        class="pointer-events-none absolute inset-0 -z-[1]"
+        aria-hidden="true">
+        <div class="absolute inset-0"></div>
+      </div><div
+        class="text-default relative mx-auto max-w-5xl px-8 py-12 md:max-w-4xl md:px-10 md:py-14 lg:py-16">
+        <div
+          class="mb-8 max-w-2xl text-center md:mx-auto md:mb-12 md:max-w-4xl lg:max-w-5xl">
+          <div>
+            <h2
+              class="font-handwrite text-2xl font-semibold tracking-wider text-secondary md:text-3xl">
+              Uniendo patas y corazones
+            </h2>
+            <p
+              class="mt-2 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+              Encuentra a tu compañero ideal
+            </p>
+            <p
+              class="mx-auto mt-5 max-w-prose text-lg text-gray-500 md:text-xl">
+              Nuestros perros están esperando una segunda oportunidad, para
+              darte todo el amor que un día alguien no supo valorar.
+            </p>
+          </div>
+        </div><div
+          class="text-md mx-auto grid gap-8 leading-normal sm:grid-cols-2 md:gap-y-12">
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero parallax-->
+    <section
+      class="not-prose relative justify-start bg-cover bg-fixed bg-center bg-no-repeat text-left text-base text-white"
+      style={`background-image: url(${bgHero2.src});`}>
+      <div
+        class="h-full overflow-y-scroll bg-gradient-to-tl from-black py-16 md:py-20">
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        </div>
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-14">
+          <div class="pointer-events-none pt-0 md:pt-[76px]"></div>
+          <div class="h-full py-12 md:py-20">
+            <div
+              class="prose mr-auto max-w-md pb-10 lg:prose-xl md:max-w-xl md:pb-16">
+              <h1
+                class="leading-tighter mb-4 mt-2 font-heading text-4xl font-bold tracking-tight text-foreground text-white md:mb-8 md:text-5xl">
+                Sin vosotros no podríamos seguir
+              </h1>
+              <div class="max-w-3xl">
+                <p
+                  class="mb-6 text-lg leading-tight tracking-tight text-white md:text-xl">
+                  Gracias a nuestros voluntarios por hacer que cada día nuestros
+                  perritos sean felices en sus momentos de paseo, un ratito que
+                  esperan con muchas ganas.
+                </p>
+                <div
+                  class="flex w-full flex-col flex-nowrap justify-center gap-4 sm:max-w-md sm:flex-row sm:justify-start">
+                  <div class="flex w-full sm:w-auto">
+                    <Button
+                      class="w-full border-white text-white md:w-auto"
+                      variant="outline"
+                      size="lg">
+                      Quiero adoptar
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="w-full">
+      <div class="pt-16 md:pt-20">
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-14">
+          <h1
+            class="mt-2 text-center font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            Lo que dicen nuestros voluntarios
+          </h1>
+          <div class="mx-auto max-w-3xl text-center md:max-w-xl">
+            <p
+              class="mb-6 mt-5 max-w-prose text-lg text-gray-500 text-muted md:text-xl">
+              Gracias a nuestros voluntarios por hacer que cada día nuestros
+              perritos sean felices en sus momentos de paseo, un ratito que
+              esperan con muchas ganas.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex w-full flex-col flex-nowrap justify-center gap-4 sm:flex-row sm:justify-start">
+        <div class="relative flex w-full gap-4 sm:w-auto">
+          <Marquee>
+            <Testimonial
+              class="max-w-64 snap-center"
+              name="Sarah Lee"
+              message="This tool has streamlined our project management and boosted team productivity!"
+            />
+            <Testimonial
+              class="max-w-64 snap-center"
+              name="Michael Smith"
+              message="Incredible functionality and ease of use. It’s become an essential part of our workflow!"
+            />
+            <Testimonial
+              class="max-w-64 snap-center"
+              name="Emma Johnson"
+              message="A game-changer for organizing our tasks and tracking progress. Highly recommended!"
+            />
+            <Testimonial
+              class="max-w-64 snap-center"
+              name="David Brown"
+              message="The intuitive design and powerful features have transformed the way we manage projects."
+            />
+            <Testimonial
+              class="max-w-64 snap-center"
+              name="David Brown"
+              message="The intuitive design and powerful features have transformed the way we manage projects."
+            />
+            <Testimonial
+              class="max-w-64 snap-center"
+              name="David Brown"
+              message="The intuitive design and powerful features have transformed the way we manage projects."
+            />
+            <Testimonial
+              class="max-w-64 snap-center"
+              name="David Brown"
+              message="The intuitive design and powerful features have transformed the way we manage projects."
+            />
+            <Testimonial
+              class="max-w-64 snap-center"
+              name="David Brown"
+              message="The intuitive design and powerful features have transformed the way we manage projects."
+            />
+          </Marquee>
+          <div
+            class="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background">
+          </div>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="w-full">
+      <div class="py-16 md:py-20">
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-14">
+          <h1
+            class="mt-2 text-center font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            Dónde encontrarnos
+          </h1>
+          <div class="mx-auto max-w-3xl text-center md:max-w-xl">
+            <p
+              class="mb-6 mt-5 max-w-prose text-lg text-gray-500 text-muted md:text-xl">
+              Nos encontramos en Calle Camino de Acevedo s/n, Mijas Costa, justo
+              detrás del Hospital Veterinario RoyalVet. ¡Visítanos para
+              cualquier consulta o servicio que necesites!
+            </p>
+          </div>
+          <div class="mx-auto max-w-3xl text-center md:max-w-7xl">
+            <div class="rounded-xl bg-gray-400 dark:bg-slate-700">
+              <iframe
+                class="rounded-xl"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3205.9646757118107!2d-4.644343826634623!3d36.53084658284082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72e21cc7b12561%3A0x1b6458cf08dfe4b!2sP.A.D%20-%20Proteccion%20de%20Animales%20Domesticos!5e0!3m2!1ses!2ses!4v1694367259717!5m2!1ses!2ses"
+                width="100%"
+                height="400"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

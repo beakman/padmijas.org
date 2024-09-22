@@ -48,7 +48,6 @@ export async function getDog(id: string): Promise<Dog> {
 }
 
 export async function getDogBySlug(slug: string, lang: string): Promise<Dog> {
-  console.log("lang", lang);
   return (await client.request(
     readItem("animals", slug, {
       fields: dogFieldsDetail,

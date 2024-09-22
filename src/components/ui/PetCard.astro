@@ -51,7 +51,7 @@ const petStatus = cva(
         class: "ring-8",
       },
     ],
-  },
+  }
 );
 
 const {
@@ -83,10 +83,7 @@ const imageThumbnail = {
 ---
 
 <div class="not-prose">
-  <a
-    href={`/${t(baseUrl)}/${slug}`}
-    class="group flex flex-col items-center px-2 py-5"
-  >
+  <a href={`${slug}`} class="group flex flex-col items-center px-2 py-5">
     <Image
       class={petStatus({ status, size })}
       src={imageThumbnail.src}

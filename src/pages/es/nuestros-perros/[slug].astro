@@ -38,9 +38,6 @@ const profilePicture = getAssetURL(dog.profile_picture.id);
 const coverPicture = getAssetURL(dog.cover.id);
 const Content = dog.translations[0].description;
 const content = marked.parse(dog.translations[0].description);
-
-console.log("dog.profile_picture");
-console.log(dog.profile_picture);
 ---
 
 <Layout title="Dog detail">

@@ -1,4 +1,5 @@
 import type { Image } from "@/api/types/image.ts";
+import type { Block } from "./block";
 
 export interface Page {
   id: number;
@@ -26,8 +27,14 @@ export type PageTranslation = {
   title: string;
   subtitle: string;
   description: string;
-  content: string;
-  locale: string;
+  content: Content;
+  cta: string;
+  languages_code: string;
+};
+export type Content = {
+  time: EpochTimeStamp;
+  blocks: Array<Block>;
+  version: string;
 };
 
 export type Pages = Array<Page>;
