@@ -6,10 +6,9 @@ import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
-const testimonialFields: Array<string> = ["*", "name", "profile_picture.*", "translations.*"];
+const testimonialFields: Array<string> = ["*", "profile_picture.*", "translations.*"];
 const testimonialFieldsDetail: Array<string> = [
   "*",
-  "name",
   "profile_picture.*",
   "translations.*",
 ];
