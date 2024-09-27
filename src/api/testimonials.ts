@@ -1,7 +1,7 @@
 /*
  * Helper functions to fetch data from Directus API
  * */
-import type { Testimonial, Testimonials } from "@/api/types/testimonial.ts";
+import type { Testimonial, Testimonials } from "@/api/types/testimonials.ts";
 import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
 import type { Lang } from "@/i18n";
