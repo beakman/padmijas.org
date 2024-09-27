@@ -3,7 +3,12 @@
  * */
 import type { Page, Pages } from "@/api/types/pages";
 import { getDirectusClient } from "@/api/client.ts";
-import { readItem, readItems, type Query } from "@directus/sdk";
+import {
+  readItem,
+  readItems,
+  type Query,
+  type QueryFilter,
+} from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
 const pageFields: Array<string> = ["*", "cover.*", "translations.*"];
@@ -12,7 +17,7 @@ const client = getDirectusClient();
 
 export async function getPages(positions?: Array<string>): Promise<Pages> {
   try {
-    const filters: Query<Page> = {
+    const filters: QueryFilter<Page, "read"> = {
       fields: pageFields,
       filter: {
         status: {
@@ -64,9 +69,17 @@ export async function getPageBySlug(
         status: {
           _neq: "draft",
         },
+      },
+      deep: {
         translations: {
-          languages_code: { _eq: lang },
-          slug: { _eq: slug },
+          _filter: {
+            _and: [
+              {
+                languages_code: { _eq: lang },
+                slug: { _eq: slug },
+              },
+            ],
+          },
         },
       },
     }),

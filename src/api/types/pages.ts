@@ -24,6 +24,7 @@ export type Position = {
 export type PageTranslation = {
   id: number;
   slug: string;
+  link: string;
   title: string;
   subtitle: string;
   description: string;
