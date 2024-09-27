@@ -75,7 +75,7 @@ export async function getPageBySlug(
           _filter: {
             _and: [
               {
-                languages_code: { _eq: lang },
+                language_code: { _eq: lang },
                 slug: { _eq: slug },
               },
             ],
