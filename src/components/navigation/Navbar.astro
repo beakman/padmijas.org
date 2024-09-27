@@ -40,11 +40,11 @@ const localizedPages: LocalizedPage[] = pages.flatMap((page: Page) => {
 
   page.translations.forEach((translation: PageTranslation) => {
     // href
-    pageTranslations.href[translation.languages_code as Lang] =
-      getAbsoluteLocaleUrl(translation.languages_code, translation.slug);
+    pageTranslations.href[translation.language_code as Lang] =
+      getAbsoluteLocaleUrl(translation.language_code, translation.slug);
 
     // name
-    pageTranslations.name[translation.languages_code as Lang] =
+    pageTranslations.name[translation.language_code as Lang] =
       translation.link;
   });
 
