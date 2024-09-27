@@ -30,7 +30,7 @@ export type PageTranslation = {
   description: string;
   content: Content;
   cta: string;
-  languages_code: string;
+  language_code: string;
 };
 export type Content = {
   time: EpochTimeStamp;
