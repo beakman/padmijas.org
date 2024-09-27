@@ -12,12 +12,13 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { getPages } from "@/api/pages";
 import type { Page } from "@/api/types/pages";
 
+const SECTION_ID = "main-menu";
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(Astro.currentLocale as Lang);
 
 const lang = LOCALES[locale].lang || locale;
 
-const pages = await getPages(["main-menu"]);
+const pages = await getPages([SECTION_ID]);
 const localizedPages = pages.filter((page) =>
   page.translations.some((translation) => translation.languages_code === lang)
 );
