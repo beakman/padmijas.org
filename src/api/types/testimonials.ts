@@ -1,3 +1,5 @@
+import type { Image } from "@/api/types/image.ts";
+
 // "id": 1,
 // "user_updated": null,
 // "date_updated": null,
