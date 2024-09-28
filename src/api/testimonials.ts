@@ -6,12 +6,12 @@ import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
-let testimonialFields: Array<string> = ["*", "profile_picture.*", "translations.*"];
-let testimonialFieldsDetail: Array<string> = [
+const testimonialFields = ["*", "profile_picture.*", "translations.*"] as const;
+const testimonialFieldsDetail = [
   "*",
   "profile_picture.*",
   "translations.*",
-];
+] as const;
 const client = getDirectusClient();
 
 export async function getTestimonials(): Promise<Testimonials> {
