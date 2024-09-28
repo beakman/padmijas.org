@@ -13,7 +13,7 @@ export interface Testimonial {
   user_updated: string | null;
   date_updated: string | null;
   name: string;
-  profile_picture: string;
+  profile_picture: Image;
   translations: Array<number>;
 }
 
