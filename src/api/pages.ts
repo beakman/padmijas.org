@@ -5,9 +5,7 @@ import type { Page, Pages } from "@/api/types/pages";
 import { getDirectusClient } from "@/api/client.ts";
 import {
   readItem,
-  readItems,
-  type Query,
-  type QueryFilter,
+  readItems
 } from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
@@ -17,7 +15,7 @@ const client = getDirectusClient();
 
 export async function getPages(positions?: Array<string>): Promise<Pages> {
   try {
-    const filters: QueryFilter<Page, "read"> = {
+    const filters = {
       fields: pageFields,
       filter: {
         status: {
