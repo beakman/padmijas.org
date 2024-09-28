@@ -11,8 +11,8 @@ import {
 } from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
-const pageFields: Array<string> = ["*", "cover.*", "translations.*"];
-const pageFieldsDetail: Array<string> = ["*", "cover.*", "translations.*"];
+let pageFields: Array<string> = ["*", "cover.*", "translations.*"];
+let pageFieldsDetail: Array<string> = ["*", "cover.*", "translations.*"];
 const client = getDirectusClient();
 
 export async function getPages(positions?: Array<string>): Promise<Pages> {
