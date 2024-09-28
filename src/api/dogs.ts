@@ -6,14 +6,14 @@ import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
-let dogFields: Array<string> = ["*", "profile_picture.*", "translations.*"];
-let dogFieldsDetail: Array<string> = [
+const dogFields: Array<string> = ["*", "profile_picture.*", "translations.*"] as const;
+const dogFieldsDetail: Array<string> = [
   "*",
   "profile_picture.*",
   "cover.*",
   "gallery.*",
   "translations.*",
-];
+] as const;
 const client = getDirectusClient();
 
 export async function getDogs(): Promise<Dogs> {
