@@ -6,8 +6,8 @@ import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
-const testimonialFields = ["*", profile_picture: ["id"], translations: ["message"]] as const;
-const testimonialFieldsDetail = ["*", profile_picture: ["id"], translations: ["message"]] as const;
+const testimonialFields = ["*", "profile_picture.id", "translations.message"] as const;
+const testimonialFieldsDetail = ["*", "profile_picture.id", "translations.message"] as const;
 const client = getDirectusClient();
 
 export async function getTestimonials(): Promise<Testimonials> {
