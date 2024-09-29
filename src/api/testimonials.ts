@@ -13,7 +13,7 @@ export async function getTestimonials(): Promise<Testimonials> {
   try {
     return (await client.request<Testimonials>(
       readItems("testimonials", {
-        fields: testimonialFields,
+        fields: ["*", {profile_picture: ["id"]}, {translations: ["message"]}],
         filter: {
           status: {
             _neq: "draft",
@@ -30,7 +30,7 @@ export async function getTestimonials(): Promise<Testimonials> {
 export async function getTestimonial(id: string): Promise<Testimonial> {
   return (await client.request(
     readItem("testimonials", id, {
-      fields: testimonialFields,
+      fields: ["*", {profile_picture: ["id"]}, {translations: ["message"]}],
       filter: {
         status: {
           _neq: "draft",
