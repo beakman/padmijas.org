@@ -37,7 +37,7 @@ export interface Dog {
 export type DogTranslation = {
   id: number;
   description: string;
-  locale: string;
+  languages_code: string;
 };
 
 export type Dogs = Array<Dog>;
