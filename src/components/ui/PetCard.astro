@@ -98,13 +98,13 @@ const sizeCard =
       height="500"
     />
     {
-      status == "adopted" ? (
+      dog.status == "adopted" ? (
         <span class="md:text-md z-10 -mt-6 flex items-center rounded-full bg-primary p-2 text-xs font-medium uppercase text-black transition-all group-hover:-translate-y-2 group-hover:bg-primary">
           <Icon name="tabler:check" class="h-5 w-5 fill-white" />
           <strong>{t(petCard.isAdopted)}</strong>
         </span>
       ) : (
-        status == "reserved" && (
+        dog.status == "reserved" && (
           <span class="md:text-md z-10 -mt-6 flex items-center rounded-full bg-purple-700 p-2 text-xs font-medium uppercase text-white transition-all group-hover:-translate-y-2 group-hover:bg-purple-500">
             <Icon name="tabler:bookmark" class="h-5 w-5 fill-white" />
             <strong>{t(petCard.isReserved)}</strong>
@@ -113,7 +113,7 @@ const sizeCard =
       )
     }
     <h5 class="my-2 text-4xl font-medium text-gray-900 dark:text-white">
-      {name}
+      {dog.name}
     </h5>
     <div class="mx-auto flex items-center justify-center gap-1 text-muted">
       {
