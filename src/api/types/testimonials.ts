@@ -16,12 +16,12 @@ export interface Testimonial {
   date_updated: string | null;
   name: string;
   profile_picture: Image;
-  translations: Array<number>;
+  translations: Array<TestimonialTranslation>;
 }
 
 export type TestimonialTranslation = {
   id: number;
-  locale: string;
+  languages_code: string;
   message: string;
 };
 
