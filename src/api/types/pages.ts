@@ -11,7 +11,7 @@ export interface Page {
   date_updated: Date | null;
   icon: string;
   cover: Image;
-  positions: Array<Position>;
+  positions: Array<PagesPosition>;
   translations: Array<PageTranslation>;
 }
 
@@ -19,6 +19,12 @@ export type Position = {
   id: number;
   name: string;
   description: string;
+};
+
+export type PagesPositions = {
+  id: number;
+  pages_id: string;
+  positions_slug: string;
 };
 
 export type PageTranslation = {
@@ -30,7 +36,7 @@ export type PageTranslation = {
   description: string;
   content: Content;
   cta: string;
-  language_code: string;
+  languages_code: string;
 };
 export type Content = {
   time: EpochTimeStamp;
