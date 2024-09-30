@@ -4,7 +4,6 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 const button = cva("button", {
   variants: {
-    class: "uppercase",
     variant: {
       default: "bg-primary text-foreground hover:bg-primary/90",
       destructive:
@@ -24,19 +23,22 @@ const button = cva("button", {
       round: "h-10 rounded-full px-4 py-1",
     },
   },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
   compoundVariants: [
     {
       variant: "default",
       size: "default",
-      class: "w-full md:w-auto flex items-center justify-center gap-2",
+      class:
+        "w-full md:w-auto flex items-center justify-center gap-2 uppercase",
     },
   ],
 });
 
-export interface Props
-  extends HTMLAttributes<"button">,
-    VariantProps<typeof button> {
-  variant?: string;
+export interface Props extends HTMLAttributes<"button"> {
+  variant?: VariantProps<typeof button>["variant"];
   class?: string;
   size?: string;
 }
@@ -53,6 +55,12 @@ const {
 } = Astro.props;
 ---
 
-<button class={button({ variant, size, class: className })} {...props}>
+<button
+  class={button({
+    variant: variant as any,
+    size: size as any,
+    class: className,
+  })}
+  {...props}>
   <slot />
 </button>

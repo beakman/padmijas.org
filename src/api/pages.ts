@@ -3,19 +3,38 @@
  * */
 import type { Page, Pages } from "@/api/types/pages";
 import { getDirectusClient } from "@/api/client.ts";
-import {
-  readItem,
-  readItems
-} from "@directus/sdk";
+import { readItem, readItems } from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
-const pageFields = ["*", {cover: ["*"]}, {translations: ["*"]}] as const;
-const pageFieldsDetail = ["*", {cover: ["*"]}, {translations: ["*"]}] as const;
+// id: number;
+// slug: string;
+// link: string;
+// title: string;
+// subtitle: string;
+// description: string;
+// content: Content;
+// cta: string;
+// languages_code: string;
+
+const pageFields = [
+  "*",
+  "cover",
+  {
+    translations: ["*"],
+  },
+];
+const pageFieldsDetail = [
+  "*",
+  "cover",
+  {
+    translations: ["*"],
+  },
+] as const;
 const client = getDirectusClient();
 
 export async function getPages(positions?: Array<string>): Promise<Pages> {
   try {
-    const filters = {
+    let filters = {
       fields: pageFields,
       filter: {
         status: {
@@ -24,19 +43,27 @@ export async function getPages(positions?: Array<string>): Promise<Pages> {
       },
     };
 
-    // Add position filter if positions are provided
-    if (positions && positions.length > 0) {
-      filters.filter = {
-        ...filters.filter,
-        positions: {
-          positions_slug: {
-            _in: positions,
+    return await client.request<Pages>(
+      readItems("pages", {
+        fields: [
+          "*",
+          "cover",
+          {
+            translations: ["*"],
+          },
+        ],
+        filter: {
+          status: {
+            _neq: "draft",
+          },
+          positions: {
+            positions_slug: {
+              _in: positions,
+            },
           },
         },
-      };
-    }
-
-    return await client.request<Pages>(readItems("pages", filters));
+      }),
+    );
   } catch (e) {
     console.error("Error fetching Pages", e);
     return [];
@@ -46,7 +73,7 @@ export async function getPages(positions?: Array<string>): Promise<Pages> {
 export async function getPage(id: string): Promise<Page> {
   return (await client.request(
     readItem("pages", id, {
-      fields: pageFields,
+      fields: pageFieldsDetail,
       filter: {
         status: {
           _neq: "draft",
@@ -73,7 +100,7 @@ export async function getPageBySlug(
           _filter: {
             _and: [
               {
-                language_code: { _eq: lang },
+                languages_code: { _eq: lang },
                 slug: { _eq: slug },
               },
             ],

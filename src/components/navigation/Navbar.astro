@@ -16,7 +16,7 @@ import {
 } from "@/i18n";
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
 import { getPages } from "@/api/pages";
-import type { Page, PageTranslation } from "@/api/types/pages";
+import type { Page, PagesTranslation } from "@/api/types/pages";
 
 const SECTION_ID = "main-menu";
 const locale = Astro.currentLocale as Lang;
@@ -38,13 +38,13 @@ const localizedPages: LocalizedPage[] = pages.flatMap((page: Page) => {
     name: {},
   };
 
-  page.translations.forEach((translation: PageTranslation) => {
+  page.translations.forEach((translation: PagesTranslation) => {
     // href
-    pageTranslations.href[translation.language_code as Lang] =
-      getAbsoluteLocaleUrl(translation.language_code, translation.slug);
+    pageTranslations.href[translation.languages_code as Lang] =
+      getAbsoluteLocaleUrl(translation.languages_code, translation.slug);
 
     // name
-    pageTranslations.name[translation.language_code as Lang] =
+    pageTranslations.name[translation.languages_code as Lang] =
       translation.link;
   });
 

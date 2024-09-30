@@ -6,13 +6,18 @@ import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
-const dogFields = ["*", profile_picture: ["id"], translations: ["description"]] as const;
-const dogFieldsDetail: Array<string> = [
+const dogFields = [
   "*",
-  profile_picture: ["id"],
-  cover: ["id"],
-  gallery: ["id"],
-  translations: ["description"],
+  "profile_picture",
+  { translations: ["description"] },
+] as const;
+
+const dogFieldsDetail = [
+  "*",
+  "profile_picture",
+  "cover",
+  "gallery",
+  { translations: ["description"] },
 ] as const;
 const client = getDirectusClient();
 
@@ -80,7 +85,7 @@ export async function fetchDogsByBreed(category: string): Promise<Dogs> {
           _eq: "published",
         },
         breeds: {
-          _eq: category,
+          _intersects: [category],
         },
       },
     }),

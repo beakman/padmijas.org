@@ -6,19 +6,18 @@ import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
 import type { Lang } from "@/i18n";
 
-const testimonialFields = ["*", {profile_picture: ["id"]}, {translations: ["message"]}] as const;
+const testimonialFields = [
+  "*",
+  { profile_picture: ["id"] },
+  { translations: ["message"] },
+] as const;
 const client = getDirectusClient();
 
 export async function getTestimonials(): Promise<Testimonials> {
   try {
     return (await client.request<Testimonials>(
       readItems("testimonials", {
-        fields: ["*", {profile_picture: ["id"]}, {translations: ["message"]}],
-        filter: {
-          status: {
-            _neq: "draft",
-          },
-        },
+        fields: ["*", "profile_picture", { translations: ["message"] }],
       }),
     )) as Testimonials;
   } catch (e) {
@@ -30,12 +29,7 @@ export async function getTestimonials(): Promise<Testimonials> {
 export async function getTestimonial(id: string): Promise<Testimonial> {
   return (await client.request(
     readItem("testimonials", id, {
-      fields: ["*", {profile_picture: ["id"]}, {translations: ["message"]}],
-      filter: {
-        status: {
-          _neq: "draft",
-        },
-      },
+      fields: ["*", "profile_picture", { translations: ["message"] }],
     }),
   )) as Testimonial;
 }

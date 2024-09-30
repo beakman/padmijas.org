@@ -1,23 +1,23 @@
 import type { Image } from "@/api/types/image.ts";
 import type { Block } from "./block";
+import type { User } from "./user";
 
 export interface Page {
   id: number;
-  status: "published" | "draft";
+  status: "published" | "draft" | "archived";
   sort: number | null;
-  user_created: Date;
+  user_created: User;
   date_created: Date;
-  user_updated: Date;
+  user_updated: User;
   date_updated: Date | null;
   icon: string;
   cover: Image;
-  positions: Array<PagesPosition>;
-  translations: Array<PageTranslation>;
+  positions: Array<PagesPositions>;
+  translations: Array<PagesTranslation>;
 }
 
 export type Position = {
-  id: number;
-  name: string;
+  slug: string;
   description: string;
 };
 
@@ -27,8 +27,9 @@ export type PagesPositions = {
   positions_slug: string;
 };
 
-export type PageTranslation = {
+export type PagesTranslation = {
   id: number;
+  pages_id: string;
   slug: string;
   link: string;
   title: string;
@@ -38,6 +39,7 @@ export type PageTranslation = {
   cta: string;
   languages_code: string;
 };
+
 export type Content = {
   time: EpochTimeStamp;
   blocks: Array<Block>;

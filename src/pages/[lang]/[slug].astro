@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getPageBySlug, getPages } from "@/api/pages";
-import type { Page, PageTranslation } from "@/api/types/pages";
+import type { Page, PagesTranslation } from "@/api/types/pages";
 import Button from "@/components/forms/Button.astro";
 import { LOCALES } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
   const pages = await getPages();
   return Object.keys(LOCALES).flatMap((lang) =>
     pages.flatMap((page: Page) =>
-      page.translations.map((translation: PageTranslation) => ({
+      page.translations.map((translation: PagesTranslation) => ({
         params: {
           lang: lang,
           slug: translation.slug,
