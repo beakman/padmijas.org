@@ -1,7 +1,7 @@
 import { createDirectus, rest, staticToken } from "@directus/sdk";
-import type { Dog, Dogs } from "@/api/types/dog.ts";
-import type { Pages } from "./types/pages";
-import type { Testimonials } from "./types/testimonials";
+import type { Dog, DogTranslation, Dogs } from "@/api/types/dog.ts";
+import type { Pages, PageTranslation } from "./types/pages";
+import type { Testimonials, TestimonialTranslation } from "./types/testimonials";
 
 export type Error = {
   message: string;
@@ -13,9 +13,12 @@ export type Error = {
 
 interface Schema {
   animals: Dogs;
+  animals_translations: Array<DogTranslation>;
   dogs: Dogs;
   pages: Pages;
+  pages_translations: Array<PageTranslation>;
   testimonials: Testimonials;
+  testimonials_translations: Array<TestimonialTranslation>;
   globals: Global;
 }
 
