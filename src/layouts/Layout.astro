@@ -7,7 +7,7 @@ import { siteMeta } from "@/config";
 import Footer from "@/components/layout/Footer.astro";
 import { SEO } from "astro-seo";
 import Header from "@/components/layout/Header.astro";
-import { useTranslations, LOCALES, getLocalePaths, type Lang } from "@/i18n";
+import { LOCALES, getLocalePaths, type Lang } from "@/i18n";
 
 interface Props {
   title?: string;
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const locale = Astro.currentLocale as Lang;
-const { title, description, ogImage, ogType } = Astro.props;
+const { title, description, ogImage, ogType } = Astro.props as Props;
 ---
 
 <!doctype html>

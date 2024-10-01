@@ -4,7 +4,6 @@
 import type { Dog, Dogs } from "@/api/types/dog.ts";
 import { getDirectusClient } from "@/api/client.ts";
 import { readItem, readItems } from "@directus/sdk";
-import type { Lang } from "@/i18n";
 
 const dogFields = [
   "*",

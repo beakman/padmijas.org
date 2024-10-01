@@ -13,12 +13,12 @@ const { images, title } = Astro.props;
 <div class="flex flex-col items-center gap-8">
   <div class="flex flex-col items-center">
     <div
-      class="flex overflow-x-scroll snap-x snap-mandatory scroll-smooth touch-pan-x aspect-[4/3] rounded-md w-full">
+      class="flex aspect-[4/3] w-full touch-pan-x snap-x snap-mandatory overflow-x-scroll scroll-smooth rounded-md">
       {
         images &&
           images.map((image, index) => (
             <Image
-              class="w-full snap-always snap-start peer"
+              class="peer w-full snap-start snap-always"
               src={image}
               alt={title ?? ""}
               id={`slide${index + 1}`}
@@ -32,10 +32,10 @@ const { images, title } = Astro.props;
   <div class="flex">
     {
       images &&
-        images.map((image, index) => (
+        images.map((_, index) => (
           <a
             href={`#slide${index + 1}`}
-            class="w-2 h-2 mx-1 rounded-full bg-foreground/60 hover:bg-foreground focus:bg-foreground peer-in-range:bg-foreground"
+            class="mx-1 h-2 w-2 rounded-full bg-foreground/60 hover:bg-foreground focus:bg-foreground peer-in-range:bg-foreground"
           />
         ))
     }

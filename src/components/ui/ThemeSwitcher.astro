@@ -7,8 +7,7 @@ import Button from "@/components/forms/Button.astro";
   data-theme-toggle
   type="button"
   variant="ghost"
-  class="flex w-auto justify-start"
->
+  class="flex w-auto justify-start">
   <Icon
     class="theme-toggle-icon h-6 w-6 opacity-100 transition"
     name="tabler:moon"
@@ -76,7 +75,7 @@ import Button from "@/components/forms/Button.astro";
       : document.documentElement.classList.remove("dark");
   });
 
-  document.addEventListener("astro:before-swap", (ev) => {
+  document.addEventListener("astro:before-swap", () => {
     // Pass the incoming document to set the theme on it
     const theme = getTheme();
     setTheme(theme);

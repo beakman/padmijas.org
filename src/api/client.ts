@@ -1,5 +1,5 @@
 import { createDirectus, rest, staticToken } from "@directus/sdk";
-import type { Dog, DogTranslation, Dogs } from "@/api/types/dog.ts";
+import type { DogTranslation, Dogs } from "@/api/types/dog.ts";
 import type {
   Pages,
   PagesPositions,

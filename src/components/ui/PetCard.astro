@@ -6,7 +6,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import type { Dog } from "@/api/types/dog";
 import { getAssetURL } from "../../api/client";
-import { type Multilingual, useTranslations } from "@/i18n";
+import { useTranslations } from "@/i18n";
 import type { Lang } from "@/i18n";
 import { petCard } from "@/consts";
 export interface Props {
@@ -56,13 +56,13 @@ const petStatus = cva(
 
 const { dog } = Astro.props;
 
-const baseUrl: Multilingual = {
-  es: "nuestros-perros",
-  en: "our-dogs",
-  ja: "犬たち",
-  "zh-cn": "我们的狗",
-  ar: "أنا الكلب",
-};
+// const baseUrl: Multilingual = {
+//   es: "nuestros-perros",
+//   en: "our-dogs",
+//   ja: "犬たち",
+//   "zh-cn": "我们的狗",
+//   ar: "أنا الكلب",
+// };
 
 const ageTimeAgo = formatDistanceToNowStrict(new Date(dog.birth_date), {
   locale: locale == "es" ? es : undefined,
