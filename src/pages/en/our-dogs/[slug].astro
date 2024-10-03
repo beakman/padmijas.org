@@ -39,9 +39,6 @@ try {
 const profilePicture =
   dog.profile_picture && getAssetURL(dog.profile_picture.id);
 const coverPicture = dog.cover && getAssetURL(dog.cover.id);
-const pictureGallery = dog.gallery?.map((image) =>
-  getAssetURL(image.directus_files_id)
-);
 const content = marked.parse(dog.translations[0].description);
 ---
 
