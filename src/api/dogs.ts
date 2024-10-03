@@ -41,7 +41,7 @@ export async function getDogs(): Promise<Dogs> {
 export async function getDog(id: string): Promise<Dog> {
   return (await client.request(
     readItem("animals", id, {
-      fields: dogFields,
+      fields: dogFieldsDetail,
       filter: {
         status: {
           _neq: "draft",
