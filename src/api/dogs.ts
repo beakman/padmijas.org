@@ -13,9 +13,9 @@ const dogFields = [
 
 const dogFieldsDetail = [
   "*",
-  "profile_picture",
-  "cover",
-  "gallery",
+  { profile_picture: ["id", "width", "height"] },
+  { cover: ["id", "width", "height"] },
+  { gallery: ["*"] },
   { translations: ["description"] },
 ] as const;
 const client = getDirectusClient();

@@ -19,7 +19,6 @@ const t = useTranslations(Astro.currentLocale as Lang);
 const lang = LOCALES[locale].lang || locale;
 
 const pages = await getPages([SECTION_ID]);
-console.log("pages", pages);
 
 interface LocalizedPage {
   href: Multilingual;
@@ -44,8 +43,6 @@ const localizedPages: LocalizedPage[] = pages.flatMap((page: Page) => {
 
   return [pageTranslations];
 });
-
-console.log("localized pages", localizedPages);
 
 interface Props {
   mainMenuItems: MenuItemProps[];

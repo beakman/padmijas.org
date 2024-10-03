@@ -7,7 +7,7 @@ export interface Dog {
   breeds: Array<string>;
   date_created: Date;
   date_updated: Date | null;
-  gallery?: Array<Image>;
+  gallery?: Array<DogsFile>;
   gender: string;
   name: string;
   profile_picture?: Image;
@@ -26,10 +26,10 @@ export type DogTranslation = {
 };
 
 export interface DogsFile {
-	/** @required */
-	id: number;
-	animals_slug?: Dog
-	directus_files_id?: Image;
+  /** @required */
+  id: number;
+  animals_slug: Dog;
+  directus_files_id: string;
 }
 
 export type Dogs = Array<Dog>;

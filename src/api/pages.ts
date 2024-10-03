@@ -17,14 +17,14 @@ import { readItem, readItems } from "@directus/sdk";
 
 const pageFields = [
   "*",
-  "cover",
+  { cover: ["id", "width", "height"] },
   {
     translations: ["*"],
   },
 ] as const;
 const pageFieldsDetail = [
   "*",
-  "cover",
+  { cover: ["id", "width", "height"] },
   {
     translations: ["*"],
   },

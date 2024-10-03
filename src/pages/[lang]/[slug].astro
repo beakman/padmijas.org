@@ -8,6 +8,8 @@ import Layout from "@/layouts/Layout.astro";
 import { getAssetURL } from "@/api/client";
 import type { Block } from "@/api/types/block";
 
+import coverImage from "@/assets/images/cover.jpg";
+
 export const getStaticPaths = async () => {
   const pages = await getPages();
   return Object.keys(LOCALES).flatMap((lang) =>
@@ -28,6 +30,7 @@ const { lang, slug } = Astro.params;
 const page = await getPageBySlug(slug, lang);
 
 console.log("page", page);
+
 if (!page) {
   return Astro.redirect("/404");
 }
@@ -44,13 +47,25 @@ if (!page) {
         <div class="w-full">
           <div class="relative shadow-xl sm:overflow-hidden">
             <div class="absolute inset-0">
-              <Image
-                src={getAssetURL(page.cover.id)}
-                alt="Cover picture background"
-                width={1065}
-                height={235}
-                class="h-full w-full object-cover"
-              />
+              {
+                page.cover ? (
+                  <Image
+                    src={getAssetURL(page.cover.id, "cover")}
+                    alt="Cover picture background"
+                    width={1065}
+                    height={235}
+                    class="h-full w-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src={coverImage}
+                    alt="Cover picture background"
+                    width={1065}
+                    height={235}
+                    class="h-full w-full object-cover"
+                  />
+                )
+              }
               <div class="absolute inset-0 bg-yellow-700 mix-blend-multiply">
               </div>
             </div>

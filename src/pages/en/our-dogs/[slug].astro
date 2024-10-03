@@ -39,6 +39,9 @@ try {
 const profilePicture =
   dog.profile_picture && getAssetURL(dog.profile_picture.id);
 const coverPicture = dog.cover && getAssetURL(dog.cover.id);
+const pictureGallery = dog.gallery?.map((image) =>
+  getAssetURL(image.directus_files_id)
+);
 const content = marked.parse(dog.translations[0].description);
 ---
 
@@ -56,7 +59,7 @@ const content = marked.parse(dog.translations[0].description);
                 dog.gallery.map((image) => (
                   <Image
                     class="aspect-square w-full rounded-lg"
-                    src={getAssetURL(image.id)}
+                    src={getAssetURL(image.directus_files_id)}
                     alt={dog.name}
                     width={100}
                     height={100}

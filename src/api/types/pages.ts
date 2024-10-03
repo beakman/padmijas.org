@@ -11,7 +11,7 @@ export interface Page {
   user_updated: User;
   date_updated: Date | null;
   icon: string;
-  cover: Image;
+  cover?: Image;
   positions: Array<PagesPositions>;
   translations: Array<PagesTranslation>;
 }
