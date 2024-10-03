@@ -40,4 +40,11 @@ export type DogTranslation = {
   languages_code: string;
 };
 
+export interface DogsFile {
+	/** @required */
+	id: number;
+	animals_slug?: Dog
+	directus_files_id?: DirectusFile | string | null;
+}
+
 export type Dogs = Array<Dog>;
