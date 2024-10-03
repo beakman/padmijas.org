@@ -2,15 +2,15 @@ import type { Image } from "@/api/types/image.ts";
 
 export interface Dog {
   id: string;
-  cover: Image;
+  cover?: Image;
   birth_date: Date;
   breeds: Array<string>;
   date_created: Date;
   date_updated: Date | null;
-  gallery: Array<Image>;
+  gallery?: Array<Image>;
   gender: string;
   name: string;
-  profile_picture: Image;
+  profile_picture?: Image;
   slug: string;
   sort: number;
   size: string;
@@ -29,7 +29,7 @@ export interface DogsFile {
 	/** @required */
 	id: number;
 	animals_slug?: Dog
-	directus_files_id?: DirectusFile | string | null;
+	directus_files_id?: Image;
 }
 
 export type Dogs = Array<Dog>;
