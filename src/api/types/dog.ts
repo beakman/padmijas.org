@@ -29,7 +29,7 @@ export interface DogsFile {
   /** @required */
   id: number;
   animals_slug: Dog;
-  directus_files_id: string;
+  directus_files_id: Image;
 }
 
 export type Dogs = Array<Dog>;
