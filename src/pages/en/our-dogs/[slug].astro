@@ -59,7 +59,7 @@ const content = marked.parse(dog.translations[0].description);
                 dog.gallery.map((image) => (
                   <Image
                     class="aspect-square w-full rounded-lg"
-                    src={getAssetURL(image.directus_files_id)}
+                    src={getAssetURL(image.directus_files_id.id)}
                     alt={dog.name}
                     width={100}
                     height={100}
