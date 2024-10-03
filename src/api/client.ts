@@ -1,4 +1,5 @@
 import { createDirectus, rest, staticToken } from "@directus/sdk";
+import type { Image } from "@/api/types/image.ts";
 import type { DogTranslation, DogsFile, Dogs } from "@/api/types/dog.ts";
 import type {
   Pages,
@@ -32,6 +33,7 @@ interface Schema {
   testimonials_translations: Array<TestimonialTranslation>;
   globals: Global;
   globals_translations: Array<GlobalTranslation>;
+  directus_files: Array<Image>;
 }
 
 export function getDirectusClient() {
