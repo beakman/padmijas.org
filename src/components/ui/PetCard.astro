@@ -67,7 +67,7 @@ const { dog } = Astro.props;
 const ageTimeAgo = formatDistanceToNowStrict(new Date(dog.birth_date), {
   locale: locale == "es" ? es : undefined,
 });
-const thumbnail = getAssetURL(dog.profile_picture.id);
+const thumbnail = dog.profile_picture.id && getAssetURL(dog.profile_picture.id);
 const imageThumbnail = {
   src: thumbnail ? thumbnail : "/dog-placeholder.png",
   alt: "Dog picture",
