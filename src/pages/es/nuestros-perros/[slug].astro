@@ -34,8 +34,8 @@ try {
   return Astro.redirect("/404");
 }
 
-const profilePicture = dog.profile_picture.id && getAssetURL(dog.profile_picture.id);
-const coverPicture = dog.cover.id && getAssetURL(dog.cover.id);
+const profilePicture = dog.profile_picture && getAssetURL(dog.profile_picture.id);
+const coverPicture = dog.cover && getAssetURL(dog.cover.id);
 const content = marked.parse(dog.translations[0].description);
 ---
 
