@@ -7,7 +7,7 @@ import { readItem, readItems } from "@directus/sdk";
 
 const dogFields = [
   "*",
-  "profile_picture",
+  { profile_picture: ["id", "width", "height"] },
   { translations: ["description"] },
 ] as const;
 
