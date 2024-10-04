@@ -58,11 +58,21 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props as Props;
     height: calc(100dvh - 10rem); /* Subtract the height of the footer */
   }
   #hamburger-checkbox:checked ~ #mobile-menu {
-    @apply translate-y-0 opacity-100;
+    @apply visible translate-y-0 opacity-100;
+  }
+  #mobile-menu {
+    @apply invisible translate-y-4 opacity-0 transition-all duration-200 ease-in-out;
   }
   .mobile-menu-content {
     height: calc(100dvh - 10rem); /* Subtract the height of the footer */
     overflow-y: auto;
+  }
+  /* New overlay style */
+  .mobile-menu-overlay {
+    @apply invisible fixed inset-0 bg-black/50 opacity-0 transition-opacity duration-200 ease-in-out;
+  }
+  #hamburger-checkbox:checked ~ .mobile-menu-overlay {
+    @apply visible opacity-100;
   }
 </style>
 
@@ -169,11 +179,14 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props as Props;
       ></span>
     </label>
 
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu-overlay z-40"></div>
+
     <!-- Mobile menu -->
     <div
       role="menu"
       aria-label="Main Menu"
-      class="absolute inset-0 top-20 -z-20 col-span-2 w-full -translate-y-4 bg-primary opacity-0 transition duration-200 ease-in-out peer-checked:z-50"
+      class="absolute inset-0 top-20 z-50 col-span-2 w-full bg-primary"
       id="mobile-menu">
       <div class="mobile-menu-content overflow-y-auto">
         <ul
@@ -253,13 +266,22 @@ const { mainMenuItems, socialLinks, showThemeSwitcher } = Astro.props as Props;
     const checkbox = document.getElementById(
       "hamburger-checkbox"
     ) as HTMLInputElement;
+    const body = document.body;
 
     checkbox.addEventListener("change", () => {
       if (checkbox.checked) {
-        document.body.classList.add("overflow-hidden");
+        body.classList.add("overflow-hidden");
       } else {
-        document.body.classList.remove("overflow-hidden");
+        body.classList.remove("overflow-hidden");
       }
     });
+
+    // Close menu when clicking outside
+    document
+      .querySelector(".mobile-menu-overlay")
+      ?.addEventListener("click", () => {
+        checkbox.checked = false;
+        body.classList.remove("overflow-hidden");
+      });
   });
 </script>
