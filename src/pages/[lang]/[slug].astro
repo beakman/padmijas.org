@@ -1,5 +1,4 @@
 ---
-export const prerender = false;
 import { Image } from "astro:assets";
 import { getPageBySlug, getPages } from "@/api/pages";
 import type { Page, PagesTranslation } from "@/api/types/pages";
@@ -46,8 +45,8 @@ if (!page) {
       <!-- Hero card -->
       <div class="relative">
         <div class="w-full">
-          <div class="relative shadow-xl sm:overflow-hidden">
-            <div class="absolute inset-0">
+          <div class="relative sm:overflow-hidden">
+            <div class="inset-0 md:absolute">
               {
                 page.cover ? (
                   <Image
@@ -67,22 +66,22 @@ if (!page) {
                   />
                 )
               }
-              <div class="absolute inset-0 bg-yellow-700 mix-blend-multiply">
+              <div class="inset-0 bg-yellow-700 mix-blend-multiply md:absolute">
               </div>
             </div>
             <div
-              class="relative max-w-screen-sm px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+              class="relative max-w-screen-sm p-8 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
               <h1
                 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
                 <span
-                  class="mb-2 block font-handwrite text-2xl font-light tracking-wide text-white md:mb-4 md:text-4xl"
+                  class="mb-2 block font-handwrite text-2xl font-light tracking-wide text-secondary md:mb-4 md:text-4xl md:text-white"
                   >{
                     (page.translations[0] && page.translations[0].subtitle) ||
                       "Subtitle"
                   }</span
                 >
                 <span
-                  class="block font-heading text-4xl font-bold uppercase leading-tight tracking-wide text-white md:text-6xl"
+                  class="block font-heading text-4xl font-bold uppercase leading-tight tracking-wide md:text-6xl md:text-white"
                   >{
                     (page.translations[0] && page.translations[0].title) ||
                       "Title"
@@ -92,7 +91,7 @@ if (!page) {
               <!-- Description -->
               {
                 page.translations[0] && page.translations[0].description && (
-                  <p class="mt-10 text-xl text-white">
+                  <p class="mt-10 text-lg font-light md:text-white">
                     {page.translations[0].description}
                   </p>
                 )

@@ -31,7 +31,10 @@ const pageFieldsDetail = [
 ] as const;
 const client = getDirectusClient();
 
-export async function getPages(positions?: Array<string>): Promise<Pages> {
+export async function getPages(
+  positions?: Array<string>,
+  lang?: string,
+): Promise<Pages> {
   try {
     // let filters = {
     //   fields: pageFields,
@@ -52,6 +55,17 @@ export async function getPages(positions?: Array<string>): Promise<Pages> {
           positions: {
             positions_slug: {
               _in: positions,
+            },
+          },
+        },
+        deep: {
+          translations: {
+            _filter: {
+              _and: [
+                {
+                  languages_code: { _eq: lang },
+                },
+              ],
             },
           },
         },
