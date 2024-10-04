@@ -102,5 +102,6 @@ export async function getPageBySlug(
       },
     }),
   );
+  console.log("pagges", pages);
   return pages.length > 0 ? pages[0] : null;
 }

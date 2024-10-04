@@ -3,7 +3,7 @@ import { getLocalePaths, LOCALES } from "@/i18n";
 ---
 
 <label
-  class="flex items-center justify-start gap-2 rounded-md bg-transparent text-sm font-medium leading-tight">
+  class="flex items-center justify-start gap-2 rounded-md bg-transparent text-xl font-medium leading-tight md:text-sm">
   <select class="bg-transparent" data-languageSelect>
     {
       getLocalePaths(Astro.url).map(({ path, lang }) => (

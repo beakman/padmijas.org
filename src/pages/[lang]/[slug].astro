@@ -1,4 +1,5 @@
 ---
+export const prerender = false;
 import { Image } from "astro:assets";
 import { getPageBySlug, getPages } from "@/api/pages";
 import type { Page, PagesTranslation } from "@/api/types/pages";
@@ -50,10 +51,10 @@ if (!page) {
               {
                 page.cover ? (
                   <Image
-                    src={getAssetURL(page.cover.id, "cover")}
+                    src={getAssetURL(page.cover.id, "hero")}
                     alt="Cover picture background"
-                    width={1065}
-                    height={235}
+                    width={1188}
+                    height={586}
                     class="h-full w-full object-cover"
                   />
                 ) : (
@@ -74,7 +75,7 @@ if (!page) {
               <h1
                 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
                 <span
-                  class="mb-2 block font-handwrite text-4xl font-light tracking-wide text-white md:mb-4 md:text-5xl"
+                  class="mb-2 block font-handwrite text-2xl font-light tracking-wide text-white md:mb-4 md:text-4xl"
                   >{
                     (page.translations[0] && page.translations[0].subtitle) ||
                       "Subtitle"
@@ -88,11 +89,23 @@ if (!page) {
                   }</span
                 >
               </h1>
+              <!-- Description -->
+              {
+                page.translations[0] && page.translations[0].description && (
+                  <p class="mt-10 text-xl text-white">
+                    {page.translations[0].description}
+                  </p>
+                )
+              }
+              <!-- CTA -->
               {
                 page.translations[0] && page.translations[0].cta && (
-                  <div class="justify-startr mt-10 flex w-full sm:max-w-sm">
+                  <div class="mt-10 flex w-full justify-start sm:max-w-sm">
                     <div class="flex w-full flex-col items-center justify-start gap-4 md:flex-row">
-                      <Button class="w-full md:w-auto" variant="default">
+                      <Button
+                        class="w-full md:w-auto"
+                        size="lg"
+                        variant="default">
                         {page.translations[0].cta}
                       </Button>
                     </div>
