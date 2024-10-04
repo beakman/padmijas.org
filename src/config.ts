@@ -55,26 +55,10 @@ export const mainMenu: MenuItemProps[] = [
     },
     href: {
       es: "/voluntariado",
-      en: "/voluntary",
+      en: "/volunteer",
       ja: "/ボランティア",
       "zh-cn": "/志愿者",
       ar: "/متطوع",
-    },
-  },
-  {
-    name: {
-      es: "Donaciones",
-      en: "Donations",
-      ja: "寄付",
-      "zh-cn": "捐赠",
-      ar: "تبرع",
-    },
-    href: {
-      es: "/donaciones",
-      en: "/donations",
-      ja: "/寄付",
-      "zh-cn": "/捐赠",
-      ar: "/تبرع",
     },
   },
   {

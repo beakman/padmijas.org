@@ -1,0 +1,67 @@
+---
+import { getPages } from "@/api/pages";
+import type { Page, PagesTranslation } from "@/api/types/pages";
+import PageCard from "@/components/ui/PageCard.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const tablerIconMap = {
+  supervised_user_circle: "tabler:user-circle",
+  fire_truck: "tabler:truck",
+};
+
+import type { Lang } from "@/i18n";
+
+const locale = Astro.currentLocale as Lang;
+
+// Get the page for this slug
+const pages = await getPages(["volunteer-page"], locale);
+---
+
+<Layout title="Voluntariado" description="Descubre cómo puedes ayudarnos">
+  <main class="">
+    <!-- Heading -->
+    <div
+      class="text-default relative mx-auto max-w-5xl px-8 py-12 md:max-w-4xl md:px-10 md:py-14 lg:py-16">
+      <div
+        class="mb-8 max-w-2xl text-center md:mx-auto md:mb-12 md:max-w-4xl lg:max-w-5xl">
+        <div>
+          <span
+            class="font-handwrite text-2xl font-semibold tracking-wider text-secondary md:text-3xl">
+            Discover how can you help
+          </span>
+          <h2
+            class="mt-2 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            Can you help us?
+          </h2>
+        </div>
+      </div><div
+        class="text-md mx-auto grid gap-8 leading-normal sm:grid-cols-2 md:gap-y-12">
+      </div>
+    </div>
+
+    <!-- Content -->
+    <section class="w-full">
+      <div class="relative mx-auto mb-20 max-w-5xl px-8 md:max-w-4xl md:px-14">
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-y-8 md:gap-6">
+          {
+            pages ? (
+              pages.map((page: Page) => (
+                <PageCard
+                  title={page.translations[0].title}
+                  description={page.translations[0].description}
+                  icon={tablerIconMap[page.icon as keyof typeof tablerIconMap]}
+                  cta={page.translations[0].cta}
+                  slug={page.translations[0].slug}
+                />
+              ))
+            ) : (
+              <div class="mx-auto text-center sm:col-span-2">
+                Crea una página en la sección de "volunteer-page"
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
