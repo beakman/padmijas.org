@@ -48,19 +48,6 @@ export function useTranslations(lang: Lang) {
   };
 }
 
-export function useTranslatedPath(lang: Lang) {
-  return function translatePath(path: string, l: string = lang) {
-    const pathName = path.replaceAll("/", "");
-    const hasTranslation =
-      defaultLang !== l &&
-      routes[l] !== undefined &&
-      routes[l][pathName] !== undefined;
-    const translatedPath = hasTranslation ? "/" + routes[l][pathName] : path;
-
-    return `/${l}${translatedPath}`;
-  };
-}
-
 /**
  * Helper to get corresponding path list for all locales
  * @param url - The current URL object
