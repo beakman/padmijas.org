@@ -15,6 +15,7 @@ export interface Testimonial {
   user_updated: string | null;
   date_updated: string | null;
   name: string;
+  handler: string;
   profile_picture: Image;
   translations: Array<TestimonialTranslation>;
 }

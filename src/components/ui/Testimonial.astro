@@ -1,9 +1,9 @@
 ---
+import { getAssetURL } from "@/api/client";
 import Avatar from "./Avatar.astro";
 
-import avatarImg from "assets/images/avatar.png";
-
 interface Props {
+  avatar?: string;
   href?: string;
   name: string;
   handler?: string;
@@ -11,7 +11,11 @@ interface Props {
   class?: string;
 }
 
-const { name, handler, class: className = "" } = Astro.props;
+const { name, handler, message, avatar, class: className = "" } = Astro.props;
+
+const avatarImg = avatar && getAssetURL(avatar);
+
+console.log("avatarImg", avatarImg);
 ---
 
 <div
@@ -20,7 +24,7 @@ const { name, handler, class: className = "" } = Astro.props;
     className,
   ]}>
   <div class="mb-4 flex w-full items-center">
-    <Avatar class="h-10 w-10" src={avatarImg} alt={name} />
+    {avatarImg && <Avatar class="h-10 w-10" src={avatarImg} alt={name} />}
     <div class="flex-grow pl-3">
       <h6 class="text-sm font-bold">{name}</h6>
       <span class="text-sm text-muted-foreground">
@@ -33,9 +37,9 @@ const { name, handler, class: className = "" } = Astro.props;
     <p class="text-sm leading-tight">
       <span class="mr-1 text-lg font-bold italic leading-none text-gray-400"
         >"</span
-      >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae,
-      obcaecati ullam excepturi dicta error deleniti sequi.<span
-        class="ml-1 text-lg font-bold italic leading-none text-gray-400">"</span
+      >{message}
+      <span class="ml-1 text-lg font-bold italic leading-none text-gray-400"
+        >"</span
       >
     </p>
   </div>

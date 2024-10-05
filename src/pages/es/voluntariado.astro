@@ -4,12 +4,8 @@ import type { Page, PagesTranslation } from "@/api/types/pages";
 import PageCard from "@/components/ui/PageCard.astro";
 import Layout from "@/layouts/Layout.astro";
 
-const tablerIconMap = {
-  supervised_user_circle: "tabler:user-circle",
-  fire_truck: "tabler:truck",
-};
-
 import type { Lang } from "@/i18n";
+import { tablerIconMap } from "@/consts";
 
 const locale = Astro.currentLocale as Lang;
 
@@ -49,7 +45,10 @@ const pages = await getPages(["volunteer-page"], locale);
                 <PageCard
                   title={page.translations[0].title}
                   description={page.translations[0].description}
-                  icon={tablerIconMap[page.icon as keyof typeof tablerIconMap]}
+                  icon={
+                    tablerIconMap[page.icon as keyof typeof tablerIconMap] ||
+                    "tabler:info-circle"
+                  }
                   cta={page.translations[0].cta}
                   slug={page.translations[0].slug}
                 />

@@ -121,3 +121,9 @@ export const NOT_TRANSLATED_CAUTION: string | Multilingual = {
   "zh-cn": "此页面不支持您的语言。",
   ar: "هذه الصفحة غير متوفرة بلغتك.",
 };
+
+export const tablerIconMap = {
+  supervised_user_circle: "tabler:user-circle",
+  fire_truck: "tabler:truck",
+  home: "tabler:home-heart",
+};

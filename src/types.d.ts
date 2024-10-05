@@ -9,9 +9,19 @@ export interface MenuItemProps {
   rel?: string;
 }
 
+export interface FooterItemProps {
+  text: Multilingual;
+  href?: Multilingual;
+  type?: "link" | "icon" | "text";
+  icon?: string;
+  classes?: string;
+  target?: string;
+  rel?: string;
+}
+
 export interface FooterItemsProps {
-  section: string;
-  links: MenuItemProps[];
+  section: Multilingual;
+  items: FooterItemProps[];
 }
 
 export interface SocialItemProps {

@@ -1,0 +1,27 @@
+---
+import type { Lang, Multilingual } from "@/i18n";
+import { Image } from "astro:assets";
+
+import logo from "@/assets/images/logo-ministerio.png";
+
+const disclaimer: Multilingual = {
+  es: "Las actividades desarrolladas por esta entidad durante el año 2023 han sido subvencionadas parcialmente por el Ministerio de Derechos Sociales y Agenda 2030",
+  en: "The activities developed by this entity during the year 2023 have been partially funded by the Ministry of Labor and Employment 2030",
+  ja: "2023年におけるこの組織の活動は、2030年度の勤務基準法のサポートにより部分的に資金が用いられています。",
+  "zh-cn": "2023年的本组织的活动已部分赞助2030年度劳动基本法支持。",
+  ar: "تم تمكين الأنشطة التي تم تطويرها من هذه الوكالة خلال السنة 2023 بالمساعدة الجزئية من الوزارة الخاصة بالعمل والتوظيف 2030",
+};
+
+const localDisclaimer = disclaimer[Astro.currentLocale as Lang];
+---
+
+<div
+  class="mx-auto flex max-w-3xl flex-wrap items-center justify-between space-x-4 p-4 px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+  <div
+    class="flex w-full flex-col justify-between space-y-4 md:flex-row md:space-y-0">
+    <Image src={logo} alt="Ministry logo" width={400} height={110} />
+    <div class="text-sm italic text-foreground md:max-w-xl md:text-base">
+      {localDisclaimer}
+    </div>
+  </div>
+</div>

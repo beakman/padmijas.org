@@ -7,16 +7,23 @@ import { readItem, readItems } from "@directus/sdk";
 
 const testimonialFields = [
   "*",
-  "profile_picture",
+  { profile_picture: ["id", "width", "height"] },
   { translations: ["message"] },
 ] as const;
 const client = getDirectusClient();
 
-export async function getTestimonials(): Promise<Testimonials> {
+export async function getTestimonials(lang?: string): Promise<Testimonials> {
   try {
     return (await client.request<Testimonials>(
       readItems("testimonials", {
         fields: testimonialFields,
+        deep: {
+          translations: {
+            _filter: {
+              languages_code: { _eq: lang },
+            },
+          },
+        },
       }),
     )) as Testimonials;
   } catch (e) {
