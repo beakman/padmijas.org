@@ -5,6 +5,27 @@ import { getDogs } from "@/api/dogs";
 import Layout from "@/layouts/Layout.astro";
 import PetCard from "@/components/ui/PetCard.astro";
 
+// Get the current locale and redirect to the translated path if necessary
+import { getLocalePaths, DEFAULT_LOCALE, type Multilingual } from "@/i18n";
+
+// const baseUrl: Multilingual = {
+//   es: "nuestros-perros",
+//   en: "our-dogs",
+//   ja: "犬たち",
+//   "zh-cn": "我们的狗",
+//   ar: "أنا الكلب",
+// };
+
+// const currentPath = Astro.url.pathname;
+
+// // Assuming lang is determined by some logic elsewhere in your app
+// const lang = DEFAULT_LOCALE; // Replace this with the actual locale logic
+// const translatedPath = `${baseUrl[lang] || baseUrl[DEFAULT_LOCALE]}`;
+
+// if (!currentPath.includes(translatedPath)) {
+//   return Astro.redirect(translatedPath);
+// }
+
 const dogs = (await getDogs()) as Dogs;
 ---
 
@@ -15,14 +36,14 @@ const dogs = (await getDogs()) as Dogs;
       <div class="mb-2 mt-16 flex flex-col text-center">
         <h2
           class="font-handwrite text-2xl font-semibold tracking-wider text-secondary md:text-3xl">
-          En busca de un hogar
+          Looking for a home
         </h2>
         <p
           class="mt-2 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-          Nuestros perros
+          Our dogs
         </p>
         <p class="mx-auto mt-5 max-w-prose text-lg text-gray-500 md:text-xl">
-          Visítanos regularmente y conoce a nuestros recién llegados peludos
+          Visit us regularly and meet our new arrivals
         </p>
       </div>
 

@@ -7,7 +7,7 @@ import { Icon } from "astro-icon/components";
 import type { Dog } from "@/api/types/dog";
 import { getAssetURL } from "../../api/client";
 import { useTranslations } from "@/i18n";
-import type { Lang } from "@/i18n";
+import type { Lang, Multilingual } from "@/i18n";
 import { petCard } from "@/consts";
 export interface Props {
   dog: Dog;
@@ -83,8 +83,6 @@ const sizeCard =
   (dog.size === "lg" && "lg") ||
   (dog.size === "xl" && "xl") ||
   "default";
-
-console.log("dog", dog);
 ---
 
 <div class="not-prose">

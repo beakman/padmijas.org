@@ -63,6 +63,10 @@ const defaultLocale = DEFAULT_LOCALE;
         langs.includes(localStorage.selectedLang)
       ) {
         location.href = `${baseUrl + localStorage.selectedLang}/`;
+        
+        document.querySelectorAll("[data-languageSelect]").forEach((select) => {
+          select.value = localStorage.selectedLang;
+        });
       } else {
         const browserLang = navigator.language.toLowerCase();
 

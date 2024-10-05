@@ -14,6 +14,14 @@ export const SITE_DESCRIPTION: string | Multilingual = {
 
 export const X_ACCOUNT: string | Multilingual = "@padmijas";
 
+export const routes = {
+  en: {
+    "nuestros-perros": "our-dogs",
+    voluntariado: "volunteer",
+    contacto: "contact",
+  },
+};
+
 export const petCard = {
   isAdopted: {
     en: "Adopted",

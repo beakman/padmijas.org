@@ -1,3 +1,4 @@
+import { routes } from "./consts";
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "./locales";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -44,6 +45,19 @@ export function useTranslations(lang: Lang) {
     } else {
       return multilingual[lang] || multilingual[DEFAULT_LOCALE] || "";
     }
+  };
+}
+
+export function useTranslatedPath(lang: Lang) {
+  return function translatePath(path: string, l: string = lang) {
+    const pathName = path.replaceAll("/", "");
+    const hasTranslation =
+      defaultLang !== l &&
+      routes[l] !== undefined &&
+      routes[l][pathName] !== undefined;
+    const translatedPath = hasTranslation ? "/" + routes[l][pathName] : path;
+
+    return `/${l}${translatedPath}`;
   };
 }
 

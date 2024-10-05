@@ -34,7 +34,7 @@ const localizedPages: LocalizedPage[] = pages.flatMap((page: Page) => {
   page.translations.forEach((translation: PagesTranslation) => {
     // href
     pageTranslations.href[translation.languages_code as Lang] =
-      getAbsoluteLocaleUrl(translation.languages_code, translation.slug);
+      getRelativeLocaleUrl(translation.languages_code, translation.slug);
 
     // name
     pageTranslations.name[translation.languages_code as Lang] =
@@ -43,6 +43,8 @@ const localizedPages: LocalizedPage[] = pages.flatMap((page: Page) => {
 
   return [pageTranslations];
 });
+
+console.log("localizedPages", localizedPages);
 
 interface Props {
   mainMenuItems: MenuItemProps[];
