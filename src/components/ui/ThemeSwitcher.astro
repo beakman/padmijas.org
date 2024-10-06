@@ -32,9 +32,9 @@ import Button from "@/components/forms/Button.astro";
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       return localStorage.getItem("theme") || "light";
     }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    }
+    // if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    //   return "dark";
+    // }
     return "light";
   }
 

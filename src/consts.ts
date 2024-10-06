@@ -3,13 +3,20 @@
 
 import { type Multilingual } from "@/i18n";
 
-export const SITE_TITLE: string | Multilingual = "Astro i18n Starter";
+export const SITE_TITLE: string | Multilingual = {
+  en: "Animal Shelter",
+  es: "Protectora de Animales Domésticos",
+  ja: "犬たち",
+  "zh-cn": "宠物救助",
+  ar: "مستشفي الحيوانات",
+};
 
 export const SITE_DESCRIPTION: string | Multilingual = {
-  en: "A starter template for Astro with i18n support.",
-  ja: "i18n 対応の Astro スターターテンプレート。",
-  "zh-cn": "具有 i18n 支持的 Astro 入门模板。",
-  ar: "قالب بداية لـ Astro مع دعم i18n.",
+  es: "Únete a nuestra causa y sé parte del cambio. 🐾",
+  en: "Join our cause and be part of the change. 🐾",
+  ja: "あなたの家に来てください。",
+  "zh-cn": "加入我们的努力，参与到改变中来。",
+  ar: "انضم للأمر وكن جزءًا من التغيير. 🐾",
 };
 
 export const X_ACCOUNT: string | Multilingual = "@padmijas";
@@ -24,7 +31,7 @@ export const routes = {
 
 export const uiStrings = {
   warning: {
-    en: "Hey",
+    en: "Hey!",
     es: "Aviso",
     ja: "警告",
     "zh-cn": "警告",
@@ -36,6 +43,20 @@ export const uiStrings = {
     ja: "詳細",
     "zh-cn": "更多信息",
     ar: "مزيد من المعلومات",
+  },
+  donate: {
+    en: "Donate",
+    es: "Donar",
+    ja: "寄付",
+    "zh-cn": "捐赠",
+    ar: "تبرع",
+  },
+  donateHref: {
+    en: "/en/donations",
+    es: "/es/donaciones",
+    ja: "/ja/寄付",
+    "zh-cn": "/zh-cn/捐赠",
+    ar: "/ar/تبرعات",
   },
 };
 

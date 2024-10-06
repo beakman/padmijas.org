@@ -11,6 +11,7 @@ import { useTranslations, LOCALES, type Lang, type Multilingual } from "@/i18n";
 import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
 import { getPages } from "@/api/pages";
 import type { Page, PagesTranslation } from "@/api/types/pages";
+import { uiStrings } from "@/consts";
 
 const SECTION_ID = "main-menu";
 const locale = Astro.currentLocale as Lang;
@@ -156,12 +157,13 @@ const { mainMenuItems, socialLinks, showThemeSwitcher, showLanguageSelector } =
     <Button
       variant="outline"
       size="lg"
+      href={t(uiStrings.donateHref)}
       class="flex items-center justify-center gap-2">
       <Icon
         name="tabler:heart-filled"
         class="h-5 w-5 text-foreground group-hover:text-red-500"
       />
-      Donate
+      {t(uiStrings.donate)}
     </Button>
     <LanguageSelector />
   </div>

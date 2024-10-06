@@ -4,7 +4,7 @@ import { type Dogs } from "@/api/types/dog";
 import { getDogs } from "@/api/dogs";
 import Layout from "@/layouts/Layout.astro";
 import PetCard from "@/components/ui/PetCard.astro";
-import { type Multilingual, DEFAULT_LOCALE } from "@/i18n";
+import { type Lang, type Multilingual, DEFAULT_LOCALE } from "@/i18n";
 
 const baseUrl: Multilingual = {
   es: "nuestros-perros",
@@ -16,9 +16,8 @@ const baseUrl: Multilingual = {
 
 const currentPath = Astro.url.pathname;
 
-// Assuming lang is determined by some logic elsewhere in your app
-const lang = DEFAULT_LOCALE; // Replace this with the actual locale logic
-const translatedPath = `${baseUrl[lang] || baseUrl[DEFAULT_LOCALE]}`;
+const locale = Astro.currentLocale as Lang;
+const translatedPath = `${baseUrl[locale] || baseUrl[DEFAULT_LOCALE]}`;
 
 if (!currentPath.includes(translatedPath)) {
   return Astro.redirect(translatedPath);
