@@ -12,6 +12,7 @@ import type {
   TestimonialTranslation,
 } from "./types/testimonials";
 import type { Global, GlobalTranslation } from "@/api/types/global.ts";
+import type { Faq, Faqs, FaqTranslation } from "./types/faq";
 
 export type Error = {
   message: string;
@@ -33,6 +34,8 @@ interface Schema {
   testimonials_translations: Array<TestimonialTranslation>;
   global: Global;
   global_translations: Array<GlobalTranslation>;
+  faq: Faqs;
+  faq_translations: Array<FaqTranslation>;
   directus_files: Array<Image>;
 }
 

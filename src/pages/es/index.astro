@@ -28,6 +28,11 @@ const localeDescription = description || t(SITE_DESCRIPTION);
 
 const testimonials = (await getTestimonials(locale)) as Testimonials;
 
+const doubleTestimonials = testimonials.map((testimonial) => ({
+  ...testimonial,
+  ...testimonial,
+}));
+
 const bgHero2 = await getImage({
   src: heroImage2,
   format: "webp",
@@ -209,7 +214,7 @@ const bgHero2 = await getImage({
       </div>
       <div
         class="flex w-full flex-col flex-nowrap justify-center gap-4 sm:flex-row sm:justify-start">
-        <div class="relative flex w-full gap-4 sm:w-auto">
+        <div class="relative mx-auto flex w-full gap-4 sm:w-auto">
           <Marquee>
             {
               testimonials &&

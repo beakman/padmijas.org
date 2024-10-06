@@ -8,6 +8,7 @@ import type { Lang } from "@/i18n";
 import { tablerIconMap } from "@/consts";
 import Accordion from "@/components/ui/Accordion.astro";
 import AccordionSection from "@/components/ui/AccordionSection.astro";
+import ContactForm from "@/components/forms/ContactForm.astro";
 
 const locale = Astro.currentLocale as Lang;
 
@@ -42,41 +43,7 @@ const pages = await getPages(["volunteer-page"], locale);
     <!-- Content -->
     <section class="w-full">
       <div class="relative mx-auto mb-20 max-w-5xl px-8 md:max-w-4xl md:px-14">
-        <div
-          class="rounded-lg border border-[#ffffff29] bg-white px-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur">
-          <Accordion>
-            <AccordionSection>
-              <h4 slot="question">What lifetime license means?</h4>
-              <p slot="answer">
-                Our courses cover a wide range of topics, including but not
-                limited to programming, design, business, personal development,
-                language learning, and more. We continuously update our course
-                offerings to meet the evolving needs and interests of our
-                learners.
-              </p>
-            </AccordionSection>
-            <AccordionSection>
-              <h4 slot="question">What lifetime license means?</h4>
-              <p slot="answer">
-                Our courses cover a wide range of topics, including but not
-                limited to programming, design, business, personal development,
-                language learning, and more. We continuously update our course
-                offerings to meet the evolving needs and interests of our
-                learners.
-              </p>
-            </AccordionSection>
-            <AccordionSection>
-              <h4 slot="question">What lifetime license means?</h4>
-              <p slot="answer">
-                Our courses cover a wide range of topics, including but not
-                limited to programming, design, business, personal development,
-                language learning, and more. We continuously update our course
-                offerings to meet the evolving needs and interests of our
-                learners.
-              </p>
-            </AccordionSection>
-          </Accordion>
-        </div>
+        <ContactForm />
       </div>
     </section>
   </main>

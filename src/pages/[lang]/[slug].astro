@@ -29,6 +29,8 @@ const { lang, slug } = Astro.params;
 // Get the page for this slug
 const page = await getPageBySlug(slug, lang as string);
 
+console.log("page", page?.translations[0].content.blocks[1].data.items);
+
 if (!page) {
   return Astro.redirect("/404");
 }
@@ -121,7 +123,7 @@ if (!page) {
     <!-- Content -->
     <section class="w-full">
       <div
-        class="text-default prose relative mx-auto max-w-3xl px-8 py-12 md:max-w-4xl md:px-10 md:py-14 lg:py-16">
+        class="text-default lg:px-8lg:py-16 prose relative mx-auto max-w-3xl px-8 py-12 md:max-w-4xl md:px-10 md:py-14 lg:max-w-6xl xl:max-w-7xl">
         {
           page &&
             page.translations[0] &&
@@ -146,9 +148,10 @@ if (!page) {
                   {block.type === "paragraph" &&
                     block.data.text &&
                     !block.data.text.includes("href=") && (
-                      <p class="mt-2 text-lg text-muted md:text-xl">
-                        {block.data.text}
-                      </p>
+                      <p
+                        class="mt-2 text-lg text-muted md:text-xl"
+                        set:html={block.data.text}
+                      />
                     )}
                   {block.type === "paragraph" &&
                     block.data.text &&
@@ -157,6 +160,19 @@ if (!page) {
                         class="mt-2 text-lg text-muted md:text-xl"
                         set:html={block.data.text}
                       />
+                    )}
+                  {block.type === "nestedlist" &&
+                    block.data.style &&
+                    block.data.style.includes("unordered") &&
+                    block.data.items && (
+                      <ul class="list-inside list-disc">
+                        {block.data.items.map((item: any) => (
+                          <li
+                            class="mt-2 text-lg text-muted md:text-xl"
+                            set:html={item.content}
+                          />
+                        ))}
+                      </ul>
                     )}
                 </>
               );
