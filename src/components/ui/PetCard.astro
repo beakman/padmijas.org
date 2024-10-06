@@ -31,7 +31,7 @@ const petStatus = cva(
       status: {
         adopted: ["ring-8", "ring-primary", "group-hover:ring-primary"],
         reserved: ["ring-8", "ring-purple-700", "group-hover:ring-purple-500"],
-        default: ["ring-8", "ring-primary"],
+        default: ["ring-primary"],
       },
       size: {
         default: ["w-full"],
@@ -86,7 +86,9 @@ const sizeCard =
 ---
 
 <div class="not-prose">
-  <a href={`${dog.slug}`} class="group flex flex-col items-center px-2 py-5">
+  <a
+    href={`${dog.slug}`}
+    class="group flex flex-col items-center px-6 py-5 md:px-2">
     <Image
       class={petStatus({ status: statusCard, size: sizeCard })}
       src={imageThumbnail.src}

@@ -9,6 +9,7 @@ export type GlobalTranslation = {
   id: number;
   languages_code: string;
   global_message: string;
+  global_message_href?: string;
 };
 
 export type Globals = Array<Global>;

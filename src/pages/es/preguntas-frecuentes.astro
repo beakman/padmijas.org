@@ -15,7 +15,9 @@ const locale = Astro.currentLocale as Lang;
 const pages = await getPages(["volunteer-page"], locale);
 ---
 
-<Layout title="Contacto" description="Contacta con nosotros">
+<Layout
+  title="Preguntas frecuentes"
+  description="Descubre cómo puedes ayudarnos">
   <main class="">
     <!-- Heading -->
     <div
@@ -25,15 +27,15 @@ const pages = await getPages(["volunteer-page"], locale);
         <div>
           <span
             class="font-handwrite text-2xl font-semibold tracking-wider text-secondary md:text-3xl">
-            Contacto
+            Pregungas frecuentes
           </span>
           <h2
             class="mt-2 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-            Déjanos un mensaje y te ayudaremos a encontrar un compañero
+            Despeja tus dudas, cuida a tus compañeros peludos.
           </h2>
           <p class="mt-8 text-lg text-muted md:text-xl">
-            Estamos aquí para escucharte y trabajar juntos en favor de los
-            animales necesitados.
+            Si tienes alguna pregunta que no esté respondida aquí, no dudes en
+            ponerte en contacto con nosotros.
           </p>
         </div>
       </div>

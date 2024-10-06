@@ -4,32 +4,30 @@ import { type Dogs } from "@/api/types/dog";
 import { getDogs } from "@/api/dogs";
 import Layout from "@/layouts/Layout.astro";
 import PetCard from "@/components/ui/PetCard.astro";
+import { type Multilingual, DEFAULT_LOCALE } from "@/i18n";
 
-// Get the current locale and redirect to the translated path if necessary
-import { getLocalePaths, DEFAULT_LOCALE, type Multilingual } from "@/i18n";
+const baseUrl: Multilingual = {
+  es: "nuestros-perros",
+  en: "our-dogs",
+  ja: "犬たち",
+  "zh-cn": "我们的狗",
+  ar: "أنا الكلب",
+};
 
-// const baseUrl: Multilingual = {
-//   es: "nuestros-perros",
-//   en: "our-dogs",
-//   ja: "犬たち",
-//   "zh-cn": "我们的狗",
-//   ar: "أنا الكلب",
-// };
+const currentPath = Astro.url.pathname;
 
-// const currentPath = Astro.url.pathname;
+// Assuming lang is determined by some logic elsewhere in your app
+const lang = DEFAULT_LOCALE; // Replace this with the actual locale logic
+const translatedPath = `${baseUrl[lang] || baseUrl[DEFAULT_LOCALE]}`;
 
-// // Assuming lang is determined by some logic elsewhere in your app
-// const lang = DEFAULT_LOCALE; // Replace this with the actual locale logic
-// const translatedPath = `${baseUrl[lang] || baseUrl[DEFAULT_LOCALE]}`;
-
-// if (!currentPath.includes(translatedPath)) {
-//   return Astro.redirect(translatedPath);
-// }
+if (!currentPath.includes(translatedPath)) {
+  return Astro.redirect(translatedPath);
+}
 
 const dogs = (await getDogs()) as Dogs;
 ---
 
-<Layout title="Dogs">
+<Layout title="Our Dogs">
   <main
     class="mx-auto flex max-w-7xl flex-wrap items-center justify-between space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl lg:px-8">
     <section class="w-full">

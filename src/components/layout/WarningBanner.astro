@@ -21,7 +21,7 @@ const globalInfo = await getGlobal(locale); // Added 'await' to resolve the Prom
         </span>
         <a
           class="font-medium text-white hover:underline dark:text-gray-900"
-          href="/voluntariado">
+          href={globalInfo.translations[0].global_message_href}>
           {globalInfo.translations[0].global_message}
         </a>
       </div>

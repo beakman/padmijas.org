@@ -21,7 +21,7 @@ const { icon, title, slug, description } = Astro.props;
 ---
 
 <div
-  class="relative flex flex-col rounded-lg bg-white p-6 shadow-md backdrop-blur hover:shadow-lg dark:bg-slate-900 dark:shadow-lg">
+  class="relative flex flex-col rounded-lg border border-[#ffffff29] bg-white p-6 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur transition-shadow hover:shadow-[0_6px_40px_rgba(0,0,0,0.2)]">
   <Icon name={icon} class="mb-6 h-12 w-12 text-secondary" />
 
   <div class="text-xl font-bold">{title}</div>
