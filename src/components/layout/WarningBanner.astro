@@ -1,0 +1,29 @@
+---
+import { Icon } from "astro-icon/components";
+import { type Lang } from "@/i18n";
+import { useTranslations } from "@/i18n";
+import { getGlobal } from "@/api/globals";
+import { uiStrings } from "@/consts";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
+const globalInfo = await getGlobal(locale); // Added 'await' to resolve the Promise
+---
+
+{
+  globalInfo &&
+    globalInfo.translations[0] &&
+    globalInfo.translations[0].global_message && (
+      <div class="z-50 mx-auto flex h-10 w-full items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap bg-purple-500 px-3 py-2 text-center text-sm text-white dark:bg-pad dark:text-gray-900 md:block">
+        <span class="dark:bg-page mr-2 inline-block bg-white/20 px-1 py-0.5 text-xs font-semibold uppercase dark:text-white rtl:ml-0.5 rtl:mr-0">
+          {t(uiStrings.warning)}
+        </span>
+        <a
+          class="font-medium text-white hover:underline dark:text-gray-900"
+          href="/voluntariado">
+          {globalInfo.translations[0].global_message}
+        </a>
+      </div>
+    )
+}

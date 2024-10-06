@@ -22,6 +22,23 @@ export const routes = {
   },
 };
 
+export const uiStrings = {
+  warning: {
+    en: "Hey",
+    es: "Aviso",
+    ja: "警告",
+    "zh-cn": "警告",
+    ar: "تحذير",
+  },
+  moreInfo: {
+    en: "More info",
+    es: "Más información",
+    ja: "詳細",
+    "zh-cn": "更多信息",
+    ar: "مزيد من المعلومات",
+  },
+};
+
 export const petCard = {
   isAdopted: {
     en: "Adopted",

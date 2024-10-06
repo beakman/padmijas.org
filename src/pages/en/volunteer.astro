@@ -43,7 +43,7 @@ const pages = await getPages(["volunteer-page"], locale);
             pages ? (
               pages.map((page: Page) => (
                 <PageCard
-                  title={page.translations[0].title}
+                  title={page.translations[0].link}
                   description={page.translations[0].description}
                   icon={
                     tablerIconMap[page.icon as keyof typeof tablerIconMap] ||

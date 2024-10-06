@@ -87,6 +87,11 @@ export async function getPageBySlug(
   const pages = await client.request<Pages>(
     readItems("pages", {
       fields: pageFieldsDetail,
+      filter: {
+        status: {
+          _neq: "draft",
+        },
+      },
       deep: {
         translations: {
           _filter: {
@@ -103,5 +108,16 @@ export async function getPageBySlug(
       },
     }),
   );
-  return pages.length > 0 ? pages[0] : null;
+  // filter out the pages that don't have a translation for the current locale
+  const filteredPages = pages.filter((page) => {
+    return page.translations.some((translation) => {
+      return translation.languages_code === lang;
+    });
+  });
+
+  if (filteredPages.length > 0) {
+    return filteredPages[0];
+  } else {
+    return null;
+  }
 }

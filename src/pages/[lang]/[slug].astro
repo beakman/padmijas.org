@@ -21,7 +21,6 @@ export const getStaticPaths = async () => {
       },
     }))
   );
-  console.log("paths", paths);
   return paths;
 };
 
@@ -29,8 +28,6 @@ const { lang, slug } = Astro.params;
 
 // Get the page for this slug
 const page = await getPageBySlug(slug, lang as string);
-
-console.log(lang, slug, page);
 
 if (!page) {
   return Astro.redirect("/404");
@@ -71,47 +68,50 @@ if (!page) {
               </div>
             </div>
             <div
-              class="relative max-w-screen-sm p-8 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
-              <h1
-                class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                <span
-                  class="mb-2 block font-handwrite text-2xl font-light tracking-wide text-secondary md:mb-4 md:text-4xl md:text-white"
-                  >{
-                    (page.translations[0] && page.translations[0].subtitle) ||
-                      "Subtitle"
-                  }</span
-                >
-                <span
-                  class="block font-heading text-4xl font-bold uppercase leading-tight tracking-wide md:text-6xl md:text-white"
-                  >{
-                    (page.translations[0] && page.translations[0].title) ||
-                      "Title"
-                  }</span
-                >
-              </h1>
-              <!-- Description -->
-              {
-                page.translations[0] && page.translations[0].description && (
-                  <p class="mt-10 text-lg font-light md:text-white">
-                    {page.translations[0].description}
-                  </p>
-                )
-              }
-              <!-- CTA -->
-              {
-                page.translations[0] && page.translations[0].cta && (
-                  <div class="mt-10 flex w-full justify-start sm:max-w-sm">
-                    <div class="flex w-full flex-col items-center justify-start gap-4 md:flex-row">
-                      <Button
-                        class="w-full md:w-auto"
-                        size="lg"
-                        variant="default">
-                        {page.translations[0].cta}
-                      </Button>
+              class="mx-auto flex max-w-3xl flex-wrap items-center justify-between space-x-4 p-4 px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+              <div
+                class="relative max-w-screen-sm p-8 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
+                <h1
+                  class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                  <span
+                    class="mb-2 block font-handwrite text-2xl font-light tracking-wide text-secondary md:mb-4 md:text-4xl md:text-white"
+                    >{
+                      (page.translations[0] && page.translations[0].subtitle) ||
+                        "Subtitle"
+                    }</span
+                  >
+                  <span
+                    class="block font-heading text-4xl font-bold uppercase leading-tight tracking-wide md:text-6xl md:text-white"
+                    >{
+                      (page.translations[0] && page.translations[0].title) ||
+                        "Title"
+                    }</span
+                  >
+                </h1>
+                <!-- Description -->
+                {
+                  page.translations[0] && page.translations[0].description && (
+                    <p class="mt-8 text-lg font-light md:text-white">
+                      {page.translations[0].description}
+                    </p>
+                  )
+                }
+                <!-- CTA -->
+                {
+                  page.translations[0] && page.translations[0].cta && (
+                    <div class="mt-10 flex w-full justify-start sm:max-w-sm">
+                      <div class="flex w-full flex-col items-center justify-start gap-4 md:flex-row">
+                        <Button
+                          class="w-full md:w-auto"
+                          size="lg"
+                          variant="default">
+                          {page.translations[0].cta}
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                )
-              }
+                  )
+                }
+              </div>
             </div>
           </div>
         </div>
@@ -120,40 +120,48 @@ if (!page) {
 
     <!-- Content -->
     <section class="w-full">
-      <div class="pt-16 md:pt-20">
-        <div
-          class="text-default prose relative mx-auto max-w-3xl px-8 py-12 md:max-w-4xl md:px-10 md:py-14 lg:py-16">
-          {
-            page &&
-              page.translations[0] &&
-              page.translations[0].content &&
-              page.translations[0].content.blocks.map((block: Block) => {
-                return (
-                  <>
-                    {block.type === "header" &&
-                      block.data.text &&
-                      block.data.level === 1 && (
-                        <h1 class="mt-2 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                          {block.data.text}
-                        </h1>
-                      )}
-                    {block.type === "header" &&
-                      block.data.text &&
-                      block.data.level === 2 && (
-                        <h2 class="leading-tighter leading-tighter text-heading mb-8 font-heading text-4xl font-bold tracking-tighter md:text-5xl">
-                          {block.data.text}
-                        </h2>
-                      )}
-                    {block.type === "paragraph" && (
+      <div
+        class="text-default prose relative mx-auto max-w-3xl px-8 py-12 md:max-w-4xl md:px-10 md:py-14 lg:py-16">
+        {
+          page &&
+            page.translations[0] &&
+            page.translations[0].content &&
+            page.translations[0].content.blocks.map((block: Block) => {
+              return (
+                <>
+                  {block.type === "header" &&
+                    block.data.text &&
+                    block.data.level === 1 && (
+                      <h1 class="mt-2 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+                        {block.data.text}
+                      </h1>
+                    )}
+                  {block.type === "header" &&
+                    block.data.text &&
+                    block.data.level === 2 && (
+                      <h2 class="leading-tighter leading-tighter text-heading mb-8 font-heading text-4xl font-bold tracking-tighter md:text-5xl">
+                        {block.data.text}
+                      </h2>
+                    )}
+                  {block.type === "paragraph" &&
+                    block.data.text &&
+                    !block.data.text.includes("href=") && (
                       <p class="mt-2 text-lg text-muted md:text-xl">
                         {block.data.text}
                       </p>
                     )}
-                  </>
-                );
-              })
-          }
-        </div>
+                  {block.type === "paragraph" &&
+                    block.data.text &&
+                    block.data.text.includes("href=") && (
+                      <div
+                        class="mt-2 text-lg text-muted md:text-xl"
+                        set:html={block.data.text}
+                      />
+                    )}
+                </>
+              );
+            })
+        }
       </div>
     </section>
   </main>

@@ -31,8 +31,8 @@ interface Schema {
   pages_translations: Array<PagesTranslation>;
   testimonials: Testimonials;
   testimonials_translations: Array<TestimonialTranslation>;
-  globals: Global;
-  globals_translations: Array<GlobalTranslation>;
+  global: Global;
+  global_translations: Array<GlobalTranslation>;
   directus_files: Array<Image>;
 }
 

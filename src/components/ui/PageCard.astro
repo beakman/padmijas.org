@@ -1,5 +1,10 @@
 ---
+import { uiStrings } from "@/consts";
+import { type Lang, useTranslations } from "@/i18n";
 import { Icon } from "astro-icon/components";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
 
 interface Props {
   icon?: string;
@@ -11,6 +16,8 @@ interface Props {
 }
 
 const { icon, title, slug, description } = Astro.props;
+
+// https://admin.padmijas.org/items/pages?&deep[translations][_filter][_and][0][languages_code][_eq]=es&deep[translations][_filter][_and][1][slug][_eq]=voluntarios-de-transporte
 ---
 
 <div
@@ -25,7 +32,7 @@ const { icon, title, slug, description } = Astro.props;
   <div class="mt-auto">
     <a
       class="mt-3 flex items-center justify-center gap-2 rounded-md bg-primary px-8 py-3 text-foreground hover:bg-primary/90"
-      href={`../${slug}`}>Más información</a
+      href={`../${slug}`}>{t(uiStrings.moreInfo)}</a
     >
   </div>
 </div>
