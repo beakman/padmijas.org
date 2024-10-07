@@ -1,19 +1,8 @@
 ---
-import { getPages } from "@/api/pages";
-import type { Page, PagesTranslation } from "@/api/types/pages";
-import PageCard from "@/components/ui/PageCard.astro";
+export const prerender = false;
+
 import Layout from "@/layouts/Layout.astro";
-
-import type { Lang } from "@/i18n";
-import { tablerIconMap } from "@/consts";
-import Accordion from "@/components/ui/Accordion.astro";
-import AccordionSection from "@/components/ui/AccordionSection.astro";
 import ContactForm from "@/components/forms/ContactForm.astro";
-
-const locale = Astro.currentLocale as Lang;
-
-// Get the page for this slug
-const pages = await getPages(["volunteer-page"], locale);
 ---
 
 <Layout title="Contacto" description="Contacta con nosotros">
@@ -22,7 +11,7 @@ const pages = await getPages(["volunteer-page"], locale);
     <div
       class="text-default relative mx-auto max-w-5xl px-8 py-12 md:max-w-4xl md:px-10 md:py-14 lg:py-16">
       <div
-        class="mb-8 max-w-2xl text-center md:mx-auto md:mb-12 md:max-w-4xl lg:max-w-5xl">
+        class="mb-4 max-w-2xl text-center md:mx-auto md:mb-12 md:max-w-4xl lg:max-w-5xl">
         <div>
           <span
             class="font-handwrite text-2xl font-semibold tracking-wider text-secondary md:text-3xl">
@@ -30,7 +19,7 @@ const pages = await getPages(["volunteer-page"], locale);
           </span>
           <h2
             class="mt-2 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-            Déjanos un mensaje y te ayudaremos a encontrar un compañero
+            Déjanos un mensaje
           </h2>
           <p class="mt-8 text-lg text-muted md:text-xl">
             Estamos aquí para escucharte y trabajar juntos en favor de los

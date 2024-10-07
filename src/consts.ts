@@ -60,6 +60,86 @@ export const uiStrings = {
   },
 };
 
+export const contactForm = {
+  successMessage: {
+    en: "Thank you for your message. We will get back to you soon.",
+    es: "Gracias por tu mensaje. Te contactaremos pronto.",
+    ja: "ありがとうございます。まもなくご連絡いたします。",
+    "zh-cn": "感谢您的信息。我们将尽快回复您。",
+    ar: "شكرا على رسالتك. سنرد عليك قريبا.",
+  },
+  errorMessage: {
+    en: "Something went wrong. Please try again later.",
+    es: "Algo salió mal. Por favor, inténtalo de nuevo o contáctanos por correo electrónico.",
+    ja: "エラーが発生しました。後でもう一度お試しください。",
+    "zh-cn": "出错了。请稍后再试。",
+    ar: "حدث خطأ. يرجى المحاولة مرة أخرى لاحقا.",
+  },
+  nameLabel: {
+    en: "Name",
+    es: "Nombre",
+    ja: "名前",
+    "zh-cn": "姓名",
+    ar: "الاسم",
+  },
+  namePlaceholder: {
+    en: "Your name",
+    es: "Tu nombre",
+    ja: "あなたの名前",
+    "zh-cn": "你的姓名",
+    ar: "اسمك",
+  },
+  messageLabel: {
+    en: "Message",
+    es: "Mensaje",
+    ja: "メッセージ",
+    "zh-cn": "信息",
+    ar: "الرسالة",
+  },
+  messagePlaceholder: {
+    en: "Your message",
+    es: "Tu mensaje",
+    ja: "あなたのメッセージ",
+    "zh-cn": "你的信息",
+    ar: "رسالتك",
+  },
+  submitButton: {
+    en: "Submit",
+    es: "Enviar",
+    ja: "送信",
+    "zh-cn": "提交",
+    ar: "إرسال",
+  },
+  errorInvalidName: {
+    en: "Please enter a username.",
+    es: "Por favor, introduce tu nombre.",
+    ja: "ユーザー名を入力してください。",
+    "zh-cn": "请输入用户名。",
+    ar: "الرجاء إدخال اسم المستخدم.",
+  },
+  errorInvalidEmail: {
+    en: "Email is not valid.",
+    es: "El correo electrónico no es válido.",
+    ja: "メールアドレスが正しくありません。",
+    "zh-cn": "电子邮件无效。",
+    ar: "البريد الإلكتروني غير صالح.",
+  },
+  errorInvalidMessage: {
+    en: "Your message is too short.",
+    es: "Tu mensaje es demasiado corto.",
+    ja: "メッセージが短すぎます。",
+    "zh-cn": "您的信息太短了。",
+    ar: "رسالتك طويلة جدا.",
+  },
+  disclaimer: {
+    en: "By submitting this form, you acknowledge and agree to the collection of your personal information.",
+    es: "Al enviar este formulario de contacto, reconoces y aceptas la recopilación de tu información personal.",
+    ja: "このフォームを送信することにより、個人情報の収集に同意したことになります。",
+    "zh-cn": "提交此表单，表示您已经同意收集您的个人信息。",
+    ar: "عن طريق إرسال هذا النموذج، فإنك توافق على وجود المعلومات الشخصية الخاصة بك.",
+  },
+};
+
 export const petCard = {
   isAdopted: {
     en: "Adopted",

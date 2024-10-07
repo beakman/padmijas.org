@@ -1,0 +1,40 @@
+---
+export const prerender = false;
+
+import Layout from "@/layouts/Layout.astro";
+import ContactForm from "@/components/forms/ContactForm.astro";
+---
+
+<Layout
+  title="Contact"
+  description="Drop us a line and we'll get back to you soon.">
+  <main class="">
+    <!-- Heading -->
+    <div
+      class="text-default relative mx-auto max-w-5xl px-8 py-12 md:max-w-4xl md:px-10 md:py-14 lg:py-16">
+      <div
+        class="mb-8 max-w-2xl text-center md:mx-auto md:mb-12 md:max-w-4xl lg:max-w-5xl">
+        <div>
+          <span
+            class="font-handwrite text-2xl font-semibold tracking-wider text-secondary md:text-3xl">
+            Contact
+          </span>
+          <h2
+            class="mt-2 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            Drop us a line and we'll help you find a new companion
+          </h2>
+          <p class="mt-8 text-lg text-muted md:text-xl">
+            We are here to listen and work together in favor of the animals.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <section class="w-full">
+      <div class="relative mx-auto mb-20 max-w-5xl px-8 md:max-w-4xl md:px-14">
+        <ContactForm />
+      </div>
+    </section>
+  </main>
+</Layout>

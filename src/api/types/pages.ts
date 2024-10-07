@@ -37,6 +37,7 @@ export type PagesTranslation = {
   description: string;
   content: Content;
   cta: string;
+  ctaHref: string;
   languages_code: string;
 };
 
