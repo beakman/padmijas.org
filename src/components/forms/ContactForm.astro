@@ -21,12 +21,13 @@ function isValidEmail(email: string) {
 
 const errors = { name: "", email: "", subject: "", message: "" };
 
-let formMessage = "";
+let formMessage;
 
-if (Astro.request.method === "POST") {
+if (Astro.request.method === "POST" && !formMessage) {
+  console.log('post contact form!', formMessage);
   try {
     const data = await Astro.request.formData();
-    const name = data.get("name");
+    const name = data.get("name"); 
     const email = data.get("email");
     const botDetected = data.get("emai");
     const message = data.get("message");    
@@ -63,15 +64,27 @@ if (Astro.request.method === "POST") {
         body: JSON.stringify(smtpData),
       });
 
+      // Delete form data
+
       if (response.ok) {
         formMessage = t(contactForm.successMessage);
+        return Astro.redirect(
+          "/?success=true"
+        );
       } else {
         formMessage = t(contactForm.errorMessage) + " " + response.statusText;
+        return Astro.redirect(
+          `/?errors=${JSON.stringify(errors)}&success=false`
+        );
       }
     }
     else if (botDetected) {
       formMessage = t(contactForm.successMessage); // trick bots to think the form was submitted successfully
     }
+
+    // Redirect to the same page to reset the form
+
+
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
