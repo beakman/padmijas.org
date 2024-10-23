@@ -16,6 +16,7 @@ import SocialShare from "@/components/ui/SocialShare.astro";
 import { petStatus, singleDog } from "@/consts";
 import coverImage from "@/assets/images/cover.jpg";
 import dogPlaceholder from "@/assets/images/dog-placeholder.png";
+import defaultCover from "@/assets/images/default-cover.png";
 
 const locale = Astro.currentLocale as Lang;
 
@@ -56,7 +57,7 @@ const content =
               dog.gallery &&
                 dog.gallery.map((image) => (
                   <Image
-                    class="aspect-square w-full rounded-lg"
+                    class="w-full rounded-lg"
                     src={getAssetURL(image.directus_files_id.id)}
                     alt={dog.name}
                     width={100}
