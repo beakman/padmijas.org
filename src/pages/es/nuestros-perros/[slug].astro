@@ -47,7 +47,7 @@ const content =
   dog.translations[0] && marked.parse(dog.translations[0].description);
 ---
 
-<Layout title="Dog detail">
+<Layout title={`${dog.name} busca un hogar. Ayúdanos a encontrarselo.`}>
   <main
     class="justify-beeen mx-auto flex max-w-7xl flex-wrap items-center space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl md:py-8 lg:px-8 lg:py-16">
     <section class="w-full">

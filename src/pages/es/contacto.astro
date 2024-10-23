@@ -49,7 +49,7 @@ if (Astro.request.method === "POST") {
         to: [{ email: `${import.meta.env.BCC_EMAIL}` }],
         bcc: [{ email: `${import.meta.env.BCC_EMAIL}` }],
         subject: `[PAD Mijas] Nuevo mensaje de ${name}`,
-        htmlContent: `<p><strong>Nombre:</strong> ${name}</p><p><strong>Mensaje:</strong> ${message}</p>`,
+        htmlContent: `<p><strong>Nombre:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Mensaje:</strong> ${message}</p>`,
       };
 
       const response = await fetch(apiUrl, {
