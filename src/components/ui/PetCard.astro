@@ -56,13 +56,13 @@ const petStatus = cva(
 
 const { dog } = Astro.props;
 
-// const baseUrl: Multilingual = {
-//   es: "nuestros-perros",
-//   en: "our-dogs",
-//   ja: "犬たち",
-//   "zh-cn": "我们的狗",
-//   ar: "أنا الكلب",
-// };
+const baseUrl: Multilingual = {
+  es: "nuestros-perros",
+  en: "our-dogs",
+  ja: "犬たち",
+  "zh-cn": "我们的狗",
+  ar: "أنا الكلب",
+};
 
 const ageTimeAgo = formatDistanceToNowStrict(new Date(dog.birth_date), {
   locale: locale == "es" ? es : undefined,
@@ -87,7 +87,7 @@ const sizeCard =
 
 <div class="not-prose">
   <a
-    href={`./${dog.slug}`}
+    href={`/${baseUrl}/${dog.slug}`}
     class="group flex flex-col items-center px-6 py-5 md:px-2">
     <Image
       class={petStatus({ status: statusCard, size: sizeCard })}
