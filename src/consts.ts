@@ -30,6 +30,13 @@ export const routes = {
 };
 
 export const uiStrings = {
+  back: {
+    en: "Back",
+    es: "Volver",
+    ja: "戻る",
+    "zh-cn": "返回",
+    ar: "الرجوع",
+  },
   warning: {
     en: "Hey!",
     es: "Aviso",

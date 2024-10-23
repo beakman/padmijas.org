@@ -13,7 +13,7 @@ interface Props {
 
 const { name, handler, message, avatar, class: className = "" } = Astro.props;
 
-const avatarImg = avatar && getAssetURL(avatar);
+const avatarImg = avatar && getAssetURL(avatar, "profile");
 ---
 
 <div

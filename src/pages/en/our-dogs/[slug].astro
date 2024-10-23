@@ -37,8 +37,8 @@ try {
 }
 
 const profilePicture =
-  dog.profile_picture && getAssetURL(dog.profile_picture.id);
-const coverPicture = dog.cover && getAssetURL(dog.cover.id);
+  dog.profile_picture && getAssetURL(dog.profile_picture.id, "profile");
+const coverPicture = dog.cover && getAssetURL(dog.cover.id, "hero");
 const content =
   dog.translations[0] && marked.parse(dog.translations[0].description);
 ---

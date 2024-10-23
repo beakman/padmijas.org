@@ -1,5 +1,6 @@
 import { createDirectus, rest, staticToken } from "@directus/sdk";
 import type { Image } from "@/api/types/image.ts";
+import { getImage } from "astro:assets";
 import type { DogTranslation, DogsFile, Dogs } from "@/api/types/dog.ts";
 import type {
   Pages,
@@ -49,7 +50,13 @@ export function getDirectusClient() {
   return createDirectus<Schema>(URL).with(rest()).with(staticToken(TOKEN));
 }
 
-export function getAssetURL(assetId: string, format: string = "profile") {
+export function getAssetURL(assetId: string, format?: string) {
   const URL = import.meta.env.DIRECTUS_URL || process.env.DIRECTUS_URL;
-  return `${URL}/assets/${assetId}?key=${format}`;
+  return `${URL}/assets/${assetId}${format ? `?key=${format}` : ""}`;
+}
+
+export async function getImageFromId(url: string, imageOptions: any) {
+  const URL = import.meta.env.DIRECTUS_URL || process.env.DIRECTUS_URL;
+  const imgUrl = `${URL}/assets/${url}`;
+  return await getImage({ src: imgUrl, ...imageOptions });
 }
