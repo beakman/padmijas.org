@@ -42,7 +42,7 @@ const profilePicture = dog.profile_picture
   : dogPlaceholder.src;
 const coverPicture = dog.cover
   ? getAssetURL(dog.cover.id, "hero")
-  : defaultCover;
+  : defaultCover.src;
 const content =
   dog.translations[0] && marked.parse(dog.translations[0].description);
 ---
