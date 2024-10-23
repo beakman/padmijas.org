@@ -39,7 +39,9 @@ const { dog } = Astro.props;
         : "tabler:gender-female"}>
       <strong>{t(singleDog.genderLabel)}</strong>
     </Icon>
-    <span class="capitalize">{dog.gender}</span>
+    <span class="capitalize"
+      >{dog.gender === "male" ? t(singleDog.male) : t(singleDog.female)}</span
+    >
   </span>
   <span class="flex w-full items-center gap-4 py-4">
     <Icon class="h-5 w-5 text-muted" name="tabler:cake">

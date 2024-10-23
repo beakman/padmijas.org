@@ -168,7 +168,11 @@ const content =
               <PetMeta dog={dog} />
               {
                 dog.status !== "adopted" && (
-                  <Button variant="default" size="lg" class="w-auto">
+                  <Button
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdEatG9b1V1lH1DPu8FnRoJEvEjCTKPM0xjN7aUaNeCbKuVNw/viewform"
+                    variant="default"
+                    size="lg"
+                    class="w-auto">
                     {t(singleDog.adoptmeButton)}
                   </Button>
                 )

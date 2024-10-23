@@ -210,6 +210,20 @@ export const singleDog = {
     "zh-cn": "性别",
     ar: "جنس",
   },
+  male: {
+    en: "Male",
+    es: "Masculino",
+    ja: "男性",
+    "zh-cn": "男性",
+    ar: "ذكر",
+  },
+  female: {
+    en: "Female",
+    es: "Femenino",
+    ja: "女性",
+    "zh-cn": "女性",
+    ar: "أنثى",
+  },
   birthDateLabel: {
     en: "Birth Date",
     es: "Fecha de nacimiento",
