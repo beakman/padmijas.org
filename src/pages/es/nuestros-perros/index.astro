@@ -9,9 +9,6 @@ import { type Lang, type Multilingual, DEFAULT_LOCALE } from "@/i18n";
 const baseUrl: Multilingual = {
   es: "nuestros-perros",
   en: "our-dogs",
-  ja: "犬たち",
-  "zh-cn": "我们的狗",
-  ar: "أنا الكلب",
 };
 
 const currentPath = Astro.url.pathname;
@@ -24,9 +21,14 @@ if (!currentPath.includes(translatedPath)) {
 }
 
 const dogs = (await getDogs()) as Dogs;
+
+const title =
+  "Perros en Adopción 🐶 &mdash; Encuentra tu Compañero Ideal en PAD";
+const description =
+  "Descubre nuestros perros en adopción en PAD Mijas. Adopta a tu nuevo mejor amigo y dale un hogar lleno de amor.";
 ---
 
-<Layout title="Dogs">
+<Layout title={title} description={description}>
   <main
     class="mx-auto flex max-w-7xl flex-wrap items-center justify-between space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl lg:px-8">
     <section class="w-full">

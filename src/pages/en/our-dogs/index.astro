@@ -9,9 +9,6 @@ import { type Lang, type Multilingual, DEFAULT_LOCALE } from "@/i18n";
 const baseUrl: Multilingual = {
   es: "nuestros-perros",
   en: "our-dogs",
-  ja: "犬たち",
-  "zh-cn": "我们的狗",
-  ar: "أنا الكلب",
 };
 
 const currentPath = Astro.url.pathname;
@@ -24,9 +21,13 @@ if (!currentPath.includes(translatedPath)) {
 }
 
 const dogs = (await getDogs()) as Dogs;
+
+const title = "Dogs for Adoption 🐶 &mdash; Find Your Perfect Companion at PAD";
+const description =
+  "Discover our dogs available for adoption at PAD Mijas. Adopt your new best friend and give them a loving home.";
 ---
 
-<Layout title="Our Dogs">
+<Layout title={title} description={description}>
   <main
     class="mx-auto flex max-w-7xl flex-wrap items-center justify-between space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl lg:px-8">
     <section class="w-full">
