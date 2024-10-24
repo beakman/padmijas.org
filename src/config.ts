@@ -5,7 +5,7 @@ export const siteMeta = {
   description:
     "Give your animal shelter a professional and modern website with NoiceShelter. Elevate your web design with our premium templates.",
   baseUrl: "https://shelter.noicethemes.com",
-  ogImage: "./assets/og-image.png",
+  ogImage: "/og.png",
   ogType: "website",
   twitterCreator: "@noicethemes",
 };
