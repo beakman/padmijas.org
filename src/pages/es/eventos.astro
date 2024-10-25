@@ -36,7 +36,7 @@ const events = await getEvents(locale);
     <!-- Content -->
     <section class="w-full">
       <div class="relative mx-auto mb-20 max-w-5xl px-8 md:max-w-4xl md:px-14">
-        <div class="grid gap-8 sm:grid-cols-2 sm:gap-y-8 md:gap-6">
+        <div class="grid items-start gap-8 sm:grid-cols-2 sm:gap-y-8 md:gap-6">
           {
             events ? (
               events.map((event: Event) => (
@@ -46,13 +46,15 @@ const events = await getEvents(locale);
                   description={event.translations[0].description}
                   category={event.category}
                   cover={event.cover}
+                  address={event.address}
                   location={event.location}
+                  price={event.price}
                   datetime={event.datetime}
                 />
               ))
             ) : (
               <div class="mx-auto text-center sm:col-span-2">
-                Crea una página en la sección de "volunteer-page"
+                No hay eventos proximamente
               </div>
             )
           }

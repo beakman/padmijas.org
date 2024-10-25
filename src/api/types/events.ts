@@ -5,7 +5,9 @@ export interface Event {
   status: "published" | "draft" | "archived";
   datetime: Date;
   category: string;
+  address: string;
   location: string;
+  price: number;
   cover?: Image;
   translations: Array<EventsTranslation>;
 }
