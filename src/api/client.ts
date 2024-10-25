@@ -8,6 +8,7 @@ import type {
   PagesTranslation,
   Position,
 } from "./types/pages";
+import type { Events, EventsTranslation } from "./types/events";
 import type {
   Testimonials,
   TestimonialTranslation,
@@ -31,6 +32,8 @@ interface Schema {
   positions: Position;
   pages_positions: Array<PagesPositions>;
   pages_translations: Array<PagesTranslation>;
+  events: Events;
+  events_translations: Array<EventsTranslation>;
   testimonials: Testimonials;
   testimonials_translations: Array<TestimonialTranslation>;
   global: Global;

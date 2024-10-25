@@ -1,0 +1,62 @@
+---
+import { uiStrings } from "@/consts";
+import { type Lang, useTranslations } from "@/i18n";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import { getAssetURL } from "@/api/client";
+import { type Image as ImageType } from "@/api/types/image";
+import defaultCover from "@/assets/images/default-cover.png";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
+interface Props {
+  cover?: ImageType;
+  title: string;
+  category?: string;
+  datetime?: Date;
+  slug: string;
+  description?: string;
+  location?: string;
+}
+
+const { cover, title, datetime, slug, category, description, location } =
+  Astro.props;
+const coverImage =
+  (cover && getAssetURL(cover.id, "profile")) || defaultCover.src;
+// https://admin.padmijas.org/items/pages?&deep[translations][_filter][_and][0][languages_code][_eq]=es&deep[translations][_filter][_and][1][slug][_eq]=voluntarios-de-transporte
+---
+
+<a href={`./${slug}`} class="group">
+  <div
+    class="relative flex flex-col rounded-lg border border-[#ffffff29] bg-white shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur transition-shadow hover:shadow-[0_6px_40px_rgba(0,0,0,0.2)]">
+    <div class="relative aspect-video overflow-hidden rounded-t-lg">
+      <Image
+        src={coverImage}
+        alt={title ?? ""}
+        width={1080}
+        height={720}
+        class="object-cover transition-transform group-hover:scale-105"
+      />
+      <span
+        class="absolute left-2 top-2 rounded bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+        {category}
+      </span>
+    </div>
+    <div class="grid gap-2 p-4">
+      <h3 class="mb-4 line-clamp-1 text-xl font-bold">{title}</h3>
+      <div class="flex items-center gap-1 text-sm text-muted">
+        <Icon name="tabler:calendar" class="h-5 w-5" />
+        <span>{datetime}</span>
+      </div>
+      <div class="flex items-center gap-1 text-sm text-muted">
+        <Icon name="tabler:map-pin" class="h-5 w-5" />
+        <a href={location}>{location}</a>
+      </div>
+      <p class="line-clamp-2 text-sm text-muted">{description}</p>
+    </div>
+    <div class="p-4 pt-0">
+      <span class="text-sm font-medium">Learn more</span>
+    </div>
+  </div>
+</a>
