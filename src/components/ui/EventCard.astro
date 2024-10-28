@@ -34,17 +34,16 @@ const {
   address,
   location,
 } = Astro.props;
-const coverImage =
-  (cover && getAssetURL(cover.id, "profile")) || defaultCover.src;
+const coverPicture = cover
+  ? getAssetURL(cover.id, "profile")
+  : defaultCover.src;
 
-const date =
-  datetime &&
-  datetime.toLocaleDateString(locale, {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+const date = datetime && new Date(datetime).toLocaleDateString(locale, {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 // https://admin.padmijas.org/items/pages?&deep[translations][_filter][_and][0][languages_code][_eq]=es&deep[translations][_filter][_and][1][slug][_eq]=voluntarios-de-transporte
 ---
 
@@ -53,7 +52,7 @@ const date =
     class="flex flex-col rounded-lg border border-[#ffffff29] bg-white shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur transition-shadow hover:shadow-[0_6px_40px_rgba(0,0,0,0.2)]">
     <div class="aspect-video overflow-hidden rounded-t-lg">
       <Image
-        src={coverImage}
+        src={coverPicture}
         alt={title ?? ""}
         width={1080}
         height={720}
