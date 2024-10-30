@@ -11,6 +11,7 @@ import type { Lang, Multilingual } from "@/i18n";
 import { petCard } from "@/consts";
 export interface Props {
   dog: Dog;
+  sizeCard?: "s" | "m" | "l" | "xl" | "default";
 }
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(Astro.currentLocale as Lang);
@@ -25,6 +26,8 @@ const petStatus = cva(
     "object-cover",
     "rounded-full",
     "transition-all",
+    "shrink-0",
+    "grow-0",
   ],
   {
     variants: {
@@ -35,10 +38,10 @@ const petStatus = cva(
       },
       size: {
         default: ["w-full"],
-        sm: ["w-32 h-32"],
-        md: ["w-48 h-48"],
-        lg: ["h-52 h-52"],
-        xl: ["h-64 h-64"],
+        s: ["w-32"],
+        m: ["w-48"],
+        l: ["w-52"],
+        xl: ["w-64"],
       },
     },
     compoundVariants: [
@@ -54,7 +57,7 @@ const petStatus = cva(
   }
 );
 
-const { dog } = Astro.props;
+const { dog, sizeCard = "l" } = Astro.props;
 
 const currentUrl: Multilingual = {
   es: "nuestros-perros",
@@ -66,7 +69,8 @@ const baseUrl = `/${locale}/${t(currentUrl)}`;
 const ageTimeAgo = formatDistanceToNowStrict(new Date(dog.birth_date), {
   locale: locale == "es" ? es : undefined,
 });
-const thumbnail = dog.profile_picture && getAssetURL(dog.profile_picture.id);
+const thumbnail =
+  dog.profile_picture && getAssetURL(dog.profile_picture.id, "profile");
 const imageThumbnail = {
   src: thumbnail ? thumbnail : "/dog-placeholder.png",
   alt: "Dog picture",
@@ -75,12 +79,6 @@ const imageThumbnail = {
 const statusCard =
   (dog.status === "adopted" && "adopted") ||
   (dog.status === "reserved" && "reserved") ||
-  "default";
-const sizeCard =
-  (dog.size === "sm" && "sm") ||
-  (dog.size === "md" && "md") ||
-  (dog.size === "lg" && "lg") ||
-  (dog.size === "xl" && "xl") ||
   "default";
 ---
 
@@ -100,20 +98,20 @@ const sizeCard =
     />
     {
       dog.status == "adopted" ? (
-        <span class="md:text-md z-10 -mt-6 flex items-center rounded-full bg-primary p-2 text-xs font-medium uppercase text-black transition-all group-hover:-translate-y-2 group-hover:bg-primary">
+        <span class="md:text-md z-10 -mt-8 flex items-center rounded-full bg-primary p-2 text-xs font-medium uppercase text-black transition-all group-hover:-translate-y-2 group-hover:bg-primary">
           <Icon name="tabler:check" class="h-5 w-5 fill-white" />
           <strong>{t(petCard.isAdopted)}</strong>
         </span>
       ) : (
         dog.status == "reserved" && (
-          <span class="md:text-md z-10 -mt-6 flex items-center rounded-full bg-purple-700 p-2 text-xs font-medium uppercase text-white transition-all group-hover:-translate-y-2 group-hover:bg-purple-500">
+          <span class="md:text-md z-10 -mt-8 flex items-center rounded-full bg-purple-700 p-2 text-xs font-medium uppercase text-white transition-all group-hover:-translate-y-2 group-hover:bg-purple-500">
             <Icon name="tabler:bookmark" class="h-5 w-5 fill-white" />
             <strong>{t(petCard.isReserved)}</strong>
           </span>
         )
       )
     }
-    <h5 class="mb-2 mt-8 text-4xl font-medium text-gray-900 dark:text-white">
+    <h5 class="mb-2 text-4xl font-medium text-gray-900 dark:text-white">
       {dog.name}
     </h5>
     <div class="mx-auto flex items-center justify-center gap-1 text-muted">

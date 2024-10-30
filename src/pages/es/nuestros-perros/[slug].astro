@@ -14,9 +14,6 @@ import PetMeta from "@/components/ui/PetMeta.astro";
 import Button from "@/components/forms/Button.astro";
 import SocialShare from "@/components/ui/SocialShare.astro";
 import { petStatus, singleDog } from "@/consts";
-import coverImage from "@/assets/images/cover.jpg";
-import dogPlaceholder from "@/assets/images/dog-placeholder.png";
-import defaultCover from "@/assets/images/default-cover.png";
 
 const locale = Astro.currentLocale as Lang;
 
@@ -36,18 +33,21 @@ try {
   console.error(`Error fetching dog with slug ${slug}:`, error);
   return Astro.redirect("/404");
 }
-
+const dogPlaceholder =
+  "https://utfs.io/f/yWKelNW56Bapwaky8AGU9BonWtzuK7ml3Ij6LP8dS5f1sETp";
+const defaultCover =
+  "https://utfs.io/f/yWKelNW56BapM3EghtsXdsCk2SihlDQqrBTpyIJxmY3OHKw4";
 const profilePicture = dog.profile_picture
   ? getAssetURL(dog.profile_picture.id, "profile")
-  : dogPlaceholder.src;
+  : dogPlaceholder;
 const coverPicture = dog.cover
   ? getAssetURL(dog.cover.id, "hero")
-  : defaultCover.src;
+  : defaultCover;
 const content =
   dog.translations[0] && marked.parse(dog.translations[0].description);
 
-const title = `${dog.name} Busca un hogar lleno de amor &mdash; Encuentra tu nuevo amigo en PAD`;
-const description = `Conoce a ${dog.name}, un encantador perro en adopción que está buscando una familia cariñosa. Si buscas un compañero fiel y lleno de ternura, ${dog.name} es perfecto para ti. ¡Descubre más sobre cómo adoptarlo hoy mismo!`;
+const title = `${dog.name} busca un hogar lleno de amor &mdash; Encuentra tu nuevo amigo en PAD`;
+const description = `Conoce a ${dog.name}, ${dog.gender === "male" ? "un encantador perro" : "una encantadora perrita"} en adopción que está buscando una familia cariñosa. Si buscas ${dog.gender === "male" ? "un compañero" : "una compañera"} fiel y ${dog.gender === "male" ? "lleno" : "llena"} de ternura, ${dog.name} es ${dog.gender === "male" ? "perfecto" : "perfecta"} para ti. ¡Descubre más sobre cómo ${dog.gender === "male" ? "adoptarlo" : "adoptarla"} hoy mismo!`;
 ---
 
 <Layout title={title} description={description}>
@@ -80,58 +80,28 @@ const description = `Conoce a ${dog.name}, un encantador perro en adopción que 
               <div class="relative">
                 <div
                   class="visible relative flex h-48 w-full justify-end rounded-xl bg-cover md:hidden">
-                  {
-                    coverPicture ? (
-                      <Image
-                        class="absolute flex h-48 w-full justify-center rounded-lg bg-gray-600 bg-cover object-cover dark:bg-slate-800"
-                        src={coverPicture}
-                        alt={dog.name}
-                        loading="lazy"
-                        decoding="async"
-                        quality="mid"
-                        width="764"
-                        height="100"
-                      />
-                    ) : (
-                      <Image
-                        class="absolute flex h-48 w-full justify-center rounded-lg bg-gray-600 bg-cover object-cover dark:bg-slate-800"
-                        src={coverImage}
-                        alt={dog.name}
-                        loading="lazy"
-                        decoding="async"
-                        quality="mid"
-                        width="764"
-                        height="100"
-                      />
-                    )
-                  }
+                  <Image
+                    class="absolute flex h-48 w-full justify-center rounded-lg bg-gray-600 bg-cover object-cover dark:bg-slate-800"
+                    src={coverPicture}
+                    alt={dog.name}
+                    loading="lazy"
+                    decoding="async"
+                    quality="mid"
+                    width="764"
+                    height="100"
+                  />
                   <div
                     class="dark:!border-navy-700 absolute -bottom-12 right-2 flex h-[120px] w-[120px] items-center justify-start rounded-full border-[4px] border-white bg-pink-400">
-                    {
-                      profilePicture ? (
-                        <Image
-                          class:list="[aspect-square h-full w-full rounded-full bg-gray-600 object-cover dark:bg-slate-800]"
-                          src={profilePicture}
-                          alt={dog.name}
-                          loading="lazy"
-                          decoding="async"
-                          quality="mid"
-                          width="132"
-                          height="132"
-                        />
-                      ) : (
-                        <Image
-                          class:list="[aspect-square h-full w-full rounded-full bg-gray-600 object-cover dark:bg-slate-800]"
-                          src={dogPlaceholder}
-                          alt={dog.name}
-                          loading="lazy"
-                          decoding="async"
-                          quality="mid"
-                          width="132"
-                          height="132"
-                        />
-                      )
-                    }
+                    <Image
+                      class:list="[aspect-square h-full w-full rounded-full bg-gray-600 object-cover dark:bg-slate-800]"
+                      src={profilePicture}
+                      alt={dog.name}
+                      loading="lazy"
+                      decoding="async"
+                      quality="mid"
+                      width="132"
+                      height="132"
+                    />
                   </div>
                 </div>
                 <!-- Title and reserved/adopted badge -->

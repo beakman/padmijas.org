@@ -47,15 +47,8 @@ const description =
       </div>
 
       <div
-        class="grid w-full gap-4 px-10 py-12 sm:grid-cols-2 md:grid-cols-3 md:gap-8 md:px-0 md:py-14 lg:grid-cols-4 lg:py-16">
-        {
-          dogs &&
-            dogs.map((dog) => (
-              <div>
-                <PetCard dog={dog} />
-              </div>
-            ))
-        }
+        class="grid w-full gap-4 px-10 py-12 sm:grid-cols-2 md:grid-cols-3 md:gap-8 md:px-0 md:py-14 lg:grid-cols-4">
+        {dogs && dogs.map((dog) => <PetCard dog={dog} />)}
       </div>
     </section>
   </main>

@@ -14,9 +14,6 @@ import PetMeta from "@/components/ui/PetMeta.astro";
 import Button from "@/components/forms/Button.astro";
 import SocialShare from "@/components/ui/SocialShare.astro";
 import { petStatus, singleDog } from "@/consts";
-import coverImage from "@/assets/images/cover.jpg";
-import dogPlaceholder from "@/assets/images/dog-placeholder.png";
-import defaultCover from "@/assets/images/default-cover.png";
 
 const locale = Astro.currentLocale as Lang;
 
@@ -37,14 +34,23 @@ try {
   return Astro.redirect("/404");
 }
 
-const profilePicture =
-  dog.profile_picture && getAssetURL(dog.profile_picture.id, "profile");
-const coverPicture = dog.cover && getAssetURL(dog.cover.id, "hero");
+const dogPlaceholder =
+  "https://utfs.io/f/yWKelNW56Bapwaky8AGU9BonWtzuK7ml3Ij6LP8dS5f1sETp";
+const defaultCover =
+  "https://utfs.io/f/yWKelNW56BapM3EghtsXdsCk2SihlDQqrBTpyIJxmY3OHKw4";
+const profilePicture = dog.profile_picture
+  ? getAssetURL(dog.profile_picture.id, "profile")
+  : dogPlaceholder;
+const coverPicture = dog.cover
+  ? getAssetURL(dog.cover.id, "hero")
+  : defaultCover;
 const content =
   dog.translations[0] && marked.parse(dog.translations[0].description);
+const title = `${dog.name} is looking for a home full of love &mdash; Find your new friend in PAD`;
+const description = `Meet ${dog.name}, a cute dog in adoption looking for a loving home. If you're looking for a loyal and full of courage dog, ${dog.name} is perfect for you. Discover more about how to adopt it today!`;
 ---
 
-<Layout title="Dog detail">
+<Layout title={title} description={description}>
   <main
     class="justify-beeen mx-auto flex max-w-7xl flex-wrap items-center space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl md:py-8 lg:px-8 lg:py-16">
     <section class="w-full">
@@ -74,112 +80,82 @@ const content =
               <div class="relative">
                 <div
                   class="visible relative flex h-48 w-full justify-end rounded-xl bg-cover md:hidden">
-                  {
-                    coverPicture ? (
-                      <Image
-                        class="absolute flex h-48 w-full justify-center rounded-lg bg-gray-600 bg-cover object-cover dark:bg-slate-800"
-                        src={coverPicture}
-                        alt={dog.name}
-                        loading="lazy"
-                        decoding="async"
-                        quality="mid"
-                        width="764"
-                        height="100"
-                      />
-                    ) : (
-                      <Image
-                        class="absolute flex h-48 w-full justify-center rounded-lg bg-gray-600 bg-cover object-cover dark:bg-slate-800"
-                        src={coverImage}
-                        alt={dog.name}
-                        loading="lazy"
-                        decoding="async"
-                        quality="mid"
-                        width="764"
-                        height="100"
-                      />
-                    )
-                  }
+                  <Image
+                    class="absolute flex h-48 w-full justify-center rounded-lg bg-gray-600 bg-cover object-cover dark:bg-slate-800"
+                    src={coverPicture}
+                    alt={dog.name}
+                    loading="lazy"
+                    decoding="async"
+                    quality="mid"
+                    width="764"
+                    height="100"
+                  />
                   <div
                     class="dark:!border-navy-700 absolute -bottom-12 right-2 flex h-[120px] w-[120px] items-center justify-start rounded-full border-[4px] border-white bg-pink-400">
-                    {
-                      profilePicture ? (
-                        <Image
-                          class:list="[aspect-square h-full w-full rounded-full bg-gray-600 object-cover dark:bg-slate-800]"
-                          src={profilePicture}
-                          alt={dog.name}
-                          loading="lazy"
-                          decoding="async"
-                          quality="mid"
-                          width="132"
-                          height="132"
-                        />
-                      ) : (
-                        <Image
-                          class:list="[aspect-square h-full w-full rounded-full bg-gray-600 object-cover dark:bg-slate-800]"
-                          src={dogPlaceholder}
-                          alt={dog.name}
-                          loading="lazy"
-                          decoding="async"
-                          quality="mid"
-                          width="132"
-                          height="132"
-                        />
-                      )
-                    }
+                    <Image
+                      class="aspect-square h-full w-full rounded-full bg-gray-600 object-cover dark:bg-slate-800"
+                      src={profilePicture}
+                      alt={dog.name}
+                      loading="lazy"
+                      decoding="async"
+                      quality="mid"
+                      width="132"
+                      height="132"
+                    />
                   </div>
                 </div>
-                <!-- Title and reserved/adopted badge -->
-                <div
-                  class="flex flex-col items-start justify-start gap-4 md:flex-row md:items-center">
-                  <h1
-                    class="leading-tighter mx-w-auto mt-8 w-full font-heading text-4xl font-bold tracking-tighter md:mt-0 md:max-w-fit md:text-5xl">
-                    {dog.name}
-                  </h1>
-                  <span class="flex items-center gap-2 text-sm">
-                    {
-                      dog.status == "reserved" && (
-                        <div class="flex w-fit items-center gap-1 rounded-lg bg-purple-700 px-2 py-1 uppercase text-white transition-all dark:bg-purple-300 dark:text-black">
-                          <Icon
-                            name="tabler:bookmark"
-                            class="h-4 w-4 fill-white md:h-5 md:w-5"
-                          />
-                          <strong>{t(petStatus.reserved)}</strong>
-                        </div>
-                      )
-                    }
-                    {
-                      dog.status == "adopted" && (
-                        <div class="flex w-fit items-center gap-1 rounded-lg bg-green-500 px-2 py-1 uppercase text-white transition-all dark:bg-green-300 dark:text-black">
-                          <Icon
-                            name="tabler:heart"
-                            class="h-4 w-4 fill-white md:h-5 md:w-5"
-                          />
-                          <strong>{t(petStatus.adopted)}</strong>
-                        </div>
-                      )
-                    }
-                  </span>
-                </div>
               </div>
-              <article class="prose" set:html={content} />
-              <PetMeta dog={dog} />
-              {
-                dog.status !== "adopted" && (
-                  <Button
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSdEatG9b1V1lH1DPu8FnRoJEvEjCTKPM0xjN7aUaNeCbKuVNw/viewform"
-                    variant="default"
-                    size="lg"
-                    class="w-auto">
-                    {t(singleDog.adoptmeButton)}
-                  </Button>
-                )
-              }
-              <SocialShare
-                url={`${LOCALES[locale].lang}/${dog.slug}`}
-                text={dog.name}
-                class="mt-5 align-middle text-gray-500 dark:text-slate-600 sm:mt-1"
-              />
+              <!-- Title and reserved/adopted badge -->
+              <div
+                class="flex flex-col items-start justify-start gap-4 md:flex-row md:items-center">
+                <h1
+                  class="leading-tighter mx-w-auto mt-8 w-full font-heading text-4xl font-bold tracking-tighter md:mt-0 md:max-w-fit md:text-5xl">
+                  {dog.name}
+                </h1>
+                <span class="flex items-center gap-2 text-sm">
+                  {
+                    dog.status == "reserved" && (
+                      <div class="flex w-fit items-center gap-1 rounded-lg bg-purple-700 px-2 py-1 uppercase text-white transition-all dark:bg-purple-300 dark:text-black">
+                        <Icon
+                          name="tabler:bookmark"
+                          class="h-4 w-4 fill-white md:h-5 md:w-5"
+                        />
+                        <strong>{t(petStatus.reserved)}</strong>
+                      </div>
+                    )
+                  }
+                  {
+                    dog.status == "adopted" && (
+                      <div class="flex w-fit items-center gap-1 rounded-lg bg-green-500 px-2 py-1 uppercase text-white transition-all dark:bg-green-300 dark:text-black">
+                        <Icon
+                          name="tabler:heart"
+                          class="h-4 w-4 fill-white md:h-5 md:w-5"
+                        />
+                        <strong>{t(petStatus.adopted)}</strong>
+                      </div>
+                    )
+                  }
+                </span>
+              </div>
             </header>
+            <article class="prose" set:html={content} />
+            <PetMeta dog={dog} />
+            {
+              dog.status !== "adopted" && (
+                <Button
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdEatG9b1V1lH1DPu8FnRoJEvEjCTKPM0xjN7aUaNeCbKuVNw/viewform"
+                  variant="default"
+                  size="lg"
+                  class="w-auto">
+                  {t(singleDog.adoptmeButton)}
+                </Button>
+              )
+            }
+            <SocialShare
+              url={`${LOCALES[locale].lang}/${dog.slug}`}
+              text={dog.name}
+              class="mt-5 align-middle text-gray-500 dark:text-slate-600 sm:mt-1"
+            />
           </div>
         </aside>
       </div>
