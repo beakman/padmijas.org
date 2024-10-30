@@ -5,18 +5,30 @@ import { html } from "satori-html";
 import { getDogs } from "@/api/dogs";
 import type { Dog, Dogs } from "@/api/types/dog";
 import type { InferGetStaticPropsType } from "astro";
+import { getAssetURL } from "@/api/client";
 
 export async function getStaticPaths() {
   const dogs = (await getDogs()) as Dogs;
 
   return dogs.map((dog: Dog) => ({
-    params: { slug: dog.slug },
-    props: dog,
+    params: {
+      slug: dog.slug,
+      picture: dog.profile_picture
+        ? getAssetURL(dog.profile_picture.id, "profile")
+        : "https://utfs.io/f/yWKelNW56Bapwaky8AGU9BonWtzuK7ml3Ij6LP8dS5f1sETp",
+    },
+    props: {
+      dog,
+      picture: dog.profile_picture
+        ? getAssetURL(dog.profile_picture.id, "profile")
+        : "https://utfs.io/f/yWKelNW56Bapwaky8AGU9BonWtzuK7ml3Ij6LP8dS5f1sETp",
+    },
   }));
 }
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ props }) => {
+  const { picture } = props;
   const fontFile = await fetch(
     "https://og-playground.vercel.app/inter-latin-ext-700-normal.woff",
   );
@@ -58,7 +70,7 @@ export const GET: APIRoute = async () => {
         }}
       >
         <img
-          src={picture}
+          src=${picture}
           alt={name}
           width={350}
           height={350}
