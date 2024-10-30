@@ -38,7 +38,11 @@ const locale = Astro.currentLocale as Lang;
                       <li class="mb-4 text-xs md:text-base">
                         {item.type === "link" && (
                           <a
-                            href={getRelativeLocaleUrl(locale, t(item.href))}
+                            href={
+                              item.href.startsWith("http")
+                                ? item.href
+                                : getRelativeLocaleUrl(locale, t(item.href))
+                            }
                             class="hover:underline"
                             target={item.target}>
                             {t(item.text)}
@@ -51,7 +55,11 @@ const locale = Astro.currentLocale as Lang;
                         )}
                         {item.type === "icon" && (
                           <a
-                            href={getRelativeLocaleUrl(locale, t(item.href))}
+                            href={
+                              item.href.startsWith("http")
+                                ? item.href
+                                : getRelativeLocaleUrl(locale, t(item.href))
+                            }
                             class="flex items-center gap-1 hover:underline">
                             <Icon
                               name={item.icon}
