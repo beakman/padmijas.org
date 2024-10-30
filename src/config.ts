@@ -86,8 +86,8 @@ export const footerLinks: FooterItemsProps[] = [
           es: "Mapa del sitio",
         },
         href: {
-          en: "/sitemap-index.xml",
-          es: "/sitemap-index.xml",
+          en: "https://padmijas.org/sitemap-index.xml",
+          es: "https://padmijas.org/sitemap-index.xml",
         },
         type: "link",
         target: "_self",
