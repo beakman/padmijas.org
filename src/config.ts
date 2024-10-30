@@ -86,8 +86,8 @@ export const footerLinks: FooterItemsProps[] = [
           es: "Mapa del sitio",
         },
         href: {
-          en: "/sitemap",
-          es: "/sitemap",
+          en: "/sitemap-index.xml",
+          es: "/sitemap-index.xml",
         },
         type: "link",
         target: "_self",

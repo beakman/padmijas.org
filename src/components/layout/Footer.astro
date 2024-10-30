@@ -39,7 +39,7 @@ const locale = Astro.currentLocale as Lang;
                         {item.type === "link" && (
                           <a
                             href={
-                              item.href.startsWith("http")
+                              t(item.href).startsWith("http")
                                 ? item.href
                                 : getRelativeLocaleUrl(locale, t(item.href))
                             }
@@ -56,7 +56,7 @@ const locale = Astro.currentLocale as Lang;
                         {item.type === "icon" && (
                           <a
                             href={
-                              item.href.startsWith("http")
+                              t(item.href).startsWith("http")
                                 ? item.href
                                 : getRelativeLocaleUrl(locale, t(item.href))
                             }
