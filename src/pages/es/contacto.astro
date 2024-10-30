@@ -64,11 +64,9 @@ if (Astro.request.method === "POST") {
 
       if (response.ok) {
         formMessage = t(contactForm.successMessage);
-        console.log('redirecting success...', formMessage);
         return Astro.redirect("./?success=true");
       } else {
         formMessage = t(contactForm.errorMessage) + " " + response.statusText;
-        console.log('redirecting error...');
         return Astro.redirect(
           `./?errors=${JSON.stringify(errors)}&success=false`
         );

@@ -9,9 +9,14 @@ import EventCard from "@/components/ui/EventCard.astro";
 const locale = Astro.currentLocale as Lang;
 
 const events = await getEvents(locale);
+
+const title =
+  "Eventos Solidarios y Actividades de PAD &mdash; ¡Únete y Apoya a Nuestros Animales!";
+const description =
+  "Participa en los eventos solidarios de PAD y ayuda a mejorar la vida de nuestros animales. Descubre cómo puedes colaborar asistiendo a nuestras actividades, desde jornadas de adopción hasta eventos especiales. ¡Cada aporte cuenta para darles un hogar!";
 ---
 
-<Layout title="Eventos" description="Eventos de PAD">
+<Layout title={title} description={description}>
   <main class="">
     <!-- Heading -->
     <div
@@ -20,11 +25,11 @@ const events = await getEvents(locale);
         <div>
           <span
             class="font-handwrite text-2xl font-semibold tracking-wider text-secondary md:text-3xl">
-            Descubre cómo puedes ayudarnos
+            Participa y ayuda a mejorar la vida de nuestros animales
           </span>
           <h2
             class="mt-2 font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-            Eventos
+            Eventos Solidarios y Actividades
           </h2>
         </div>
       </div><div
@@ -35,7 +40,7 @@ const events = await getEvents(locale);
     <!-- Content -->
     <section class="w-full">
       <div class="relative mx-auto mb-20 max-w-5xl px-8 md:max-w-4xl md:px-14">
-        <div class="grid items-start gap-8 sm:grid-cols-2 sm:gap-y-8 md:gap-6">
+        <div class="grid grid-cols-2 items-start gap-8 sm:gap-y-8 md:gap-6">
           {
             events ? (
               events.map((event: Event) => (

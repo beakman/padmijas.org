@@ -29,8 +29,6 @@ const { lang, slug } = Astro.params;
 // Get the page for this slug
 const page = await getPageBySlug(slug, lang as string);
 
-console.log("page", page?.translations[0].content.blocks[1].data.items);
-
 if (!page) {
   return Astro.redirect("/404");
 }

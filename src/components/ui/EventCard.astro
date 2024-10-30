@@ -6,7 +6,6 @@ import { Image } from "astro:assets";
 import Button from "@/components/forms/Button.astro";
 import { getAssetURL } from "@/api/client";
 import { type Image as ImageType } from "@/api/types/image";
-import defaultCover from "@/assets/images/default-cover.png";
 
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(locale);
@@ -34,23 +33,25 @@ const {
   address,
   location,
 } = Astro.props;
-const coverPicture = cover
-  ? getAssetURL(cover.id, "profile")
-  : defaultCover.src;
 
-const date = datetime && new Date(datetime).toLocaleDateString(locale, {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
-// https://admin.padmijas.org/items/pages?&deep[translations][_filter][_and][0][languages_code][_eq]=es&deep[translations][_filter][_and][1][slug][_eq]=voluntarios-de-transporte
+const defaultCover =
+  "https://utfs.io/f/yWKelNW56BapM3EghtsXdsCk2SihlDQqrBTpyIJxmY3OHKw4";
+const coverPicture = cover ? getAssetURL(cover.id, "profile") : defaultCover;
+
+const date =
+  datetime &&
+  new Date(datetime).toLocaleDateString(locale, {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 ---
 
-<a href={`${slug}`} class="group w-full">
+<div class="group block">
   <div
     class="flex flex-col rounded-lg border border-[#ffffff29] bg-white shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur transition-shadow hover:shadow-[0_6px_40px_rgba(0,0,0,0.2)]">
-    <div class="aspect-video overflow-hidden rounded-t-lg">
+    <div class="relative aspect-video overflow-hidden rounded-t-lg">
       <Image
         src={coverPicture}
         alt={title ?? ""}
@@ -63,7 +64,7 @@ const date = datetime && new Date(datetime).toLocaleDateString(locale, {
         {category}
       </span>
     </div>
-    <div class="grid gap-2 p-4">
+    <div class="flex flex-col gap-2 p-4">
       <h3 class="mb-4 line-clamp-1 text-xl font-bold">{title}</h3>
       <div class="flex items-start gap-1 text-sm text-muted">
         <Icon name="tabler:calendar" class="h-5 w-5" />
@@ -71,7 +72,7 @@ const date = datetime && new Date(datetime).toLocaleDateString(locale, {
       </div>
       <div class="flex items-start gap-1 text-sm text-muted">
         <Icon name="tabler:map-pin" class="h-5 w-5" />
-        <a href={location}>{address}</a>
+        <a class="overflow-ellipsis" href={location}>{address}</a>
       </div>
       <div class="flex items-start gap-1 text-sm text-muted">
         <Icon name="tabler:tag" class="h-5 w-5" />
@@ -79,7 +80,9 @@ const date = datetime && new Date(datetime).toLocaleDateString(locale, {
       </div>
     </div>
     <div class="p-4 pt-0">
-      <Button href={`./${slug}`} variant="default"> Ver evento </Button>
+      <Button href={`/${locale}/eventos/${slug}`} variant="default">
+        Más información
+      </Button>
     </div>
   </div>
-</a>
+</div>
