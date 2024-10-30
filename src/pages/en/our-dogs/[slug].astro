@@ -53,7 +53,11 @@ const title = `${dog.name} is looking for a home full of love &mdash; Find your 
 const description = `Meet ${dog.name}, a cute dog in adoption looking for a loving home. If you're looking for a loyal and full of courage dog, ${dog.name} is perfect for you. Discover more about how to adopt it today!`;
 ---
 
-<Layout title={title} description={description} ogImage={ogImage}>
+<Layout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogType="article">
   <main
     class="justify-beeen mx-auto flex max-w-7xl flex-wrap items-center space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl md:py-8 lg:px-8 lg:py-16">
     <section class="w-full">

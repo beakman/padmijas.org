@@ -46,7 +46,7 @@ if (Astro.request.method === "POST") {
     if (!hasErrors && !botDetected) {
       const smtpData = {
         sender: { email: email, name: name },
-        to: [{ email: `${import.meta.env.BCC_EMAIL}` }],
+        to: [{ email: `${import.meta.env.RECIPIENT_EMAIL}` }],
         bcc: [{ email: `${import.meta.env.BCC_EMAIL}` }],
         subject: `[PAD Mijas] Nuevo mensaje de ${name}`,
         htmlContent: `<p><strong>Nombre:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Mensaje:</strong> ${message}</p>`,
