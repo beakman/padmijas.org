@@ -12,6 +12,7 @@ import { SEO } from "astro-seo";
 import Header from "@/components/layout/Header.astro";
 import { LOCALES, getLocalePaths, type Lang } from "@/i18n";
 import WarningBanner from "@/components/layout/WarningBanner.astro";
+import { Plausible } from "astro-analytics";
 
 interface Props {
   title?: string;
@@ -27,6 +28,10 @@ const { title, description, ogImage, ogType } = Astro.props as Props;
 <!doctype html>
 <html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head>
+    <Plausible
+      domain="padmijas.org"
+      src="https://analytics.padmijas.org/js/script.js"
+    />
     <SEO
       title={title ?? siteMeta.title}
       description={description ?? siteMeta.description}
@@ -73,6 +78,7 @@ const { title, description, ogImage, ogType } = Astro.props as Props;
         />
       ))
     }
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title ?? siteMeta.title}</title>
     <!-- <ViewTransitions /> -->
   </head>

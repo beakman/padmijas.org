@@ -116,6 +116,18 @@ export const footerLinks: FooterItemsProps[] = [
         type: "link",
         target: "_self",
       },
+      {
+        text: {
+          en: "Analytics",
+          es: "Analíticas",
+        },
+        href: {
+          en: "https://analytics.padmijas.org/padmijas.org",
+          es: "https://analytics.padmijas.org/padmijas.org",
+        },
+        type: "link",
+        target: "_blank",
+      },
     ],
   },
   {

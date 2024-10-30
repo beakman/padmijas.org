@@ -44,13 +44,16 @@ const profilePicture = dog.profile_picture
 const coverPicture = dog.cover
   ? getAssetURL(dog.cover.id, "hero")
   : defaultCover;
+const ogImage = dog.profile_picture
+  ? getAssetURL(dog.profile_picture.id, "og-dog")
+  : "https://utfs.io/f/yWKelNW56Bapwaky8AGU9BonWtzuK7ml3Ij6LP8dS5f1sETp";
 const content =
   dog.translations[0] && marked.parse(dog.translations[0].description);
 const title = `${dog.name} is looking for a home full of love &mdash; Find your new friend in PAD`;
 const description = `Meet ${dog.name}, a cute dog in adoption looking for a loving home. If you're looking for a loyal and full of courage dog, ${dog.name} is perfect for you. Discover more about how to adopt it today!`;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} ogImage={ogImage}>
   <main
     class="justify-beeen mx-auto flex max-w-7xl flex-wrap items-center space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl md:py-8 lg:px-8 lg:py-16">
     <section class="w-full">

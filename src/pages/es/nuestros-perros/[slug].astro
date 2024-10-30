@@ -45,12 +45,14 @@ const coverPicture = dog.cover
   : defaultCover;
 const content =
   dog.translations[0] && marked.parse(dog.translations[0].description);
-
+const ogImage = dog.profile_picture
+  ? getAssetURL(dog.profile_picture.id, "og-dog")
+  : "https://utfs.io/f/yWKelNW56Bapwaky8AGU9BonWtzuK7ml3Ij6LP8dS5f1sETp";
 const title = `${dog.name} busca un hogar lleno de amor &mdash; Encuentra tu nuevo amigo en PAD`;
 const description = `Conoce a ${dog.name}, ${dog.gender === "male" ? "un encantador perro" : "una encantadora perrita"} en adopción que está buscando una familia cariñosa. Si buscas ${dog.gender === "male" ? "un compañero" : "una compañera"} fiel y ${dog.gender === "male" ? "lleno" : "llena"} de ternura, ${dog.name} es ${dog.gender === "male" ? "perfecto" : "perfecta"} para ti. ¡Descubre más sobre cómo ${dog.gender === "male" ? "adoptarlo" : "adoptarla"} hoy mismo!`;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} ogImage={ogImage}>
   <main
     class="justify-beeen mx-auto flex max-w-7xl flex-wrap items-center space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl md:py-8 lg:px-8 lg:py-16">
     <section class="w-full">
