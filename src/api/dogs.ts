@@ -3,7 +3,9 @@
  * */
 import type { Dog, Dogs } from "@/api/types/dog.ts";
 import { getDirectusClient } from "@/api/client.ts";
-import { readItem, readItems } from "@directus/sdk";
+import { readItem, readItems, type QueryFilter } from "@directus/sdk";
+import type { Item } from "@directus/types";
+import type { Animal, Schema } from "../../my-schema.ts";
 
 const dogFields = [
   "*",
@@ -15,25 +17,43 @@ const dogFieldsDetail = [
   "*",
   { profile_picture: ["id", "width", "height"] },
   { cover: ["id", "width", "height"] },
-  { gallery: [ { directus_files_id: ["id", "width", "height"] }] },
+  { gallery: [{ directus_files_id: ["id", "width", "height"] }] },
   { translations: ["description"] },
 ] as const;
 const client = getDirectusClient();
 
-export async function getDogs(): Promise<Dogs> {
+export async function getDogs(name: string, status: string): Promise<Dog[]> {
+  const filters = {
+    name,
+    status,
+  };
   try {
-    return (await client.request<Dogs>(
-      readItems("animals", {
-        fields: dogFields,
-        filter: {
-          status: {
-            _neq: "draft",
-          },
+    const filter: QueryFilter<Schema, Dog> = {
+      ...(filters.name && {
+        name: {
+          _icontains: filters.name,
         },
       }),
-    )) as Dogs;
-  } catch (e) {
-    console.error("Error fetching dogs", e);
+      ...(filters.status && {
+        status: {
+          _eq: filters.status,
+        },
+      }),
+      status: {
+        _neq: "draft",
+      },
+    };
+
+    const response = await client.request(
+      readItems("animals", {
+        fields: dogFields,
+        filter,
+      }),
+    );
+
+    return response as Dog[];
+  } catch (error) {
+    console.error("Error fetching dogs", error);
     return [];
   }
 }
