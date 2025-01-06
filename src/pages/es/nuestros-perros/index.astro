@@ -51,7 +51,7 @@ if (Astro.request.method === "POST") {
     const data = await Astro.request.formData();
     const search = data.get("search");
     const status = data.get("status");
-    return Astro.redirect(`./?search=${search}&status=${status}`);
+    return Astro.redirect(`?search=${search}&status=${status}`);
   } catch (error) {
     console.error(error);
   }
