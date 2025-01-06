@@ -2,10 +2,8 @@
  * Helper functions to fetch data from Directus API
  * */
 import type { Dog, Dogs } from "@/api/types/dog.ts";
-import { getDirectusClient } from "@/api/client.ts";
+import { getDirectusClient, type Schema } from "@/api/client.ts";
 import { readItem, readItems, type QueryFilter } from "@directus/sdk";
-import type { Item } from "@directus/types";
-import type { Animal, Schema } from "../../my-schema.ts";
 
 const dogFields = [
   "*",
@@ -22,32 +20,22 @@ const dogFieldsDetail = [
 ] as const;
 const client = getDirectusClient();
 
-export async function getDogs(name: string, status: string): Promise<Dog[]> {
-  const filters = {
-    name,
-    status,
-  };
-  try {
-    const filter: QueryFilter<Schema, Dog> = {
-      ...(filters.name && {
-        name: {
-          _icontains: filters.name,
-        },
-      }),
-      ...(filters.status && {
-        status: {
-          _eq: filters.status,
-        },
-      }),
-      status: {
-        _neq: "draft",
-      },
-    };
+interface DogStatusCount {
+  published: number;
+  adopted: number;
+  reserved: number;
+  draft: number;
+}
 
+export async function getDogs(
+  filter?: QueryFilter<Schema, Dog>,
+): Promise<Dog[]> {
+  try {
     const response = await client.request(
       readItems("animals", {
         fields: dogFields,
         filter,
+        sort: ["name"],
       }),
     );
 
@@ -56,6 +44,21 @@ export async function getDogs(name: string, status: string): Promise<Dog[]> {
     console.error("Error fetching dogs", error);
     return [];
   }
+}
+
+export async function getDogsCounts(): Promise<DogStatusCount> {
+  const response = await client.request(
+    readItems("animals", {
+      fields: ["slug", "status"],
+    }),
+  );
+  return response.reduce(
+    (counts, item) => {
+      counts[item.status]++;
+      return counts;
+    },
+    { published: 0, adopted: 0, reserved: 0, draft: 0 },
+  );
 }
 
 export async function getDogBySlug(slug: string, lang: string): Promise<Dog> {

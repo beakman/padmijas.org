@@ -1,7 +1,10 @@
 ---
 export const prerender = false;
 import { type Dogs } from "@/api/types/dog";
-import { getDogs } from "@/api/dogs";
+import type { QueryFilter } from "@directus/sdk";
+import { getDogs, getDogsCounts } from "@/api/dogs";
+import { Dog } from "@/api/types/dog";
+import { Schema } from "@/api/client";
 import Layout from "@/layouts/Layout.astro";
 import PetCard from "@/components/ui/PetCard.astro";
 import { type Lang, type Multilingual, DEFAULT_LOCALE } from "@/i18n";
@@ -20,16 +23,35 @@ if (!currentPath.includes(translatedPath)) {
   return Astro.redirect(translatedPath);
 }
 
+const counts = await getDogsCounts();
 const search: string = Astro.url.searchParams.get("search");
-const state: string = Astro.url.searchParams.get("state");
-const dogs = (await getDogs(search, state)) as Dogs;
+const status: string = Astro.url.searchParams.get("status") || "published";
+const _status =
+  status === "all" ? { _neq: "draft" } : { _nin: ["draft", "adopted"] };
+const filters: { name: string; status: any } = {
+  name: search,
+  status: _status,
+};
+
+const filter: QueryFilter<Schema, Dog> = {
+  ...(filters.name && {
+    name: {
+      _icontains: filters.name,
+    },
+  }),
+  ...(filters.status && {
+    status: filters.status,
+  }),
+};
+
+const dogs = (await getDogs(filter)) as Dogs;
 
 if (Astro.request.method === "POST") {
   try {
     const data = await Astro.request.formData();
     const search = data.get("search");
-    const state = data.get("state");
-    return Astro.redirect(`./?search=${search}&state=${state}`);
+    const status = data.get("status");
+    return Astro.redirect(`./?search=${search}&status=${status}`);
   } catch (error) {
     console.error(error);
   }
@@ -108,13 +130,15 @@ const description =
               >
                 <input
                   type="radio"
-                  name="state"
+                  name="status"
                   value="published"
                   id="inAdoption"
                   class="sr-only"
-                  checked={state === "published"}
+                  checked={status === "published"}
                 />
-                <span class="text-sm font-medium">En adopción</span>
+                <span class="text-sm font-medium"
+                  >En adopción ({counts.published + counts.reserved})</span
+                >
               </label>
             </div>
             <div>
@@ -124,27 +148,31 @@ const description =
               >
                 <input
                   type="radio"
-                  name="state"
-                  value=""
+                  name="status"
+                  value="all"
                   id="allDogs"
                   class="sr-only"
-                  checked={state !== "published"}
+                  checked={status === "all"}
                 />
-                <span class="text-sm font-medium">Todos</span>
+                <span class="text-sm font-medium"
+                  >Todos ({
+                    counts.published + counts.adopted + counts.reserved
+                  })</span
+                >
               </label>
             </div>
           </fieldset>
           <!-- Status -->
         </form>
-        <script define:vars={{ search, state }}>
+        <script define:vars={{ search, status }}>
           const searchInput = document.getElementById("Search");
           const inAdoptionInput = document.getElementById("inAdoption");
           const allDogs = document.getElementById("allDogs");
           const form = document.getElementById("dogForm");
 
           searchInput.value = search;
-          inAdoptionInput.checked = state === "published";
-          allDogs.checked = state !== "published";
+          inAdoptionInput.checked = status === "published";
+          allDogs.checked = status === "all";
 
           let debounceTimeout;
 
@@ -173,7 +201,18 @@ const description =
       <div
         class="grid w-full gap-4 px-10 py-12 sm:grid-cols-2 md:grid-cols-3 md:gap-8 md:px-0 md:py-14 lg:grid-cols-4"
       >
-        {dogs && dogs.map((dog) => <PetCard dog={dog} />)}
+        {
+          dogs.length > 0 ? (
+            dogs.map((dog) => <PetCard dog={dog} />)
+          ) : (
+            <div class="col-span-4 items-center justify-center rounded-md bg-gray-100 p-4 text-center">
+              <p class="text-lg font-semibold">¡Lo sentimos!</p>
+              <p class="my-2 text-base">
+                Su búsqueda no ha devuelto resultados.
+              </p>
+            </div>
+          )
+        }
       </div>
     </section>
   </main>

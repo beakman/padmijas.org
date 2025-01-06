@@ -24,7 +24,7 @@ export type Error = {
   };
 };
 
-interface Schema {
+export interface Schema {
   animals: Dogs;
   animals_translations: Array<DogTranslation>;
   animals_files: Array<DogsFile>;
