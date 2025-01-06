@@ -3,8 +3,8 @@ export const prerender = false;
 import { type Dogs } from "@/api/types/dog";
 import type { QueryFilter } from "@directus/sdk";
 import { getDogs, getDogsCounts } from "@/api/dogs";
-import { Dog } from "@/api/types/dog";
-import { Schema } from "@/api/client";
+import { type Dog } from "@/api/types/dog";
+import { type Schema } from "@/api/client";
 import Layout from "@/layouts/Layout.astro";
 import PetCard from "@/components/ui/PetCard.astro";
 import { type Lang, type Multilingual, DEFAULT_LOCALE } from "@/i18n";
@@ -24,7 +24,7 @@ if (!currentPath.includes(translatedPath)) {
 }
 
 const counts = await getDogsCounts();
-const search: string = Astro.url.searchParams.get("search");
+const search: string = Astro.url.searchParams.get("search") || "";
 const status: string = Astro.url.searchParams.get("status") || "published";
 const _status =
   status === "all" ? { _neq: "draft" } : { _nin: ["draft", "adopted"] };
