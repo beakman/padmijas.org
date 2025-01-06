@@ -19,6 +19,42 @@ function isValidEmail(email: string) {
   return re.test(String(email).toLowerCase());
 }
 
+export async function processCaptcha(gRecaptchaResponse: string) {
+  const url =
+    'https://www.google.com/recaptcha/api/siteverify'
+
+  const requestBody = new URLSearchParams({
+    secret:
+      import.meta.env.RECAPTCHA_SECRET_KEY ||
+      process.env.RECAPTCHA_SECRET_KEY,
+    response: gRecaptchaResponse
+  })
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: requestBody.toString()
+  })
+  console.log('recaptcha post');
+  console.log(requestBody.toString());
+  const data = await response.json()
+
+  console.log(data)
+  /*
+  {
+    success: true,
+    challenge_ts: '2024-01-20T18:18:12Z',
+    hostname: 'localhost',
+    score: 0.9,
+    action: 'submit'
+  }
+  */
+
+  return data.success
+}
+
 const errors = { name: "", email: "", subject: "", message: "" };
 
 let formMessage;
@@ -30,6 +66,21 @@ if (Astro.request.method === "POST") {
     const email = data.get("email");
     const botDetected = data.get("emai");
     const message = data.get("message");
+
+    const gRecaptchaResponse =
+    data.get("g-recaptcha-response")?.toString() || ''
+
+    console.log("gRecaptchaResponse", gRecaptchaResponse);
+
+
+    const isValidCaptcha = await processCaptcha(gRecaptchaResponse)
+
+    if (!isValidCaptcha) {
+      formMessage = t(contactForm.errorInvalidCaptcha);
+      return Astro.redirect(
+          `./?success=false&reason=captcha`
+        );
+    }
 
     if (typeof name !== "string" || name.length < 1) {
       errors.name += t(contactForm.errorInvalidName);
@@ -85,7 +136,8 @@ if (Astro.request.method === "POST") {
   if (success === "true") {
     formMessage = t(contactForm.successMessage);
   } else if (success === "false") {
-    formMessage = t(contactForm.errorMessage);
+    const reason = Astro.url.searchParams.get("reason");
+    formMessage = reason === "captcha" ? t(contactForm.errorInvalidCaptcha) : t(contactForm.errorMessage);
   }
 }
 ---
@@ -140,6 +192,13 @@ if (Astro.request.method === "POST") {
                 {formMessage}
               </div>
             ) : (
+              <script is:inline src="https://www.google.com/recaptcha/enterprise.js?render=6LdafK8qAAAAAFDlM6gYNktQrvnM-YrfgknvZb9A"></script>
+  <!-- Your code -->
+              <script is:inline>
+                function onSubmit(token) {
+                  document.getElementById("contact-form").submit();
+                }
+              </script>
               <form
                 method="POST"
                 id="contact-form"
@@ -156,7 +215,7 @@ if (Astro.request.method === "POST") {
                     placeholder={t(contactForm.namePlaceholder)}
                     required
                   />
-                  {errors.name && <p>{errors.name}</p>}
+                  {errors.name && <p class="text-red-600 text-sm mt-1">⚠️ {errors.name}</p>}
                 </div>
                 <!-- honeypot field to catch bots. Purposefully mispelled "email" as "emai" to better trick bots -->
                 <label for="emai" class="sr-only">Real users skip this field</label>
@@ -172,7 +231,7 @@ if (Astro.request.method === "POST") {
                     placeholder="your@email.com"
                     required
                   />
-                  {errors.email && <p>{errors.email}</p>}
+                  {errors.email && <p class="text-red-600 text-sm mt-1">⚠️ {errors.email}</p>}
                 </div>
                 <div>
                   <label for="contact-message" class="text-gray-600">{t(contactForm.messageLabel)}</label>
@@ -183,7 +242,7 @@ if (Astro.request.method === "POST") {
                     rows="4"
                     placeholder={t(contactForm.messagePlaceholder)}
                     required></textarea>
-                  {errors.message && <p>{errors.message}</p>}
+                  {errors.message && <p class="text-red-600 text-sm mt-1">⚠️ {errors.message}</p>}
                 </div>
                 <div class="my-3 flex items-start">
                   <div class="mt-0.5 flex">
@@ -204,9 +263,11 @@ if (Astro.request.method === "POST") {
                   </div>
                 </div>
 
-                <button
+                <button data-sitekey={import.meta.env.RECAPTCHA_SITE_KEY || process.env.RECAPTCHA_SITE_KEY}
+                  data-callback='onSubmit'
+                  data-action='submit'
                   type="submit"
-                  class="flex items-center justify-center gap-2 rounded-md bg-primary p-2.5 transition hover:bg-primary/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-opacity-50">
+                  class="g-recaptcha flex items-center justify-center gap-2 rounded-md bg-primary p-2.5 transition hover:bg-primary/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-opacity-50">
                   {t(contactForm.submitButton)}
                 </button>
               </form>
