@@ -87,6 +87,10 @@ export const contactForm = {
     en: "Your message is too short.",
     es: "Tu mensaje es demasiado corto.",
   },
+  errorInvalidCaptcha: {
+    en: "Invalid captcha.",
+    es: "Captcha inválido.",
+  },
   disclaimer: {
     en: "By submitting this form, you acknowledge and agree to the collection of your personal information.",
     es: "Al enviar este formulario de contacto, reconoces y aceptas la recopilación de tu información personal.",
