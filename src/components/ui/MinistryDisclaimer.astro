@@ -5,17 +5,19 @@ import { Image } from "astro:assets";
 import logo from "@/assets/images/logo-ministerio.png";
 
 const disclaimer: Multilingual = {
-  es: "Las actividades desarrolladas por esta entidad durante el año 2023 han sido subvencionadas parcialmente por el Ministerio de Derechos Sociales y Agenda 2030",
-  en: "The activities developed by this entity during the year 2023 have been partially funded by the Ministry of Labor and Employment 2030",  
+  es: "Las actividades desarrolladas por esta entidad durante el año 2024 han sido subvencionadas parcialmente por el Ministerio de Derechos Sociales, Consumo y Agenda 2030.",
+  en: "The activities carried out by this entity during the year 2024 have been partially subsidized by the Ministry of Social Rights, Consumption and Agenda 2030.",
 };
 
 const localDisclaimer = disclaimer[Astro.currentLocale as Lang];
 ---
 
 <div
-  class="mx-auto flex max-w-3xl flex-wrap items-center justify-between space-x-4 p-4 px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl">
+  class="mx-auto flex max-w-3xl flex-wrap items-center justify-between space-x-4 p-4 px-4 sm:px-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl"
+>
   <div
-    class="flex w-full flex-col justify-between space-y-4 md:flex-row md:space-y-0">
+    class="flex w-full flex-col justify-between space-y-4 md:flex-row md:space-y-0"
+  >
     <Image src={logo} alt="Ministry logo" width={400} height={110} />
     <div class="text-sm italic text-foreground md:max-w-xl md:text-base">
       {localDisclaimer}
