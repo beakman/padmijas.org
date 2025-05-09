@@ -118,6 +118,18 @@ export const footerLinks: FooterItemsProps[] = [
       },
       {
         text: {
+          en: "Pre-adoption form",
+          es: "Formulario de pre-adopción",
+        },
+        href: {
+          en: "https://forms.gle/SAJFg2UE5iE8JFYX8",
+          es: "https://forms.gle/TfttmdHkTPfEFgvF9",
+        },
+        type: "link",
+        target: "_self",
+      },
+      {
+        text: {
           en: "Analytics",
           es: "Analíticas",
         },
