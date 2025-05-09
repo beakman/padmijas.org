@@ -56,12 +56,15 @@ const description = `Conoce a ${dog.name}, ${dog.gender === "male" ? "un encanta
   title={title}
   description={description}
   ogImage={ogImage}
-  ogType="article">
+  ogType="article"
+>
   <main
-    class="justify-beeen mx-auto flex max-w-7xl flex-wrap items-center space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl md:py-8 lg:px-8 lg:py-16">
+    class="justify-beeen mx-auto flex max-w-7xl flex-wrap items-center space-x-4 p-4 px-4 sm:px-6 md:max-w-4xl md:py-8 lg:px-8 lg:py-16"
+  >
     <section class="w-full">
       <div
-        class="mx-auto flex h-max w-full flex-col gap-6 md:max-w-5xl md:flex-row">
+        class="mx-auto flex h-max w-full flex-col gap-6 md:max-w-5xl md:flex-row"
+      >
         <div class="order-2 w-full md:order-1 md:w-5/6">
           <div class="flex flex-col gap-4">
             <!-- dogs pictures -->
@@ -80,12 +83,14 @@ const description = `Conoce a ${dog.name}, ${dog.gender === "male" ? "un encanta
           </div>
         </div>
         <aside
-          class="order-1 mb-5 h-max w-full md:sticky md:top-28 md:order-2 md:mb-0">
+          class="order-1 mb-5 h-max w-full md:sticky md:top-28 md:order-2 md:mb-0"
+        >
           <div class="flex flex-col gap-4">
             <header class="flex flex-col gap-4">
               <div class="relative">
                 <div
-                  class="visible relative flex h-48 w-full justify-end rounded-xl bg-cover md:hidden">
+                  class="visible relative flex h-48 w-full justify-end rounded-xl bg-cover md:hidden"
+                >
                   <Image
                     class="absolute flex h-48 w-full justify-center rounded-lg bg-gray-600 bg-cover object-cover dark:bg-slate-800"
                     src={coverPicture}
@@ -97,7 +102,8 @@ const description = `Conoce a ${dog.name}, ${dog.gender === "male" ? "un encanta
                     height="100"
                   />
                   <div
-                    class="dark:!border-navy-700 absolute -bottom-12 right-2 flex h-[120px] w-[120px] items-center justify-start rounded-full border-[4px] border-white bg-pink-400">
+                    class="dark:!border-navy-700 absolute -bottom-12 right-2 flex h-[120px] w-[120px] items-center justify-start rounded-full border-[4px] border-white bg-pink-400"
+                  >
                     <Image
                       class:list="[aspect-square h-full w-full rounded-full bg-gray-600 object-cover dark:bg-slate-800]"
                       src={profilePicture}
@@ -112,9 +118,11 @@ const description = `Conoce a ${dog.name}, ${dog.gender === "male" ? "un encanta
                 </div>
                 <!-- Title and reserved/adopted badge -->
                 <div
-                  class="flex flex-col items-start justify-start gap-4 md:flex-row md:items-center">
+                  class="flex flex-col items-start justify-start gap-4 md:flex-row md:items-center"
+                >
                   <h1
-                    class="leading-tighter mx-w-auto mt-8 w-full font-heading text-4xl font-bold tracking-tighter md:mt-0 md:max-w-fit md:text-5xl">
+                    class="leading-tighter mx-w-auto mt-8 w-full font-heading text-4xl font-bold tracking-tighter md:mt-0 md:max-w-fit md:text-5xl"
+                  >
                     {dog.name}
                   </h1>
                   <span class="flex items-center gap-2 text-sm">
@@ -148,10 +156,11 @@ const description = `Conoce a ${dog.name}, ${dog.gender === "male" ? "un encanta
               {
                 dog.status !== "adopted" && (
                   <Button
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSdEatG9b1V1lH1DPu8FnRoJEvEjCTKPM0xjN7aUaNeCbKuVNw/viewform"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSd4h9uiqa61qLARRD3NkIiiyr7iqL9AhSXma9w0QvSYKTZ2uQ/viewform"
                     variant="default"
                     size="lg"
-                    class="w-auto">
+                    class="w-auto"
+                  >
                     {t(singleDog.adoptmeButton)}
                   </Button>
                 )

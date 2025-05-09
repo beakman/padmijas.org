@@ -9,12 +9,13 @@ const { dog } = Astro.props;
 ---
 
 <div
-  class="flex flex-col justify-center divide-y divide-gray-200 dark:divide-gray-800">
+  class="flex flex-col justify-center divide-y divide-gray-200 dark:divide-gray-800"
+>
   <span class="flex w-full items-center gap-4 py-4">
     <Icon class="h-5 w-5 text-muted" name="tabler:ruler-measure">
       <strong>{t(singleDog.sizeLabel)}</strong>
     </Icon>
-    <span class="capitalize">{dog.size}</span>
+    <span class="uppercase">{dog.size}</span>
   </span>
   <span class="flex w-full items-center gap-4 py-4">
     <Icon class="h-5 w-5 text-muted" name="tabler:dog">
@@ -36,7 +37,8 @@ const { dog } = Astro.props;
       class="h-5 w-5 text-muted"
       name={dog.gender === "male"
         ? "tabler:gender-male"
-        : "tabler:gender-female"}>
+        : "tabler:gender-female"}
+    >
       <strong>{t(singleDog.genderLabel)}</strong>
     </Icon>
     <span class="capitalize"

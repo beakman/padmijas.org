@@ -122,7 +122,7 @@ export const petStatus = {
 export const singleDog = {
   adoptmeButton: {
     en: "Adopt me",
-    es: "Adoptame",
+    es: "Adóptame",
   },
   sizeLabel: {
     en: "Size",
