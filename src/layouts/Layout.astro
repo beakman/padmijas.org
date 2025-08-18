@@ -12,7 +12,6 @@ import { SEO } from "astro-seo";
 import Header from "@/components/layout/Header.astro";
 import { LOCALES, getLocalePaths, type Lang } from "@/i18n";
 import WarningBanner from "@/components/layout/WarningBanner.astro";
-import { Plausible } from "astro-analytics";
 
 interface Props {
   title?: string;
@@ -28,10 +27,7 @@ const { title, description, ogImage, ogType } = Astro.props as Props;
 <!doctype html>
 <html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head>
-    <Plausible
-      domain="padmijas.org"
-      src="https://analytics.padmijas.org/js/script.js"
-    />
+    <script defer src="https://analytics.psalido.net/script.js" data-website-id="3b04329f-e66a-4691-a1b2-5dc408d2c64e"></script>
     <SEO
       title={title ?? siteMeta.title}
       description={description ?? siteMeta.description}
