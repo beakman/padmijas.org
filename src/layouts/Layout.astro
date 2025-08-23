@@ -27,7 +27,7 @@ const { title, description, ogImage, ogType } = Astro.props as Props;
 <!doctype html>
 <html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head>
-    <script defer src="https://analytics.psalido.net/script.js" data-website-id="3b04329f-e66a-4691-a1b2-5dc408d2c64e"></script>
+    <script defer data-domain="padmijas.org" src="https://analytics.padmijas.org/js/script.js"></script>
     <SEO
       title={title ?? siteMeta.title}
       description={description ?? siteMeta.description}
