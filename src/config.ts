@@ -134,8 +134,8 @@ export const footerLinks: FooterItemsProps[] = [
           es: "Analíticas",
         },
         href: {
-          en: "https://analytics.padmijas.org/padmijas.org",
-          es: "https://analytics.padmijas.org/padmijas.org",
+          en: "https://analytics.psalido.net/padmijas.org",
+          es: "https://analytics.psalido.net/padmijas.org",
         },
         type: "link",
         target: "_blank",
