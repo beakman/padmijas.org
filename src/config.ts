@@ -216,18 +216,6 @@ export const footerLinks: FooterItemsProps[] = [
     items: [
       {
         text: {
-          en: "contacto@padmijas.org",
-          es: "contacto@padmijas.org",
-        },
-        href: {
-          en: "mailto:contacto@padmijas.org",
-          es: "mailto:contacto@padmijas.org",
-        },
-        type: "link",
-        target: "_self",
-      },
-      {
-        text: {
           en: "Camino de Acevedo Street, Mijas Costa (Behind the Royal Vet Hospital)",
           es: "Calle Camino de Acevedo s/n, Mijas Costa (Detrás de Hospital Veterinario RoyalVet)",
         },
