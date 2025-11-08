@@ -113,6 +113,10 @@ if (Astro.request.method === "POST") {
         body: JSON.stringify(smtpData),
       });
 
+      console.log("[DEBUG] response");
+      console.log(response);
+      console.log("--[DEBUG] response");
+
       if (response.ok) {
         formMessage = t(contactForm.successMessage);
         return Astro.redirect("./?success=true");
