@@ -10,3 +10,16 @@
 - Redirigir al idioma por defecto del navegador
 - Incluir más idiomas (intentar automatizarlo con algo)
 - Botón like para agregar a favoritos a un perro (local storage)
+
+## Errores anteriores
+
+### Formulario de contacto no funciona:
+
+Posibles causas:
+
+- La dirección ip del host de la web no está en el listado de ips autorizadas de Brevo.com
+
+We have detected you are using an unrecognised IP address 87.218.16.150. If you performed this action make sure to add the new IP address in this link: https://app.brevo.com/security/authorised_ips'
+
+- Las variables de entorno con las claves api de Brevo y Recaptcha no están activas.
+- La clave API está desactivada en Brevo.com.
