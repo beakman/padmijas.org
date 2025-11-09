@@ -39,7 +39,8 @@ const locale = Astro.currentLocale as Lang;
                         {item.type === "link" && (
                           <a
                             href={
-                              t(item.href).startsWith("http")
+                              t(item.href).startsWith("http") ||
+                              t(item.href).startsWith("mailto")
                                 ? t(item.href)
                                 : getRelativeLocaleUrl(locale, t(item.href))
                             }
