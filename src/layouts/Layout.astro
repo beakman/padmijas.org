@@ -27,7 +27,8 @@ const { title, description, ogImage, ogType } = Astro.props as Props;
 <!doctype html>
 <html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head>
-    <script defer data-domain="padmijas.org" src="https://analytics.padmijas.org/js/script.js"></script>
+    <script is:inline defer data-domain="padmijas.org" src="https://analytics.noicelab.de/js/script.hash.outbound-links.js"></script>
+    <script is:inline>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
     <SEO
       title={title ?? siteMeta.title}
       description={description ?? siteMeta.description}
