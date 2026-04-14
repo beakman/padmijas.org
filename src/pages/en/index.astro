@@ -28,11 +28,6 @@ const localeDescription = description || t(SITE_DESCRIPTION);
 
 const testimonials = (await getTestimonials(locale)) as Testimonials;
 
-const doubleTestimonials = testimonials.map((testimonial) => ({
-  ...testimonial,
-  ...testimonial,
-}));
-
 const bgHero2 = await getImage({
   src: heroImage2,
   format: "webp",
@@ -53,6 +48,7 @@ const bgHero2 = await getImage({
                 alt="Dog looking at you"
                 width={1065}
                 height={235}
+                loading="eager"
                 class="h-full w-full object-cover"
               />
               <div

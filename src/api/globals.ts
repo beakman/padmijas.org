@@ -1,7 +1,7 @@
 /*
  * Helper functions to fetch data from Directus API
  * */
-import type { Global, GlobalTranslation } from "@/api/types/global.ts";
+import type { Global } from "@/api/types/global.ts";
 import { getDirectusClient } from "@/api/client.ts";
 import { readSingleton } from "@directus/sdk";
 

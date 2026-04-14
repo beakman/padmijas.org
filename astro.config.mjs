@@ -23,7 +23,7 @@ export default defineConfig({
       },
     }),
   ],
-  output: "hybrid",
+  output: "static",
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en"],

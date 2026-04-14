@@ -4,7 +4,6 @@ import { satoriAstroOG } from "satori-astro";
 import { html } from "satori-html";
 import { getDogs } from "@/api/dogs";
 import type { Dog, Dogs } from "@/api/types/dog";
-import type { InferGetStaticPropsType } from "astro";
 import { getAssetURL } from "@/api/client";
 
 export async function getStaticPaths() {
@@ -31,10 +30,7 @@ export async function getStaticPaths() {
     },
   }));
 }
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
-export const GET: APIRoute = async ({ props }) => {
-  const { dog, picture, gender, ageTimeAgo } = props;
+export const GET: APIRoute = async () => {
   const fontFile = await fetch(
     "https://og-playground.vercel.app/inter-latin-ext-700-normal.woff",
   );

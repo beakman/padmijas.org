@@ -1,5 +1,7 @@
 // 1. Import utilities from `astro:content`
-import { z, defineCollection } from "astro:content";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "zod";
 
 export const ThemeCategories = new Map([
   ["recent", "Recently Added"],
@@ -29,15 +31,13 @@ export const ThemeTools = new Map([
 // 2. Define a `type` and `schema` for each collection
 
 const themeCollection = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/themes" }),
   schema: ({ image }) =>
     z.object({
       title: z.string().min(3),
       description: z.string().min(5),
       fullDescription: z.string().optional(),
-      cover: image().refine((img) => img.width >= 1080, {
-        message: "Cover image must be at least 1080 pixels wide!",
-      }),
+      cover: image(),
       images: z.array(image()).default([]),
       author: z.object({
         url: z.string(),
@@ -47,15 +47,15 @@ const themeCollection = defineCollection({
       categories: z.array(
         z.enum(Array.from(ThemeCategories.keys()) as [string, ...string[]]),
       ),
-      repoUrl: z.string().url().optional(),
-      demoUrl: z.string().url().optional(),
-      buyUrl: z.string().url().optional(),
+      repoUrl: z.url().optional(),
+      demoUrl: z.url().optional(),
+      buyUrl: z.url().optional(),
       price: z.number().min(0).default(0),
       tools: z
         .array(z.enum(Array.from(ThemeTools.keys()) as [string, ...string[]]))
         .default([]),
       related: z.array(z.string()).max(3).default([]),
-      publishDate: z.date({ coerce: true }).optional(),
+      publishDate: z.coerce.date().optional(),
       badge: z.string().optional(),
     }),
 });

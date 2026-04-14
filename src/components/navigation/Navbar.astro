@@ -8,7 +8,7 @@ import Button from "../forms/Button.astro";
 import { Icon } from "astro-icon/components";
 import LanguageSelector from "@/components/i18n/LanguageSelector.astro";
 import { useTranslations, LOCALES, type Lang, type Multilingual } from "@/i18n";
-import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { getPages } from "@/api/pages";
 import type { Page, PagesTranslation } from "@/api/types/pages";
 import { uiStrings } from "@/consts";
@@ -196,7 +196,6 @@ const { mainMenuItems, socialLinks, showThemeSwitcher, showLanguageSelector } =
 
     <!-- Mobile menu -->
     <div
-      role="menu"
       aria-label="Main Menu"
       class="absolute inset-0 top-20 z-50 col-span-2 w-full bg-primary"
       id="mobile-menu"

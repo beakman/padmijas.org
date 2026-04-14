@@ -1,6 +1,5 @@
 ---
-import { uiStrings } from "@/consts";
-import { type Lang, useTranslations } from "@/i18n";
+import { type Lang } from "@/i18n";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Button from "@/components/forms/Button.astro";
@@ -8,7 +7,6 @@ import { getAssetURL } from "@/api/client";
 import { type Image as ImageType } from "@/api/types/image";
 
 const locale = Astro.currentLocale as Lang;
-const t = useTranslations(locale);
 
 interface Props {
   cover?: ImageType;
@@ -29,7 +27,6 @@ const {
   slug,
   category,
   price,
-  description,
   address,
   location,
 } = Astro.props;

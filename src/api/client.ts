@@ -14,7 +14,7 @@ import type {
   TestimonialTranslation,
 } from "./types/testimonials";
 import type { Global, GlobalTranslation } from "@/api/types/global.ts";
-import type { Faq, Faqs, FaqTranslation } from "./types/faq";
+import type { Faqs, FaqTranslation } from "./types/faq";
 
 export type Error = {
   message: string;

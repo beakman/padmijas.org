@@ -3,12 +3,9 @@ import { Image } from "astro:assets";
 import { getPageBySlug, getPages } from "@/api/pages";
 import type { Page, PagesTranslation } from "@/api/types/pages";
 import Button from "@/components/forms/Button.astro";
-import { LOCALES, type Lang } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 import { getAssetURL } from "@/api/client";
 import type { Block } from "@/api/types/block";
-
-import coverImage from "@/assets/images/cover.jpg";
 
 export const getStaticPaths = async () => {
   const pages = await getPages();

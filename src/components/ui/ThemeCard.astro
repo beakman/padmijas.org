@@ -11,7 +11,7 @@ const { theme } = Astro.props;
 ---
 
 <div class="flex flex-col w-full gap-4 p-4">
-  <a href={`/themes/${theme.slug}`}>
+  <a href={`/themes/${theme.id}`}>
     <Image
       src={theme.data.cover}
       alt={theme.data.title ?? ""}
@@ -25,10 +25,8 @@ const { theme } = Astro.props;
     <h2 class="text-2xl font-semibold">{theme.data.title}</h2>
     <p class="text-lg md:text-2xl text-muted-foreground">${theme.data.price}</p>
   </div>
-  <Button class="w-full text-center md:w-auto" variant="default">
-    <a class="flex items-center gap-2" href={`/themes/${theme.slug}`}>
-      Buy now
-      <Icon name="tabler:arrow-right" class="w-5 h-5" />
-    </a>
+  <Button class="w-full text-center md:w-auto" variant="default" href={`/themes/${theme.id}`} target="_self">
+    Buy now
+    <Icon name="tabler:arrow-right" class="w-5 h-5" />
   </Button>
 </div>

@@ -48,10 +48,9 @@ const dogs = (await getDogs(filter)) as Dogs;
 
 if (Astro.request.method === "POST") {
   try {
-    const data = await Astro.request.formData();
-    const search = data.get("search");
-    const status = data.get("status");
-    return Astro.redirect(`?search=${search}&status=${status}`);
+    return Astro.redirect(
+      "?" + new URLSearchParams(Object.fromEntries(await Astro.request.formData())).toString()
+    );
   } catch (error) {
     console.error(error);
   }
@@ -163,21 +162,19 @@ const description =
           </fieldset>
           <!-- Status -->
         </form>
-        <script define:vars={{ search, status }}>
+        <script is:inline define:vars={{ search, dogStatus: status }}>
           const searchInput = document.getElementById("Search");
           const inAdoptionInput = document.getElementById("inAdoption");
           const allDogs = document.getElementById("allDogs");
           const form = document.getElementById("dogForm");
 
           searchInput.value = search;
-          inAdoptionInput.checked = status === "published";
-          allDogs.checked = status === "all";
+          inAdoptionInput.checked = dogStatus === "published";
+          allDogs.checked = dogStatus === "all";
 
           let debounceTimeout;
 
-          searchInput.addEventListener("input", (event) => {
-            const value = event.target.value;
-
+          searchInput.addEventListener("input", (_event) => {
             if (debounceTimeout) {
               clearTimeout(debounceTimeout);
             }
@@ -187,11 +184,11 @@ const description =
             }, 800); // Adjust the timeout duration as needed
           });
 
-          inAdoptionInput.addEventListener("change", (event) => {
+          inAdoptionInput.addEventListener("change", () => {
             form.submit();
           });
 
-          allDogs.addEventListener("change", (event) => {
+          allDogs.addEventListener("change", () => {
             form.submit();
           });
         </script>

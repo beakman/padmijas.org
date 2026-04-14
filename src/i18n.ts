@@ -1,4 +1,3 @@
-import { routes } from "./consts";
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "./locales";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
