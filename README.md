@@ -4,6 +4,9 @@ Website for [PAD](https://padmijas.org) — Protectora de Animales Domésticos, 
 
 Built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com), and [Directus](https://directus.io) as the headless CMS. Supports Spanish (default) and English.
 
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/8451dee7-1342-478d-8a92-41b8cb519b99" />
+
+
 ---
 
 ## Local development
