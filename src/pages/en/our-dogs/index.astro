@@ -46,15 +46,6 @@ const filter: QueryFilter<Schema, Dog> = {
 
 const dogs = (await getDogs(filter)) as Dogs;
 
-if (Astro.request.method === "POST") {
-  try {
-    return Astro.redirect(
-      "?" + new URLSearchParams(Object.fromEntries(await Astro.request.formData())).toString()
-    );
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 const title = "Dogs for Adoption 🐶 &mdash; Find Your Perfect Companion at PAD";
 const description =
@@ -84,7 +75,7 @@ const description =
 
       <!-- Filters -->
       <div class="flex flex-col gap-4 md:flex-row">
-        <form id="dogForm" class="mt-16 w-full" method="POST">
+        <form id="dogForm" class="mt-16 w-full" method="GET">
           <!-- Search -->
           <div class="relative mb-10">
             <label for="Search" class="sr-only"> Search </label>
