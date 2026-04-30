@@ -13,11 +13,11 @@ const locale = Astro.currentLocale as Lang;
 const pages = await getPages(["volunteer-page"], locale);
 ---
 
-<Layout title="Voluntariado" description="Descubre cómo puedes ayudarnos">
+<Layout title="Voluntariado" description="Descubre cómo puedes ser voluntario en PAD y ayudar a nuestros animales a disfrutar de paseos y cuidados cada día en Mijas Costa.">
   <main class="">
     <!-- Heading -->
     <div
-      class="text-default relative mx-auto max-w-5xl px-8 py-12 md:max-w-4xl md:px-10 md:py-14 lg:py-16">
+      class="text-default relative mx-auto max-w-4xl px-8 py-12 md:px-10 md:py-14 lg:py-16">
       <div class="max-w-2xl text-center md:mx-auto md:max-w-4xl lg:max-w-5xl">
         <div>
           <span
@@ -36,7 +36,7 @@ const pages = await getPages(["volunteer-page"], locale);
 
     <!-- Content -->
     <section class="w-full">
-      <div class="relative mx-auto mb-20 max-w-5xl px-8 md:max-w-4xl md:px-14">
+      <div class="relative mx-auto mb-20 max-w-4xl px-8 md:px-10">
         <div class="grid gap-8 sm:grid-cols-2 sm:gap-y-8 md:gap-6">
           {
             pages ? (
